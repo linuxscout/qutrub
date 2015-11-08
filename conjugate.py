@@ -20,10 +20,8 @@
 #
 #***********************************************************************/
 
-##from verb_const import *
-##from ar_ctype import *
-##from classverb import *
-from src.mosaref_main import *
+from libqutrub.mosaref_main import *
+
 import sys,re,string
 import sys, getopt, os
 scriptname = os.path.splitext(os.path.basename(sys.argv[0]))[0]
@@ -108,31 +106,22 @@ def main():
 		sys.exit(0)
 #
 	print filename,all,future,past,passive,imperative,confirmed,future_moode
-##	sys.exit(1)
 	line=fl.readline().decode("utf");
 	text=u""
 	verb_table=[];
 	nb_field=2;
 	while line :
-		line=chomp(line)
+		line=line.strip('\n');
 		if not line.startswith("#"):
-#		print "line ", line
-#			text=text+" "+line
 			liste=line.split("\t");
 			if len(liste)>=nb_field:
 				verb_table.append(liste);
 #		print " ****",text
 		line=fl.readline().decode("utf8");
 	fl.close();
-#	print verb_table;
-#	sys.exit();
 	for tuple_verb in verb_table:
 		word=tuple_verb[0];
-##"""		transitive=tuple_verb[1];
-##		haraka=tuple_verb[2];
-##		print transitive.encode("utf8")
-##		print haraka.encode("utf8");
-##"""
+
 
 ##        print transi
 		if not is_valid_infinitive_verb(word):
@@ -148,9 +137,9 @@ def main():
 			    transitive=False;
 			text=do_sarf(word,future_type,all,past,future,passive,imperative,future_moode,confirmed,transitive,display_format);
 			print text.encode("utf8")
-
 if __name__ == "__main__":
-  main()
+	main()
+
 
 
 

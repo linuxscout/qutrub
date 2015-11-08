@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="ja_JP" sourcelanguage="ar">
+<context>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="476"/>
+        <source>&lt;html dir=&apos;rtl&apos;&gt;
+&lt;body&gt;
+&lt;ol&gt;
+  &lt;li&gt;اكتب الفعل مشكولا شكلا تاما
+(الحركات والشدة ) في خانة الفعل مثال
+:
+كَتَبَ، كَاتَبَ. &lt;/li&gt;
+  &lt;li&gt;ملاحظة إذا كان الفعل مهموز
+الأول على وزن فاعل،مثل آخى يرجى كتابته على الشكل ءَاخَى. &lt;/li&gt;
+  &lt;li&gt;إذا كان الفعل ثلاثيا حدد
+حركة عين الفعل في المضارع، مثلا كتب يكتُب تأخذ الحركة ضمة في المضارع.
+إذا كان الفعل غير ثلاثي، تجاهل هذه الميزة. &lt;/li&gt;
+  &lt;li&gt;حدد اللزوم والتعدي للفعل، &lt;/li&gt;
+  &lt;li&gt;اختر الزمن الذي تريد
+التصريف فيه &lt;/li&gt;
+  &lt;li&gt;اضغط على &quot;صرّف الفعل&quot;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/body&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="483"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:14pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;حدد اللزوم والتعدي للفعل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="489"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;اختر الزمن الذي تريد التصريف فيه&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="495"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:18pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;صرف الفعل&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="497"/>
+        <source>حركة عين الثلاثي في المضارع</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="498"/>
+        <source>خيارات</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="499"/>
+        <source>البحث في المعجم</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="537"/>
+        <source>الفعل  غير صالح</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="1005"/>
+        <source>خطأ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="702"/>
+        <source>لا شيء يمكن طبعه، صرّف أولا</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="742"/>
+        <source>عذرا</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="743"/>
+        <source>غير متوفر حاليا</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="785"/>
+        <source>لا يمكن فتح ملف المساعدة</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="813"/>
+        <source>عن برنامج قطرب</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="853"/>
+        <source>حفظ ملف</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="868"/>
+        <source>لا بيانات للتصدير، صرّف أولا</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="873"/>
+        <source>اسم ملف غير مناسب %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="883"/>
+        <source>لا يمكن فتح الملف %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="886"/>
+        <source>لا يمكن حفظ الملف %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="933"/>
+        <source>الفعل %s غير صالح2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="956"/>
+        <source>اختر زمنا واحدا على الأقل</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="1006"/>
+        <source>الفعل غير موجود في قائمة الأفعال الثلاثية</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="789"/>
+        <source>دليل الاستخدام</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+</TS>

@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="resources" lang="ar" >
+    <file>resources/images/Copy.png</file>
+    <file>resources/images/save.png</file>
+    <file>resources/images/Copy.png</file>
+    <file>resources/images/cut.png</file>
+    <file>resources/images/help.jpg</file>
+    <file>resources/images/logo.png</file>
+    <file>resources/images/new.png</file>
+    <file>resources/images/open.png</file>
+    <file>resources/images/paste.png</file>
+    <file>resources/images/qutrub.ico</file>
+    <file>resources/images/logo.jpg</file>
+    <file>resources/images/help.jpg</file>
+    <file>resources/languages/en.qm</file>
+    <file>resources/languages/fr.qm</file>
+    <file>resources/languages/fa.qm</file>	
+    <file>resources/languages/ur.qm</file>
+    <file>resources/languages/jp.qm</file>	
+    <file>resources/languages/ms.qm</file>	
+	<file>resources/languages/de.qm</file>	
+  </qresource>
+  <qresource prefix="newPrefix" />
+</RCC>

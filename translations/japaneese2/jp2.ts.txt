@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="ja_JP" sourcelanguage="ar">
+<context>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="476"/>
+        <source>&lt;html dir=&apos;rtl&apos;&gt;
+&lt;body&gt;
+&lt;ol&gt;
+  &lt;li&gt;シャクルをふった動詞を書いて下さい。たとえば كَتَبَ، كَاتَبَ. </li> <li>備考：もしその動詞は「آخى」のような「فاعل」型のハムザ動詞であったら、このように「ءَاخَى」と書いて下さい。 </li> <li>三語根動詞の場合、未完了形における二つ目の子音の母音を選択して下さい。 たとえば、「كتب يكتُب」の場合、ダンマを選びます。そうでない動詞の場合、そのまま書いてください。 </li> <li>動詞が自動詞か他動詞かを選択して下さい。&lt;/li&gt;
+  &lt;li&gt;ا「活用」ボタンを押してください&quot;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/body&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="483"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:14pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;自動詞か他動詞かを表示&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="489"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;活用時制を選んでください&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="495"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;ae_AlMateen&apos;; font-size:18pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;動詞を活用してください&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="497"/>
+        <source>3語根動詞の未完了形における代子音の母音</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="498"/>
+        <source>オプション</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="499"/>
+        <source>辞書での検索</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="537"/>
+        <source>正しくない動詞</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="1005"/>
+        <source>エラー</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="702"/>
+        <source>印刷するデータはありません。先に動詞を活用してください</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="742"/>
+        <source>申し訳ありません</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="743"/>
+        <source>該当するものはありません</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="785"/>
+        <source>ヘルプファイルが開けられません</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="813"/>
+        <source>コトロブプログラムについて</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="853"/>
+        <source>ファイル保存</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="868"/>
+        <source>エクスポートするデータはありません。先に動詞を活用してください</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="873"/>
+        <source>相応しくないファイル名 %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="883"/>
+        <source>ファイルが開けられません %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="886"/>
+        <source>ファイルの保存ができません %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="933"/>
+        <source>動詞が正しく入力されていません %s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="956"/>
+        <source>少なくとも時制を一つ選んでください</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="1006"/>
+        <source>3語根動詞のリストにはありません</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="qutrubgui.py" line="789"/>
+        <source>使い方の手引き</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+</TS>

@@ -1,0 +1,360 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"X-Virgin-Header: remove this line if you change anything in the header.\n"
+"X-Language: ja_JP\n"
+"X-Source-Language: ar\n"
+
+#. ts-context Dialog
+#: setting.py:99
+msgid "ÊİÖíáÇÊ"
+msgstr "?????"
+
+#. ts-context Dialog
+#: setting.py:100
+msgid "ÎØ ÚÑÖ ÇáäÊÇÆÌ"
+msgstr "?????????"
+
+#. ts-context Dialog
+#: setting.py:101
+msgid "ÊÚÏíá"
+msgstr "??"
+
+#. ts-context Dialog
+#: setting.py:102
+msgid "ÇÓÊÚÇÏÉ ÇáÎØ ÇáÇİÊÑÇÖí"
+msgstr "???????????????"
+
+#. ts-context Dialog
+#: setting.py:103
+msgid "áÛÉ ÇáÊØÈíŞ"
+msgstr "??"
+
+#. ts-context Dialog
+#: setting.py:104
+msgid "ÇáÚÑÈíÉ"
+msgstr "ÇáÚÑÈíÉ"
+
+#. ts-context Dialog
+#: setting.py:105
+msgid "English"
+msgstr "English"
+
+#. ts-context Dialog
+#: setting.py:106
+msgid "Deutch"
+msgstr "Deutch"
+
+#. ts-context Dialog
+#: setting.py:107
+msgid "Français"
+msgstr "Français"
+
+#. ts-context Dialog
+#: setting.py:108
+msgid "ÃÑÏæ"
+msgstr "ÃÑÏæ"
+
+#. ts-context Dialog
+#: setting.py:109
+msgid "İÇÑÓí"
+msgstr "İÇÑÓí"
+
+#. ts-context Dialog
+#: setting.py:110
+msgid "???"
+msgstr "???"
+
+#. ts-context Dialog
+#: setting.py:112
+msgid "ÇáÈÍË ÏÇÆãÇ İí ãÚÌã ÇáÃİÚÇá ÇáËáÇËíÉ"
+msgstr "??????????"
+
+#. ts-context Dialog
+#: setting.py:113
+msgid "ÅÙåÇÑ ÚáÇãÇÊ ÇáÊÔßíá Èáæä ãÎÊáİ"
+msgstr "?????????????????????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:464
+msgid "ŞØÑÈ: ÊÕÑíİ ÇáÃİÚÇá ÇáÚÑÈíÉ"
+msgstr "????:??????????????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:466
+msgid ","
+msgstr ""
+
+#. ts-context MainWindow
+#: qutrubgui.py:467
+msgid "ÇáãÇÖí"
+msgstr "????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:468
+msgid "ÇáãÖÇÑÚ"
+msgstr "????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:469
+msgid "ÇáÃãÑ"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:511
+msgid "ÇáãÈäí ááãÌåæá"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:488
+msgid ""
+"<html dir='rtl'>\n"
+"          <body>\n"
+"          <ol>\n"
+"          <li>ÇßÊÈ ÇáİÚá ãÔßæáÇ ÔßáÇ ÊÇãÇ\n"
+"          (ÇáÍÑßÇÊ æÇáÔÏÉ ) İí ÎÇäÉ ÇáİÚá ãËÇá\n"
+"          :\n"
+"          ßóÊóÈó¡ ßóÇÊóÈó. </li>\n"
+"          <li>ãáÇÍÙÉ ÅĞÇ ßÇä ÇáİÚá ãåãæÒ\n"
+"          ÇáÃæá Úáì æÒä İÇÚá¡ãËá ÂÎì íÑÌì ßÊÇÈÊå Úáì ÇáÔßá ÁóÇÎóì. </li>\n"
+"          <li>ÅĞÇ ßÇä ÇáİÚá ËáÇËíÇ ÍÏÏ\n"
+"          ÍÑßÉ Úíä ÇáİÚá İí ÇáãÖÇÑÚ¡ ãËáÇ ßÊÈ íßÊõÈ ÊÃÎĞ ÇáÍÑßÉ ÖãÉ İí "
+"ÇáãÖÇÑÚ.\n"
+"          ÅĞÇ ßÇä ÇáİÚá ÛíÑ ËáÇËí¡ ÊÌÇåá åĞå ÇáãíÒÉ. </li>\n"
+"          <li>ÍÏÏ ÇááÒæã æÇáÊÚÏí ááİÚá¡ </li>\n"
+"          <li>ÇÎÊÑ ÇáÒãä ÇáĞí ÊÑíÏ\n"
+"          ÇáÊÕÑíİ İíå </li>\n"
+"          <li>ÇÖÛØ Úáì \"ÕÑøİ ÇáİÚá\".</li>\n"
+"          </ol>\n"
+"          </body>"
+msgstr ""
+"\n"
+"          <html dir='ltr'>\n"
+"          <body>\n"
+"          <ol>\n"
+"          <li>??????????????????????????? ßóÊóÈó¡ ßóÇÊóÈó. </li>\n"
+"          <li>??:???????????(Á)?????????????????İÇÚá??\n"
+"          ?????ÂÎì????????????ÁóÇÎóì????????? </li>\n"
+"          <li>??????????????????????????????????????\n"
+"          ???????????ßÊÈ íßÊõÈ?????(ÜÜõÜ)??????????????????? </li>\n"
+"          <li>????????????????????</li>\n"
+"          <li>??????????????</li>\n"
+"          <li>?????????????????????</li>\n"
+"          </ol>\n"
+"          </body>\n"
+"        "
+
+#. ts-context MainWindow
+#: qutrubgui.py:489
+msgid "ÇáãÖÇÑÚ ÇáãäÕæÈ æÇáãÌÒæã"
+msgstr "??????????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:490
+msgid "ÇáãÄßÏ "
+msgstr "?????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:495
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"        <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"        p, li { white-space: pre-wrap; }\n"
+"        </style></head><body style=\" font-family:'ae_AlMateen'; "
+"font-size:14pt; font-weight:600; font-style:normal;\">\n"
+"        <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ÍÏÏ ÇááÒæã æÇáÊÚÏí "
+"ááİÚá</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"          <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"          p, li { white-space: pre-wrap; }\n"
+"          </style></head><body style=\" font-family:'MS Gothic'; "
+"font-size:14pt; font-weight:600; font-style:normal;\">\n"
+"          <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; "
+"text-indent:0px;\">????????????????????</p></body></html>"
+
+#. ts-context MainWindow
+#: qutrubgui.py:496
+msgid "ãÊÚÏí"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:501
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"          <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"          p, li { white-space: pre-wrap; }\n"
+"          </style></head><body style=\" font-family:'ae_AlMateen'; "
+"font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"          <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ÇÎÊÑ ÇáÒãä ÇáĞí "
+"ÊÑíÏ ÇáÊÕÑíİ İíå</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"          <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"          p, li { white-space: pre-wrap; }\n"
+"          </style></head><body style=\" font-family:'MS Gothic'; "
+"font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"          <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; "
+"text-indent:0px;\">??????????????</p></body></html>"
+
+#. ts-context MainWindow
+#: qutrubgui.py:502
+msgid "ßá ÇáÃÒãäÉ"
+msgstr "??????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:507
+msgid ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"          <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"          p, li { white-space: pre-wrap; }\n"
+"          </style></head><body style=\" font-family:'ae_AlMateen'; "
+"font-size:18pt; font-weight:600; font-style:normal;\">\n"
+"          <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ÕÑİ "
+"ÇáİÚá</p></body></html>"
+msgstr ""
+"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+"\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"          <html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+"type=\"text/css\">\n"
+"          p, li { white-space: pre-wrap; }\n"
+"          </style></head><body style=\" font-family:'MS Gothic'; "
+"font-size:18pt; font-weight:600; font-style:normal;\">\n"
+"          <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+"margin-right:0px; -qt-block-indent:0; "
+"text-indent:0px;\">???????</p></body></html>"
+
+#. ts-context MainWindow
+#: qutrubgui.py:508
+msgid "ÊÕÑíİ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:510
+msgid "ÇáãÈäí ááãÚáæã"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:512
+msgid "ÎÕÇÆÕ ÇáİÚá"
+msgstr "?????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:513
+msgid "ÇáŞíãÉ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:515
+msgid "ãáİ"
+msgstr "????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:516
+msgid "ÚÑÖ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:517
+msgid "ãÓÇÚÏÉ"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:518
+msgid "ÊÍÑíÑ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:519
+msgid "ÃÏæÇÊ"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:520
+msgid "toolBar"
+msgstr "?????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:521
+msgid "Ê&ÕÏíÑ"
+msgstr "??????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:522
+msgid "&ÎÑæÌ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:523
+msgid "ÎØ"
+msgstr "????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:525
+msgid "Íæá ÇáÈÑäÇãÌ"
+msgstr "?????????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:526
+msgid "Ïáíá ÇáÇÓÊÚãÇá"
+msgstr "??????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:527
+msgid "äÓÎ"
+msgstr "???"
+
+#. ts-context MainWindow
+#: qutrubgui.py:528
+msgid "ãä åæ ŞØÑÈ¿"
+msgstr "??????????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:529
+msgid "ÊİÖíáÇÊ"
+msgstr "?????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:530
+msgid "ØÈÇÚÉ..."
+msgstr "??..."
+
+#. ts-context MainWindow
+#: qutrubgui.py:531
+msgid "ãÚÇíäÉ ÇáØÈÇÚÉ"
+msgstr "???????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:532
+msgid "ÅÚÏÇÏ ÇáÕİÍÉ"
+msgstr "?????"
+
+#. ts-context MainWindow
+#: qutrubgui.py:533
+msgid "ÊßÈíÑ"
+msgstr "??"
+
+#. ts-context MainWindow
+#: qutrubgui.py:534
+msgid "ÊÕÛíÑ"
+msgstr "??"
