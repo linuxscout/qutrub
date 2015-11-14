@@ -6,14 +6,23 @@
 #      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
+import sys
+import os
+PWD = os.path.join(os.path.dirname(__file__))
+print PWD
+sys.path.append(os.path.join(PWD, '../../support'))
+sys.path.append(os.path.join(PWD, '../../'))
 
 import PyQt4.QtCore
 import PyQt4.QtGui
-#import PyQt4.QtCore.QString 
-##from PyQt4 import QtCore, QtGui
-from libqutrub.mosaref_main import *
+from libqutrub.verb_valid import is_valid_infinitive_verb
 from qutrub_rc import *
 import pyarabic.araby as araby
+import libqutrub.ar_verb as ar_verb
+import libqutrub.verb_db as verb_db
+import libqutrub.verb_const as verb_const
+import libqutrub.classverb as verbclass
+import libqutrub.mosaref_main as mosaref
 
 from setting import *
 
@@ -26,8 +35,9 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         self.MainWindow=MainWindow;
-        QtCore.QDir.setSearchPaths("res", QtCore.QStringList(QtCore.QDir.currentPath()));
-        # print repr(list(QtCore.QStringList(QtCore.QDir.searchPaths("res"))));
+        QtCore.QDir.setSearchPaths("res", QtCore.QStringList(QtCore.QDir.currentPath()+"/gui"));
+        # kk in QtCore.QStringList(QtCore.QDir.currentPath()+"/gui"):
+        #    print repr(kk)
 
 
         self.font_base=None;
@@ -445,7 +455,7 @@ class Ui_MainWindow(object):
         self.readSettings();
         self.applySettings();
         self.translator=QtCore.QTranslator();
-        if not self.translator.load(self.getLanguageCode(), "resources/languages/",'_.'):
+        if not self.translator.load(self.getLanguageCode(), "gui/resources/languages/",'_.'):
         # if not self.translator.load(self.getLanguageCode(), "res:resources/languages"):
         	print "failed loading"; 
 
@@ -538,7 +548,7 @@ class Ui_MainWindow(object):
 
             word=unicode(word);
             word = word.strip(' ');
-            if not araby.isArabicword(word):
+            if not araby.is_arabicword(word):
 
                 QtGui.QToolTip.showText(self.Tverb.geometry().bottomRight(),
                             QtGui.QApplication.translate("MainWindow", "الفعل  غير صالح", None, QtGui.QApplication.UnicodeUTF8),self.Tverb)
@@ -546,7 +556,7 @@ class Ui_MainWindow(object):
 
 
             else:
-                self.CBHaraka.setEnabled(is_triliteral_verb(word));
+                self.CBHaraka.setEnabled(ar_verb.is_triliteral_verb(word));
                 self.Tverb.setStyleSheet ("QLineEdit { color: black;}")
         else:
             self.Tverb.setStyleSheet ("QLineEdit { color: black;}")
@@ -981,12 +991,12 @@ body {
                     suggest="";
                     self.CBSuggest.clear()
                     search_triverb_dict=(self.BDict.checkState()!=0)
-                    if is_triliteral_verb(word) and search_triverb_dict:
+                    if ar_verb.is_triliteral_verb(word) and search_triverb_dict:
             # search the future haraka for the triliteral verb
 ##                        db_base_path=os.path.join(_base_directory(req),"libqutrub/");
                         #db_base_path=".";
                         #liste_verb=find_triliteral_verb(db_base_path,word,haraka);
-                        liste_verb=find_alltriverb(word,haraka,True);
+                        liste_verb= verb_db.find_alltriverb(word,haraka,True);
 #                        for v in liste_verb:
 #                            print liste_verb[0]['verb'].encode('utf8');
             # if there are more verb forms, select the first one
@@ -1006,7 +1016,7 @@ body {
                                 suggested_word=liste_verb[i]["verb"]
                                 suggested_haraka=liste_verb[i]["haraka"]
                                 suggested_transitive=liste_verb[i]["transitive"]
-                                future_form=get_future_form(suggested_word,suggested_haraka);
+                                future_form= mosaref.get_future_form(suggested_word,suggested_haraka);
             #                    display_format=display_format.decode("utf8");
                                 #suggest=u"""<a href='?verb=%s&haraka=%s&transitive=%s&all=1&display_format=HTML'>%s %s</a><br/>"""%(suggested_word,suggested_haraka,suggested_transitive,suggested_word,future_form);
                                 suggest=suggested_word+u"-"+future_form+u"(%s)"%suggested_haraka#+"[%s]"%suggested_transitive;
@@ -1048,7 +1058,7 @@ body {
         for j in range(1,len(rslt_tab[0])):
             self.TabActiveResult.setHorizontalHeaderItem(j-1,QtGui.QTableWidgetItem(rslt_tab[0][j]))
             self.TabPassiveResult.setHorizontalHeaderItem(j-1,QtGui.QTableWidgetItem(rslt_tab[0][j]))
-            if rslt_tab[0][j] in TableIndicativeTense:
+            if rslt_tab[0][j] in verb_const.TableIndicativeTense:
                 self.TabActiveResult.showColumn(j-1)
                 self.TabPassiveResult.hideColumn(j-1)
             else:
@@ -1107,41 +1117,40 @@ body {
     	valid=is_valid_infinitive_verb(word)
     	listetenses=[];
     	if valid:
-    		future_type=get_future_type_by_name(future_type);
-
+    		future_type= ar_verb.get_future_type_by_name(future_type);
     		bab_sarf=0;
-    		vb=verbclass(word,transitive,future_type);
+    		vb=verbclass.VerbClass(word,transitive,future_type);
     		#vb.verb_class();
     		vb.set_display(display_format);
     	#test the uniformate function
     		if all :
     			if transitive :
 ##    				print "transitive";
-    				listetenses=TableTense
+    				listetenses= verb_const.TABLE_TENSE
     				result= vb.conjugate_all_tenses();
     			else:
 ##    				print "intransitive";
-    				listetenses=TableIndicativeTense;
+    				listetenses = verb_const.TableIndicativeTense;
 ##    				print len(TableIndicativeTense)
     				result= vb.conjugate_all_tenses(listetenses);
     		else :
     			listetenses=[];
-    			if past : listetenses.append(TensePast);
-    			if (past and passive and transitive) : listetenses.append(TensePassivePast)
-    			if future : listetenses.append(TenseFuture);
-    			if (future and passive and transitive) : listetenses.append(TensePassiveFuture)
+    			if past : listetenses.append(verb_const.TensePast);
+    			if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
+    			if future : listetenses.append(verb_const.TenseFuture);
+    			if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
     			if (future_moode) :
-    				listetenses.append(TenseSubjunctiveFuture)
-    				listetenses.append(TenseJussiveFuture)
+    				listetenses.append(verb_const.TenseSubjunctiveFuture)
+    				listetenses.append(verb_const.TenseJussiveFuture)
     			if (confirmed) :
-    				if (future):listetenses.append(TenseConfirmedFuture);
-    				if (imperative):listetenses.append(TenseConfirmedImperative);
+    				if (future):listetenses.append(verb_const.TenseConfirmedFuture);
+    				if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
     			if (future and passive and transitive and confirmed) :
-    				listetenses.append(TensePassiveConfirmedFuture);
+    				listetenses.append(verb_const.TensePassiveConfirmedFuture);
     			if (passive and transitive and future_moode) :
-    				listetenses.append(TensePassiveSubjunctiveFuture)
-    				listetenses.append(TensePassiveJussiveFuture)
-    			if imperative : listetenses.append(TenseImperative)
+    				listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
+    				listetenses.append(verb_const.TensePassiveJussiveFuture)
+    			if imperative : listetenses.append(verb_const.TenseImperative)
     			result =vb.conjugate_all_tenses(listetenses);
 
 
@@ -1152,6 +1161,7 @@ body {
     		self.result["CSV"]=vb.conj_display.display("CSV",listetenses)
     		self.result["XML"]=vb.conj_display.display("XML",listetenses)
     		self.verb_attribut=vb.conj_display.get_verb_attributs();
+
     		return result;
     	else: return None;
 

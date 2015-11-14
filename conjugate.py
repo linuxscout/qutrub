@@ -19,8 +19,10 @@
 #  $Source: arabtechies.sourceforge.net
 #
 #***********************************************************************/
-
-from libqutrub.mosaref_main import *
+import sys
+sys.path.append('support')
+import libqutrub.mosaref_main 
+from libqutrub.verb_valid import is_valid_infinitive_verb
 
 import sys,re,string
 import sys, getopt, os

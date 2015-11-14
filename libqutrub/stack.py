@@ -1,7 +1,8 @@
 ﻿#!/usr/bin/python
 # -*- coding=utf-8 -*-
 #************************************************************************
-from arabic_const import *
+# from arabic_const import *
+from pyarabic.araby import *
 from verb_const import *
 class Stack :
 	def __init__(self,text="") :

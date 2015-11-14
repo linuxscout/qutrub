@@ -1,6 +1,9 @@
+2015/11/13: Taha Zerrouki
+- trasfert source code into gihub
+- re-organize the code structure
 27-03-2012 Taha zerrouki:
 	New release 1.0.
-	Add Japneese, english, malay ttranslation.
+	Add Japneese, english, malay translation.
 	Create a library for python as libqutrub
 15-03-2012 Taha Zerrouki:
 	Docstring in code
