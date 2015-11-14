@@ -39,6 +39,7 @@ check that python 2.5 or higher is installed
 extract the package
 run the conjugate.py script 
 
+```
 Usage 
 --------------
 (C) CopyLeft 2009, Taha Zerrouki
@@ -56,7 +57,7 @@ Usage: conjugate -f filename [OPTIONS]
 	[-v | --passive]	passive form
 	N.B. FILE FORMAT is descripted in README
 	This program is licensed under the GPL License
-
+```
 
 Input file format   
 -----------------
@@ -66,6 +67,8 @@ Fields are separated by tabulation.
 A line can be ignored, if it begin by '#'
 The first field is the verb in vocalised form
 The second field is the mark of the letter before last in the future tense, it used just for the verb Thulathi (with three letters).
+
+```
 	values 
 		Fahta:
 			1- fatha
@@ -90,7 +93,7 @@ The second field is the mark of the letter before last in the future tense, it u
 		4		KASRA	FATHA
 		5		DAMMA	DAMMA
 		6		KASRA	KASRA
-
+```
 The third field is :Transitive/intransitive
 	values can be used in this field are:
 		transitive :
@@ -107,6 +110,7 @@ The third field is :Transitive/intransitive
 				4-intransitive
 Example 
 #commented line
+```
 كَتَبَ	ضمة	متعدي
 ضَرَبَ	كسرة	متعدي
 ذَكَرَ	ضمة	متعدي
@@ -119,4 +123,5 @@ Example
 تَنَازَعَ	-	متعدي
 اِدَّارَكَ	-	متعدي
 
+```
 This program is licensed under the GPL License
