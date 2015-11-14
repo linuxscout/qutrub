@@ -1,3 +1,29 @@
+
+Qutrub
+=======
+  Qutrub: Arabic verb conjugation software  قطرب: تصريف الأفعال العربية
+
+[![downloads]( https://img.shields.io/sourceforge/dt/qutrub.svg)](http://sourceforge.org/projects/qutrub)
+[![downloads]( https://img.shields.io/sourceforge/dm/qutrub.svg)](http://sourceforge.org/projects/qutrub)
+
+  Developpers: 	Taha Zerrouki: http://tahadz.com
+	taha dot zerrouki at gmail dot com
+
+
+Features |   value
+---------|---------------------------------------------------------------------------------
+Authors  | [Authors.md](https://github.com/linuxscout/qutrub/master/AUTHORS.md)
+Release  | 1.5
+License  |[GPL](https://github.com/linuxscout/qutrub/master/COPYING)
+Tracker  |[linuxscout/qutrub/Issues](https://github.com/linuxscout/qutrub/issues)
+Mailinglist  |[<qutrub@googlegroups.com>](http://groups.google.com/group/qutrub/)
+Website  |[tahadz.com/qutrub](http://www.tahadz.com/qutrub/)
+Source  |[Github](http://github.com/linuxscout/qutrub)
+Download  |[sourceforge](http://qutrub.sourceforge.net)
+Feedbacks  |[Comments](http://tahadz.com/qutrub/contact)
+Accounts  | [@Twitter](https://twitter.com/linuxscout)  [@Sourceforge](http://sourceforge.net/projectsqutrub/)
+
+
 ﻿#INSTALL
 Requirements
 ----------------
