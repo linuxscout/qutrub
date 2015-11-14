@@ -96,6 +96,7 @@ The second field is the mark of the letter before last in the future tense, it u
 ```
 The third field is :Transitive/intransitive
 	values can be used in this field are:
+```
 		transitive :
 				1-متعدي
 				2-م
@@ -108,6 +109,7 @@ The third field is :Transitive/intransitive
 				2-ل
 				3-i
 				4-intransitive
+```
 Example 
 #commented line
 ```
