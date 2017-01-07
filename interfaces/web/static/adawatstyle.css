@@ -161,13 +161,38 @@ tbody:nth-child(even) td {
   background-color:#fafcda
 }
 .poetryJustifyCSS3 td {
-	text-align: justify;
+    text-align: justify;
 }
 .poetryJustifyCSS3 td::after{
-	content: "";
-	display: inline-block;
-	width: 100%;
+    content: "";
+    display: inline-block;
+    width: 100%;
 }
 .poetryJustifyCSS3 td:nth-child(2n+1) { padding-left: 1.5em; }
 .poetryJustifyCSS3 td:nth-child(2n+0) { padding-right: 1.5em; }
 
+#MoreOptions
+{
+display:none;
+}
+#showhelp
+{
+display:none;
+}
+#Resultpassive
+{
+display:none;
+background-color:#EFE5D5;
+}
+#tenses
+{
+display:none;
+}
+#Bindicative
+{
+background-color:#ffffff;
+}
+#Bpassive
+{
+background-color:#EFE5D5;
+}

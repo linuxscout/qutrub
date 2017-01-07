@@ -9,13 +9,12 @@
   <title>قطرب: تصريف الأفعال العربية</title>
   <meta charset="UTF-8">
   <!--<link href="styles.css" rel="stylesheet">-->
-  <link href="%(script)s/_files/favicon1.png" rel="icon" type="image/png">
-  <link href="%(script)s/_files/adawatstyle.css" rel="stylesheet">
-  <link href="%(script)s/_files/xzero-rtl/css/bootstrap-arabic.min.css" rel="stylesheet">
-  <!--<link rel="stylesheet" href="%(script)s/_files/twbs-rtl/css/bootstrap-arabic.min.css">-->
+  <link href="{{ url_for('static', filename = 'favicon1.png') }}" rel="icon" type="image/png">
+  <link href="{{ url_for('static', filename = 'adawatstyle.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename = 'xzero-rtl/css/bootstrap-arabic.min.css') }}" rel="stylesheet">
 
-  <script src="%(script)s/_files/jquery-1.7.1.min.js"></script>
-  <script src="%(script)s/_files/xzero-rtl/js/bootstrap-arabic.min.js"></script><!--<link rel="stylesheet" href="%(script)s/_files/twbs-rtl/css/bootstrap.min.css">-->
+  <script src="{{ url_for('static', filename = 'jquery-1.7.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'xzero-rtl/js/bootstrap-arabic.min.js') }}"></script>
   <meta content="width=device-width, initial-scale=1" name="viewport">
 <style>
 </style>
@@ -26,30 +25,30 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/mishkal/main"><img alt="قطرب: تصريف الأفعال العربية" height="80px"
-          src="%(script)s/_files/logo.jpg" style='float:right; margin-top:-20px;'> </a>
+          <a class="navbar-brand" href="/main"><img alt="قطرب: تصريف الأفعال العربية" height="80px"
+          src="{{ url_for('static', filename = 'logo.jpg') }}" style='float:right; margin-top:-20px;'> </a>
         </div>
 
         <div>
           <ul class="nav navbar-nav pull-right">
             <li class="active">
-              <a class="active" href="index"><span class="glyphicon glyphicon-home"></span>الرئيسية</a>
+              <a class="active" href="/index"><span class="glyphicon glyphicon-home"></span>الرئيسية</a>
             </li>
 
             <li>
-              <a href="/mishkal/doc"><span class="glyphicon glyphicon-info-sign"></span>توثيق</a>
+              <a href="/doc"><span class="glyphicon glyphicon-info-sign"></span>توثيق</a>
             </li>
 
             <li>
-              <a href="/mishkal/download"><span class="glyphicon glyphicon-download"></span>تحميل</a>
+              <a href="/download"><span class="glyphicon glyphicon-download"></span>تحميل</a>
             </li>
 
             <li>
-              <a href="/mishkal/projects"><span class="glyphicon glyphicon-pushpin"></span>مشاريع</a>
+              <a href="/projects"><span class="glyphicon glyphicon-pushpin"></span>مشاريع</a>
             </li>
 
             <li>
-              <a href="/mishkal/contact"><span class="glyphicon glyphicon-envelope"></span>اتصل بنا</a>
+              <a href="/contact"><span class="glyphicon glyphicon-envelope"></span>اتصل بنا</a>
             </li>
           </ul>
         </div>
@@ -65,10 +64,12 @@
 
 <div class="form-control">
 <ul class="list-inline close pull-right">
-<!--<li><a href="#" id="more" class="pull-right">أدوات<span class="glyphicon glyphicon-wrench"></span></a>-->
+<li><a href="#" id="more" class="pull-right">أدوات<span class="glyphicon glyphicon-wrench"></span></a>
 </li>
 <li>
+<!--
 <a href="#" id="vocalize_group" class="pull-right">خيارات<span class="glyphicon glyphicon-cog"></span></a>
+-->
 </li>
 <li>
 <button class="close" id="random" title="نص عشوائي"><span aria-hidden="true"><span class="glyphicon glyphicon-random" title="نص عشوائي"></span></span></button>
@@ -81,15 +82,42 @@
 
 </ul>
 </div>
-          <input id="InputText" type="text" class="form-control" name="InputText" cols="20" value="%(DefaultText)s"/>
+          <input id="InputText" type="text" class="form-control" name="InputText" cols="20" value="{{ DefaultText }}"/>
 
    
      
            <div class='form-inline'>
             <a class="btn btn-success" id="conjugate" title='تصريف النص'>تصريف الفعل</a>
-             <input checked class="checkbox" id="LastMark" type="checkbox" value='1'> حركة الإعراب
+<div id="MoreOptions" title="الخيارات"> 
+<input checked class="checkbox" id="transitive" type="checkbox" value='1'> متعدي
 
-<button class="close pull-right" id="move" title="نسخ الناتج إلى المدخل"><span aria-hidden="true"><span class="glyphicon glyphicon-arrow-up form-control"></span></span><span class="sr-only">نص عشوائي</span></button>
+<input name="all" id="all" class="checkbox" value="1"  type="checkbox" checked="checked">كل الأزمنة &nbsp;&nbsp;
+<br/>
+<div id="tenses">
+
+<input name="past"  id="past" class="checkbox" value="1" checked type="checkbox">الماضي
+<input name="future" id="future" class="checkbox" value="1" checked type="checkbox">المضارع 
+<input name="imperative" id="imperative" class="checkbox" value="1"  checked type="checkbox">الأمر 
+<br>
+<input name="passive" id="passive" value="1"  class="checkbox"  type="checkbox" checked />المبني للمجهول 
+<input name="future_moode" id="future_moode" class="checkbox" value="1"  type="checkbox" checked />المضارع المنصوب والمجزوم
+<input name="confirmed" id="confirmed" class="checkbox"value="1"  type="checkbox" checked />المؤكد 
+</div>
+
+
+ 
+حركة
+عين المضارع         <select name="haraka">
+        <option value="فتحة" selected>فتحة</option>
+        <option value="ضمة">ضمة</option>
+        <option value="كسرة">كسرة</option>
+        </select>
+للفعل الثلاثي فقط<br/>
+
+
+</div>
+<button
+ class="close pull-right" id="move" title="نسخ الناتج إلى المدخل"><span aria-hidden="true"><span class="glyphicon glyphicon-arrow-up form-control"></span></span><span class="sr-only">نص عشوائي</span></button>
             
           <div class='moresection' id="vocalizesection">
             <label>تشكيل:</label>
@@ -160,7 +188,7 @@
 
 
       <div class="col-md-3 column">
-     <!--<img alt="test" src="%(script)s/_files/images/adawat.png">-->
+
        <article>
     <h3>احصل على قطرب</h3>
 <a class="btn-lg btn-link" href="http://sourceforge.net/projects/mishkal/files/mishkal-Desktop-Win-0.1.4.zip/download">
@@ -175,7 +203,7 @@
       <div class="col-md-9 column"> 
 
 
-<output id="result" class="form-control">%(ResultText)s</output>
+<output id="result" class="form-control">{{ ResultText }}</output>
 
 <section class="bg-info" id="small_hint"></section>
 </div>
@@ -186,12 +214,12 @@
 <progress id='loading'></progress>
 <section class="bg-info" id="hint"></section>
  <h3>جرّب مشاريعنا</h3>
-      <a href="http://qutrub.arabeyes.org"><img src="%(script)s/_files/images/qutrub.jpg" alt="قطرب"></a>
-     <a href="http://adawat.sf.net"><img src="%(script)s/_files/images/adawat.png" alt="أدوات"></a>
-     <a href="http://radif.sf.net"> <img src="%(script)s/_files/images/radif.png" alt="الرديف"></a>
-      <a href="http://ayaspell.sf.net"><img src="%(script)s/_files/images/ayaspell.png" alt="التدقيق الإملائي"></a>
- <a href="http://pypi.python.org/pypi/PyArabic/"><img src="%(script)s/_files/images/pyarabic.png" alt="مكتبة بيثون العربية"></a>
- <a href="http://pypi.python.org/pypi/Tashaphyne/"><img src="%(script)s/_files/images/tashaphyne.png" alt="التحليل الصرفي"></a>
+      <a href="http://qutrub.arabeyes.org"><img src="{{ url_for('static', filename = 'images/qutrub.jpg') }}" alt="قطرب"></a>
+     <a href="http://adawat.sf.net"><img src="{{ url_for('static', filename = 'images/adawat.png') }}" alt="أدوات"></a>
+     <a href="http://radif.sf.net"> <img src="{{ url_for('static', filename = 'images/radif.png') }}" alt="الرديف"></a>
+      <a href="http://ayaspell.sf.net"><img src="{{ url_for('static', filename = 'images/ayaspell.png') }}" alt="التدقيق الإملائي"></a>
+ <a href="http://pypi.python.org/pypi/PyArabic/"><img src="{{ url_for('static', filename = 'images/pyarabic.png') }}" alt="مكتبة بيثون العربية"></a>
+ <a href="http://pypi.python.org/pypi/Tashaphyne/"><img src="{{ url_for('static', filename = 'images/tashaphyne.png') }}" alt="التحليل الصرفي"></a>
 
 </div>
     </div>
@@ -203,11 +231,7 @@
   <div class="container">
 <div class="row clearfix">
 <div class="col-md-12 column">
-  <!--<section class="bg-danger pull-bottom" id="contributeSection">
-    بعد أن تتحقّق من أنّ النص مشكول تشكيلا صحيحا، أرسله إلينا من أجل تحسين أداء البرنامج. مع جزيل
-    شكرنا. <a class="btn btn-info btn-xs" id="contribute"><span>اقترح تشكيلا أفضل</span></a>
-  </section>
--->
+
 </div>
 </div>
 
@@ -255,8 +279,6 @@
       </div>
     </div>
   </section>
-<script>
-var script="%(script)s";
-  </script> <script src="%(script)s/_files/adawat.js"></script></span>
+<script src="{{ url_for('static', filename = 'adawat.js') }}"></script></span>
 </body>
 </html>

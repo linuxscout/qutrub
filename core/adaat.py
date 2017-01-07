@@ -43,7 +43,7 @@ def DoAction(text, action, options = {}):
     elif action == "StripHarakat":
         return araby.strip_tashkeel(text)
     elif action == "Conjugate":
-        return conjugate(text)
+        return conjugate(text, options)
     elif action == "CsvToData":
         return csv_to_python_table(text)
     elif action == "Romanize":
@@ -166,72 +166,81 @@ def csv_to_python_table(text):
 
     return resulttext
 
-def conjugate(text):
-	"""
-	Conjugate verb using qutrub
-	
-	"""
+def conjugate(text, options):
+    """
+    Conjugate verb using qutrub
+    
+    """
 
-	#extract first word if many words are given
-	word = text.split(" ")[0]
+    #extract first word if many words are given
+    word = text.split(" ")[0]
 
-	return do_sarf(word, araby.FATHA, transitive = True );
+    return do_sarf(word, 
+        future_type = options.get("future_type",u"فتحة"),
+        all         = options.get("all", False),
+        past        = options.get("past", False),
+        future      = options.get("future", False),
+        passive     = options.get("passive", False),
+        imperative  = options.get("imperative", False),
+        future_moode= options.get("future_moode", False),
+        confirmed   = options.get("confirmed", False),
+        transitive  = options.get("transitive", False),
+        #~ display_format  =options.get("imperative", "HTML"),
+        );
 
 def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
-	import libqutrub.mosaref_main as mosaref
-	import libqutrub.ar_verb as ar_verb
-	import libqutrub.classverb as verbclass
-	import libqutrub.verb_const as verb_const
-	import pyarabic.arabrepr as myrepr
-	from libqutrub.verb_valid import is_valid_infinitive_verb
-	valid = is_valid_infinitive_verb(word)
-	listetenses=[];
-	if valid:
-		future_type= ar_verb.get_future_type_by_name(future_type);
-		bab_sarf=0;
-		vb = verbclass.VerbClass(word,transitive,future_type);
-		#vb.verb_class();
-		vb.set_display(display_format);
-	#test the uniformate function
-		if all :
-			if transitive :
-##    				print "transitive";
-				listetenses= verb_const.TABLE_TENSE
-				result= vb.conjugate_all_tenses();
-			else:
-##    				print "intransitive";
-				listetenses = verb_const.TableIndicativeTense;
-##    				print len(TableIndicativeTense)
-				result= vb.conjugate_all_tenses(listetenses);
-		else :
-			listetenses=[];
-			if past : listetenses.append(verb_const.TensePast);
-			if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
-			if future : listetenses.append(verb_const.TenseFuture);
-			if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
-			if (future_moode) :
-				listetenses.append(verb_const.TenseSubjunctiveFuture)
-				listetenses.append(verb_const.TenseJussiveFuture)
-			if (confirmed) :
-				if (future):listetenses.append(verb_const.TenseConfirmedFuture);
-				if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
-			if (future and passive and transitive and confirmed) :
-				listetenses.append(verb_const.TensePassiveConfirmedFuture);
-			if (passive and transitive and future_moode) :
-				listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
-				listetenses.append(verb_const.TensePassiveJussiveFuture)
-			if imperative : listetenses.append(verb_const.TenseImperative)
-			result =vb.conjugate_all_tenses(listetenses);
-    		#self.result["HTML"]=vb.conj_display.display("HTML",listetenses)
-		#return result;
-		#return vb.conj_display.display("HTML",listetenses)
-		#return vb.conj_display.display("DICT",listetenses)
-		mrepr = myrepr.ArabicRepr()
-		return vb.conj_display.display("TABLE",listetenses)		
-		return mrepr.repr(vb.conj_display.display("TABLE",listetenses))
-		
-		return mrepr.repr(result)
-	else: return None;
+    import libqutrub.mosaref_main as mosaref
+    import libqutrub.ar_verb as ar_verb
+    import libqutrub.classverb as verbclass
+    import libqutrub.verb_const as verb_const
+    import pyarabic.arabrepr as myrepr
+    from libqutrub.verb_valid import is_valid_infinitive_verb
+    valid = is_valid_infinitive_verb(word)
+    listetenses=[];
+    if valid:
+        future_type= ar_verb.get_future_type_by_name(future_type);
+        bab_sarf=0;
+        vb = verbclass.VerbClass(word,transitive,future_type);
+        #vb.verb_class();
+        vb.set_display(display_format);
+    #test the uniformate function
+        if all :
+            if transitive :
+##                  print "transitive";
+                listetenses= verb_const.TABLE_TENSE
+                result= vb.conjugate_all_tenses();
+            else:
+##                  print "intransitive";
+                listetenses = verb_const.TableIndicativeTense;
+##                  print len(TableIndicativeTense)
+                result= vb.conjugate_all_tenses(listetenses);
+        else :
+            listetenses=[];
+            if past : listetenses.append(verb_const.TensePast);
+            if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
+            if future : listetenses.append(verb_const.TenseFuture);
+            if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
+            if (future_moode) :
+                listetenses.append(verb_const.TenseSubjunctiveFuture)
+                listetenses.append(verb_const.TenseJussiveFuture)
+            if (confirmed) :
+                if (future):listetenses.append(verb_const.TenseConfirmedFuture);
+                if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
+            if (future and passive and transitive and confirmed) :
+                listetenses.append(verb_const.TensePassiveConfirmedFuture);
+            if (passive and transitive and future_moode) :
+                listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
+                listetenses.append(verb_const.TensePassiveJussiveFuture)
+            if imperative : listetenses.append(verb_const.TenseImperative)
+            result =vb.conjugate_all_tenses(listetenses);
+            #self.result["HTML"]=vb.conj_display.display("HTML",listetenses)
+        #return result;
+
+        return vb.conj_display.display("TABLE",listetenses)
+    else:
+        
+
+    else: return None;
 
 
 def romanize(text, code = "ISO"):
