@@ -969,6 +969,11 @@ class VerbClass:
         else:
             # the key is composed from the letters and past and future marks,
             # to identify irregular verb
+            if self.word_letters == u"ءرى":
+                #~ print self.word_letters.encode("utf8")
+                self.past_haraka = araby.FATHA
+                self.future_type  = araby.KASRA
+                #~ self.vlength      = 4
             key = self.word_letters + self.past_haraka+self.future_type
             if vconst.IRREGULAR_VERB_CONJUG.has_key(key ):
                 return True

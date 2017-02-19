@@ -355,10 +355,11 @@ _YH: {_S:_YHA, _F:_YHA, _D:_YHA, _K:_YHA, _AH:_YHA, _WH:_YHA, _YH:_YHA },
 }
 
 FINAL_TAHMEEZ_TABLE = {
-u"%s" % BEGIN_WORD :{_S:_HZ, _F:_AHA, _D:_AHA, _K:_AHB, _AH:_AM, _WH:_AHA, 
+u"%s" % BEGIN_WORD :{_S:_HZ, _F:_AHA, _D:_AHA, _K:_YHA, _AH:_AM, _WH:_AHA, 
  _YH:_AHA}, 
+#~ _S: {_S:_HZ, _F:_AHA, _D:_WHA, _K:_YHA, _AH:_AHA, _WH:_WHA, _YH:_YHA }, 
 _S: {_S:_HZ, _F:_AHA, _D:_WHA, _K:_YHA, _AH:_AHA, _WH:_WHA, _YH:_YHA }, 
-_F: {_S:_AHA, _F:_AHA, _D:_AHA, _K:_AHB, _AH:_AHA, _WH:_WHA, _YH:_YHA }, 
+_F: {_S:_AHA, _F:_AHA, _D:_AHA, _K:_YHA, _AH:_AHA, _WH:_WHA, _YH:_YHA }, 
 _D: {_S:_WHA, _F:_WHA, _D:_WHA, _K:_YHA, _AH:_WHA, _WH:_WHA, _YH:_YHA }, 
 _K: {_S:_YHA, _F:_YHA, _D:_YHA, _K:_YHA, _AH:_WHA, _WH:_WHA, _YH:_YHA }, 
 _AH: {_S:_HZ, _F:_HZ, _D:_HZ, _K:_HZ, _AH:_HZ, _WH:_WHA, _YH:_YHA }, 
@@ -392,8 +393,12 @@ TenseFuture:(u"رى", FATHA+FATHA+FATHA),
 TensePassiveFuture:(u"رى", DAMMA+FATHA+FATHA), 
 TenseImperative:(u"رى", FATHA+FATHA), 
 }
-IRREGULAR_VERB_CONJUG[u"ءري"+FATHA+FATHA] = {
-CONJUG_BAB:(FATHA, FATHA), 
+#ToDO
+# الفعل أرى مشكلة كبيرة
+# لأنه الفعل الشاذ الوحيد الرباعي
+
+IRREGULAR_VERB_CONJUG[u"ءرى"+FATHA+KASRA] = {
+CONJUG_BAB:(KASRA, FATHA), 
 TenseFuture:(u"ري", DAMMA+KASRA+FATHA), 
 TensePassiveFuture:(u"ري", DAMMA+FATHA+FATHA), 
 TenseImperative:(u"ءري", FATHA+KASRA+FATHA), 
@@ -548,7 +553,8 @@ u'آشى':[u'أءشى'],
 u'آصد':[u'أءصد'], 
 u'آصر':[u'ءاصر'], 
 u'آصل':[u'أءصل'], 
-u'آضّ':[u'ءاضّ'], 
+u'آضّ':[u'ءاضّ'],
+u'آض':[u'ءاضّ'],  
 u'آطم':[u'أءطم'], 
 u'آفك':[u'أءفك'], 
 u'آفى':[u'أءفى'], 

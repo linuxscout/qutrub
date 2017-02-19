@@ -691,7 +691,7 @@ def normalize_hamza(word):
     @return: return a converted text.
     @rtype: unicode.
     """
-    if word.startswith(ALEF_MADDA):
+    if False and word.startswith(ALEF_MADDA):
         if len(word)>= 3 and (word[1] not in HARAKAT) and \
                      (word[2] == SHADDA or len(word) == 3):
             word = HAMZA + ALEF + word[1:]

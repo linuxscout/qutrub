@@ -331,10 +331,12 @@ def  normalize_alef_madda(word):
     """
     if word.startswith(ALEF_MADDA):
         word_nm = araby.strip_harakat(word)
+        #print word, word_nm, len(word), len(word_nm)
         if len(word_nm) == 2:
             return word_nm.replace(ALEF_MADDA, HAMZA+ALEF)
         elif len(word_nm) == 3:
             if vconst.ALEF_MADDA_VERB_TABLE.has_key(word_nm):
+                #print word, "exists in madd table", vconst.ALEF_MADDA_VERB_TABLE[word_nm][0]
                 #return the first one only
                 #mylist = ALEF_MADDA_VERB_TABLE[word_nm]
                 return vconst.ALEF_MADDA_VERB_TABLE[word_nm][0]
@@ -513,7 +515,7 @@ def uniformate_verb(word):
         return ("", "")
     #normalize ALEF MADDA
     if word.startswith(ALEF_MADDA):
-        word = word.replace(ALEF_MADDA, HAMZA+HAMZA)
+        word = normalize_alef_madda(word)
     else:
         word = word.replace(ALEF_MADDA, HAMZA+ALEF)
 
@@ -742,7 +744,8 @@ def standard2(word_nm, harakat):
     @rtype: unicode.
     """
     if len(word_nm) != len(harakat):
-        return u""
+        print word_nm.encode('utf8'),len(word_nm), u"-".join([araby.name(x) for x in harakat]), len(harakat)
+        return u"*"
     else:
         word = u""
         i = 0
@@ -826,7 +829,7 @@ def tahmeez2(word_nm, harakat):
             else:
                 if i == 0:
                     actual = harakat[i]
-                    swap = vconst.INITIAL_TAHMEEZ_TABLE[actual]
+                    swap = vconst.INITIAL_TAHMEEZ_TABLE.get(actual, actual)
                 else:
                     before = harakat[i-1]
                     actual = harakat[i]
@@ -846,8 +849,17 @@ def tahmeez2(word_nm, harakat):
                         if  vconst.MIDDLE_TAHMEEZ_TABLE.has_key(before) and\
                        vconst.MIDDLE_TAHMEEZ_TABLE[before].has_key(actual):
                             swap = vconst.MIDDLE_TAHMEEZ_TABLE[before][actual]
+                            #~ # if the actual haraka is FATHA
+                            if actual == araby.FATHA and before == araby.SUKUN:
+                                if word_nm[i-1] == araby.YEH:
+                                    swap = araby.YEH_HAMZA
+                                #~ #elif word_nm[i-1] in ( araby.WAW, araby.DAL,araby.THAL, 
+                                #~ #   araby.REH, araby.ZAIN ):
+                                elif word_nm[i-1]  in( araby.WAW, ):
+                                    swap = araby.HAMZA                            
                         else :
                             swap = word_nm[i]
+
                     else :
                         if before == vconst.NOT_DEF_HARAKA:
                             before = FATHA
