@@ -237,9 +237,6 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
         #return result;
 
         return vb.conj_display.display("TABLE",listetenses)
-    else:
-        
-
     else: return None;
 
 

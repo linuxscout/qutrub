@@ -28,7 +28,7 @@ import libqutrub.verb_const as vconst
 # import ar_ctype 
 import pyarabic.araby as araby
 #~ from pyarabic.araby import *
-from pyarabic.araby import FATHA, DAMMA, KASRA, SHADDA, SUKUN, HAMZA, ALEF, \
+from pyarabic.araby import FATHA, DAMMA, KASRA, SHADDA, SUKUN, HAMZA, ALEF,  \
   WAW, ALEF_HAMZA_ABOVE, ALEF_MADDA, \
  YEH_HAMZA,   ALEF_MAKSURA, YEH, TEH,  \
 LAM_ALEF, SIMPLE_LAM_ALEF, LAM_ALEF_HAMZA_ABOVE, \
@@ -668,7 +668,7 @@ def geminating(word_nm, harakat):
     # نعالج الحالات التي فيها الحرف الحالي متبوع بحرف شدة،
     # ندرس الحالات التي يجب فيها فك الإدغام
         if (i > 0 and i+1 < length and word_nm[i+1] == SHADDA and \
-        harakat[i] in (SUKUN, FATHA, KASRA, DAMMA)):
+        harakat[i] in (SUKUN, FATHA, KASRA, DAMMA)) and harakat[i-1]:
             # treat ungeminating case
 
 #إذا كان الحرف المضعف الأول غير ساكن والحرف المضعّف الثاني (ممثلا بشدة)ساكنا،
@@ -836,10 +836,8 @@ def tahmeez2(word_nm, harakat):
 
                     if i+1 < len(word_nm):
     # if the hamza have shadda, it will take the harakat of shadda.
-                        if actual == vconst.NOT_DEF_HARAKA or \
-                         actual == SUKUN:
-                            if word_nm[i+1] == SHADDA and \
-                            harakat[i+1] != SUKUN:
+                        if actual == vconst.NOT_DEF_HARAKA or actual == SUKUN:
+                            if word_nm[i+1] == SHADDA and harakat[i+1] != SUKUN:
                                 actual = harakat[i+1]
                         if before == vconst.NOT_DEF_HARAKA:
                             before = FATHA
@@ -850,12 +848,13 @@ def tahmeez2(word_nm, harakat):
                        vconst.MIDDLE_TAHMEEZ_TABLE[before].has_key(actual):
                             swap = vconst.MIDDLE_TAHMEEZ_TABLE[before][actual]
                             #~ # if the actual haraka is FATHA
-                            if actual == araby.FATHA and before == araby.SUKUN:
-                                if word_nm[i-1] == araby.YEH:
+                            if before  in (SUKUN, vconst.YEH_HARAKA, vconst.ALEF_HARAKA, vconst.WAW_HARAKA):
+                                if actual == FATHA and word_nm[i-1] == araby.YEH:
                                     swap = araby.YEH_HAMZA
                                 #~ #elif word_nm[i-1] in ( araby.WAW, araby.DAL,araby.THAL, 
                                 #~ #   araby.REH, araby.ZAIN ):
-                                elif word_nm[i-1]  in( araby.WAW, ):
+                                #ZZZZ
+                                elif word_nm[i-1] == araby.WAW and actual  not in (KASRA, vconst.YEH_HARAKA):
                                     swap = araby.HAMZA                            
                         else :
                             swap = word_nm[i]
@@ -868,7 +867,11 @@ def tahmeez2(word_nm, harakat):
 
                         if  vconst.FINAL_TAHMEEZ_TABLE.has_key(before) and \
                          vconst.FINAL_TAHMEEZ_TABLE[before].has_key(actual):
-                            swap = vconst.FINAL_TAHMEEZ_TABLE[before][actual]
+                            if word_nm[i-1]  in( araby.WAW, ) and actual in (FATHA, DAMMA):
+                                #pass
+                               swap = araby.HAMZA 
+                            else:
+                                swap = vconst.FINAL_TAHMEEZ_TABLE[before][actual]
                         else :
                             swap = word_nm[i]
                 word += swap
@@ -985,11 +988,11 @@ def homogenize(word_nm, harakat):
                   and shadda_in_next:
                     new_harakat += ''
                 # حالة هو تيسّر في المضارع المبني للمجهول
-                elif  actual_letter == YEH and previous_haraka == DAMMA and \
-                actual_haraka  == DAMMA  and  shadda_in_next:
-                    #pass
-                    new_harakat += DAMMA
-                    new_word += YEH
+                #~ elif  actual_letter == YEH and previous_haraka == DAMMA and \
+                #~ actual_haraka  == DAMMA  and  shadda_in_next:
+                    #~ #pass
+                    #~ new_harakat += DAMMA
+                    #~ new_word += YEH
                 # # مثل تؤدّينّ
                 # elif  previous_haraka in (KASRA, FATHA) and
                 # actual_haraka  == DAMMA  and  shadda_in_next:
@@ -998,7 +1001,12 @@ def homogenize(word_nm, harakat):
                 # ToDO review
                 #سقّى، يُسقُّون
                 elif  actual_haraka  == DAMMA  and  shadda_in_next:
-                    new_harakat = new_harakat[:-1]+DAMMA
+                    if previous_haraka in (DAMMA, KASRA):
+                    #~ if previous_haraka in DAMMA:
+                        new_harakat = new_harakat[:-1]+DAMMA
+                    else:
+                        new_harakat += DAMMA
+                        new_word += WAW
                 #تحويل الياء إلى واو ساكنة
                 #2 - إذا كانت الياء مضمومة (ضما قصيرا أو طويلا)،
 # وكان ما قبلها مفتوحا، تتحول الياء إلى واو ساكنة.                #مثال :
@@ -1027,9 +1035,12 @@ def homogenize(word_nm, harakat):
                 previous_haraka == FATHA:
                     new_harakat += SUKUN
                     new_word += YEH
-                elif  (actual_haraka  == vconst.WAW_HARAKA) and \
-                 previous_haraka == KASRA :
+                elif  (actual_haraka  == vconst.WAW_HARAKA) and previous_haraka == KASRA :
                     new_harakat = new_harakat[:-1]+vconst.WAW_HARAKA
+
+                    #~ if araby.is_hamza(previous_letter):
+                        #~ new_word    = new_word[:-1] + araby.WAW_HAMZA
+                        
 
                 else :
                     new_harakat += actual_haraka
@@ -1044,9 +1055,11 @@ def homogenize(word_nm, harakat):
                 (actual_haraka in(SUKUN, DAMMA, vconst.WAW_HARAKA))and\
                  (previous_haraka == DAMMA) and not shadda_in_next:
                     new_harakat = new_harakat[:-1]+vconst.WAW_HARAKA
+                    
                 elif actual_letter == WAW and (actual_haraka in(SUKUN, DAMMA))\
                  and (previous_haraka == DAMMA) and not shadda_in_next:
                     new_harakat = new_harakat[:-1]+vconst.WAW_HARAKA
+                    
                 #تحويل الواو المضمومة  أو الطويلة إلى واو ساكنة
                 elif  (actual_haraka in (DAMMA, vconst.WAW_HARAKA)) \
                 and previous_haraka == FATHA :
@@ -1054,21 +1067,44 @@ def homogenize(word_nm, harakat):
                     new_word += WAW
                 # حالة وجع ايجع
                 elif (actual_haraka  == (SUKUN))and \
-                (previous_haraka == KASRA)and not shadda_in_next:
+                (previous_haraka == KASRA) and not shadda_in_next:
                     new_harakat = new_harakat[:-1]+vconst.YEH_HARAKA
                 elif  (actual_haraka == KASRA)and shadda_in_next:
                     new_harakat = new_harakat[:-1]+KASRA
+                    
                 elif  actual_letter == vconst.ALEF_MAMDUDA and \
-                (actual_haraka == DAMMA)and shadda_in_next:
-                    new_harakat = new_harakat[:-1]+DAMMA
+                (actual_haraka == DAMMA) and shadda_in_next:
+                    if previous_haraka == DAMMA:
+                        new_harakat = new_harakat[:-1]+DAMMA
+                    else:
+                        new_harakat += DAMMA
+                        new_word +=  WAW
+                        
+                
+                elif  actual_letter == WAW and (actual_haraka == vconst.WAW_HARAKA):
+                    new_harakat = new_harakat[:-1]+ vconst.WAW_HARAKA
+                elif  actual_letter == WAW and (actual_haraka == DAMMA) and previous_haraka == DAMMA and shadda_in_next:
+                    new_harakat +=""
+                    
                 elif  actual_letter == vconst.ALEF_MAMDUDA and \
                 (actual_haraka == vconst.YEH_HARAKA) and \
                  not shadda_in_next:
                     new_harakat = new_harakat[:-1]+vconst.YEH_HARAKA
+                elif  (actual_letter == WAW ) and (actual_haraka == DAMMA) and previous_haraka in (FATHA,) and \
+                 shadda_in_next:
+                    new_harakat += DAMMA
+                    new_word += WAW
+                elif  actual_letter == WAW and (actual_haraka == DAMMA) and previous_haraka in (FATHA,) and \
+                 shadda_in_next:
+                    new_harakat += DAMMA
+                    new_word += WAW
                 elif  actual_letter == WAW and (actual_haraka == DAMMA) and\
                  shadda_in_next:
                     new_harakat += DAMMA
                     new_word += WAW
+                #elif  actual_letter == WAW and actual_haraka == FATHA and (previous_haraka == FATHA):
+                #    new_harakat += "" #actual_haraka
+                 #   new_word += ""#WAW
                 else :
                     new_harakat += actual_haraka
                     new_word += WAW
@@ -1091,6 +1127,7 @@ def homogenize(word_nm, harakat):
         else:
             previous_letter = ''
             previous_haraka = ''
+
         if  last_letter == ALEF_MAKSURA or last_letter == YEH :
             if  (last_haraka in(KASRA, DAMMA))  and previous_haraka == KASRA:
                 new_harakat = new_harakat[:-1]+vconst.YEH_HARAKA
@@ -1146,6 +1183,22 @@ def homogenize(word_nm, harakat):
                 new_harakat += last_haraka
                 new_word += WAW
                 #new_word += vconst.ALEF_MAMDUDA
+        elif  last_letter == WAW :
+            if  (last_haraka in(DAMMA, FATHA))  and previous_haraka == FATHA:
+                new_harakat += vconst.NOT_DEF_HARAKA
+                new_word += ALEF_MAKSURA
+            elif  (last_haraka in(FATHA,))  and previous_haraka == KASRA:
+                new_harakat += vconst.FATHA
+                new_word += YEH
+            elif  (last_haraka in (vconst.YEH_HARAKA,))  and previous_haraka in (KASRA, DAMMA):
+                new_harakat = new_harakat[:-1]+vconst.YEH_HARAKA
+                new_word += ''
+            elif (last_haraka in(SUKUN,))  and previous_haraka in (DAMMA, FATHA):
+                new_harakat += ""
+                new_word += ""
+            else:
+                new_harakat += harakat[i]
+                new_word += word_nm[i]
         else:
             new_harakat += harakat[i]
             new_word += word_nm[i]

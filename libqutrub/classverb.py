@@ -627,6 +627,9 @@ class VerbClass:
                 conj_huwa = self.conjugate_tense_pronoun(tense, 
                 vconst.PronounHuwa)
                 self.conj_display.add(tense, vconst.PronounHuwa, conj_huwa)
+                conj_hum = self.conjugate_tense_pronoun(tense, 
+                vconst.PronounHum)
+                self.conj_display.add(tense, vconst.PronounHum, conj_hum)
 # حالة الفعل مهموز الآخر
                 if conj_huwa.endswith(YEH+HAMZA+FATHA) :
                     self.conj_display.add(tense, vconst.PronounHya, 
@@ -650,12 +653,12 @@ class VerbClass:
                     conj_huwa+TEH+FATHA+ALEF)
                     self.conj_display.add(tense, vconst.PronounHuma, 
                     conj_huwa+ALEF)
-                    if conj_huwa.endswith(KASRA+YEH+FATHA):
-                        self.conj_display.add(tense, vconst.PronounHum, 
-                        conj_huwa[:-3]+DAMMA+WAW+ALEF)
-                    else:
-                        self.conj_display.add(tense, vconst.PronounHum, 
-                        conj_huwa[:-1]+DAMMA+WAW+ALEF)
+                    #~ if conj_huwa.endswith(KASRA+YEH+FATHA):
+                        #~ self.conj_display.add(tense, vconst.PronounHum, 
+                        #~ conj_huwa[:-3]+DAMMA+WAW+ALEF)
+                    #~ else:
+                        #~ self.conj_display.add(tense, vconst.PronounHum, 
+                        #~ conj_huwa[:-1]+DAMMA+WAW+ALEF)
             elif tense in (vconst.TenseFuture, vconst.TensePassiveFuture, 
             vconst.TenseJussiveFuture, vconst.TenseSubjunctiveFuture, 
             vconst.TenseConfirmedFuture, vconst.TensePassiveJussiveFuture, 
@@ -792,7 +795,7 @@ class VerbClass:
         elif tense == vconst.TensePassivePast:
             # direct conjugation
             if pronoun in (vconst.PronounAna, vconst.PronounNahnu, 
-            vconst.PronounHunna, vconst.PronounHunna, vconst.PronounHuwa):
+            vconst.PronounHunna, vconst.PronounHunna, vconst.PronounHuwa, vconst.PronounHum):
                 conj = self.conjugate_tense_pronoun(tense, pronoun)
                 self.conj_display.add(tense, pronoun, conj)
             # indirect conjugation
@@ -828,7 +831,8 @@ class VerbClass:
             # indirect conjugation
             # Ana pronoun like conjugation
             elif pronoun in ( vconst.PronounHya, vconst.PronounHuma_f, 
-            vconst.PronounHuma, vconst.PronounHum):
+            #~ vconst.PronounHuma, vconst.PronounHum):
+            vconst.PronounHuma,):
                 conj_huwa = self.conj_display.get_conj(tense, 
                 vconst.PronounHuwa)
                 if conj_huwa == u"":
@@ -844,8 +848,8 @@ class VerbClass:
                     self.conj_display.add(tense, vconst.PronounHuma, 
                     conj_huwa[:-2]+YEH_HAMZA+FATHA+ALEF)
 
-                    self.conj_display.add(tense, vconst.PronounHum, 
-                    conj_huwa[:-2]+YEH_HAMZA+DAMMA+WAW+ALEF)
+                    #~ self.conj_display.add(tense, vconst.PronounHum, 
+                    #~ conj_huwa[:-2]+YEH_HAMZA+DAMMA+WAW+ALEF)
 
                 else :
                     self.conj_display.add(tense, vconst.PronounHya, 
@@ -854,12 +858,12 @@ class VerbClass:
                     conj_huwa+TEH+FATHA+ALEF)
                     self.conj_display.add(tense, vconst.PronounHuma, 
                     conj_huwa+ALEF)
-                    if conj_huwa.endswith(KASRA+YEH+FATHA):
-                        self.conj_display.add(tense, vconst.PronounHum, 
-                        conj_huwa[:-3]+DAMMA+WAW+ALEF)
-                    else:
-                        self.conj_display.add(tense, vconst.PronounHum, 
-                        conj_huwa[:-1]+DAMMA+WAW+ALEF)
+                    #~ if conj_huwa.endswith(KASRA+YEH+FATHA):
+                        #~ self.conj_display.add(tense, vconst.PronounHum, 
+                        #~ conj_huwa[:-3]+DAMMA+WAW+ALEF)
+                    #~ else:
+                        #~ self.conj_display.add(tense, vconst.PronounHum, 
+                        #~ conj_huwa[:-1]+DAMMA+WAW+ALEF)
         elif tense in (vconst.TenseFuture, vconst.TensePassiveFuture, 
         vconst.TenseJussiveFuture, vconst.TenseSubjunctiveFuture, 
         vconst.TenseConfirmedFuture, vconst.TensePassiveJussiveFuture, 

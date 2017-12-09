@@ -349,8 +349,10 @@ _S: {_S:_HZ, _F:_AHA, _D:_WHA, _K:_YHA, _AH:_AHA, _WH:_WHA, _YH:_YHA },
 _F: {_S:_AHA, _F:_AHA, _D:_WHA, _K:_YHA, _AH:_AHA, _WH:_WHA, _YH:_YHA }, 
 _D: {_S:_WHA, _F:_WHA, _D:_WHA, _K:_YHA, _AH:_WHA, _WH:_WHA, _YH:_YHA }, 
 _K: {_S:_YHA, _F:_YHA, _D:_YHA, _K:_YHA, _AH:_YHA, _WH:_YHA, _YH:_YHA }, 
+#_AH: {_S:_HZ, _F:_HZ, _D:_WHA, _K:_YHA, _AH:_HZ, _WH:_WHA, _YH:_YHA }, 
 _AH: {_S:_HZ, _F:_HZ, _D:_WHA, _K:_YHA, _AH:_HZ, _WH:_WHA, _YH:_YHA }, 
-_WH: {_S:_HZ, _F:_HZ, _D:_WHA, _K:_YHA, _AH:_HZ, _WH:_WHA, _YH:_YHA }, 
+#_WH: {_S:_HZ, _F:_HZ, _D:_WHA, _K:_YHA, _AH:_HZ, _WH:_WHA, _YH:_YHA }, 
+_WH: {_S:_HZ, _F:_HZ, _D:_HZ, _K:_YHA, _AH:_HZ, _WH:_HZ, _YH:_YHA }, 
 _YH: {_S:_YHA, _F:_YHA, _D:_YHA, _K:_YHA, _AH:_YHA, _WH:_YHA, _YH:_YHA }, 
 }
 
