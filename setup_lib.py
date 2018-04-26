@@ -5,7 +5,7 @@ from glob import glob
 # to install type:
 # python setup.py install --root=/
 
-setup (name='LibQutrub', version='1.0',
+setup (name='LibQutrub', version='1.2',
       description='libqutrub Arabic verb conjuagtion library',
       author='Taha Zerrouki',
       author_email='taha(dot) zerrouki (at) gmail.com',
