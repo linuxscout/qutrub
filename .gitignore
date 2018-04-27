@@ -2,4 +2,6 @@
 *.*~
 tests/*
 doc/html/*
-
+build/*
+dist/*
+interfaces/web.old/*
