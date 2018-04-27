@@ -211,7 +211,7 @@ class VerbClass:
     def _is_hamza_zaida(self, verb_normalized_unvocalized):
         """
         Function to determine if the first HAMZA in the verb is not original
-            ترجع إذا كانت الهمزة الأولى في الفعل غير أصلية
+        ترجع إذا كانت الهمزة الأولى في الفعل غير أصلية
         Determine if the verb starts with Hamza and the Teh is not
         @param verb_normalized_unvocalized: the unvovalized form f the verb.
         @type verb_normalized_unvocalized: unicde
@@ -275,9 +275,9 @@ class VerbClass:
         """
         Prepare the conjugation stems for future tenses 
         (future, jussive, subjective) and imperative tense.
-         Those stems will be concatenated with conjugation affixes.
-          This function store results in self.tab_conjug_stem. 
-          This function prepare conjugation stems for the following tenses:
+        Those stems will be concatenated with conjugation affixes.
+        This function store results in self.tab_conjug_stem. 
+        This function prepare conjugation stems for the following tenses:
             - vconst.TenseFuture :  تصريف الفعل المضارع 
             - vconst.TenseJussiveFuture : تصريف الفعل المضارع المجزوم 
             - vconst.TenseSubjunctiveFuture : تصريف الفعل المضارع المنصوب 
@@ -955,16 +955,16 @@ class VerbClass:
         """
         Return True if the verb is irregular, 
         founded in the irregular verb table
-        إرجاع إّذا كان الفعل ضاذا.
+        Aإرجاع إّذا كان الفعل ضاذا.
         الأفعال العربية الخاصة هي
         رأى، أكل أمر سأل،
-#        ج- إذا كان يتصرف من باب (مَنَعَ يَمْنَعُ)، 
-تحذف واوه, نحو: وَضَعَ، يَضَعُ، وَجَأَ يَجَأُ،
- وَدَعَ يَدَعُ، وَزَعَ يَزَعُ، وَضَأَ يَضَأُ، وَطَأَ يَطَأُ، 
-وَقَعَ يَقَعُ، وَلَغَ يَلَغُ، وَهَبَ يَهَبُ، 
-عدا خمسة أفعال هي: (وَبَأ)، و(وَبَهَ)، و(وَجَعَ)، و(وَسَعَ)، و(وَهَلَ)،
- فلا تحذف منها الواو؛ فنقول: يَوْبَأُ، يَوْبَهُ، يَوْجَعُ، يَوْسَعُ، يَوْهَلُ.
-  الأفعال (وَبَأ)، و(وَبَهَ)، و(وَجَعَ)، و(وَسَعَ)، و(وَهَلَ)، الفعل وبَأ يوبأ        
+        # ج- إذا كان يتصرف من باب (مَنَعَ يَمْنَعُ)، 
+        تحذف واوه, نحو: وَضَعَ، يَضَعُ، وَجَأَ يَجَأُ،
+        وَدَعَ يَدَعُ، وَزَعَ يَزَعُ، وَضَأَ يَضَأُ، وَطَأَ يَطَأُ، 
+        وَقَعَ يَقَعُ، وَلَغَ يَلَغُ، وَهَبَ يَهَبُ، 
+        عدا خمسة أفعال هي: (وَبَأ)، و(وَبَهَ)، و(وَجَعَ)، و(وَسَعَ)، و(وَهَلَ)،
+        فلا تحذف منها الواو؛ فنقول: يَوْبَأُ، يَوْبَهُ، يَوْجَعُ، يَوْسَعُ، يَوْهَلُ.
+        الأفعال (وَبَأ)، و(وَبَهَ)، و(وَجَعَ)، و(وَسَعَ)، و(وَهَلَ)، الفعل وبَأ يوبأ        
         @return:True if irregular
         @rtype: Boolean
         """        

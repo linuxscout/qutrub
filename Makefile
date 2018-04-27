@@ -10,9 +10,9 @@ backup:
 #create all files 
 all: install install3 wheel wheel3  doc
 install:
-	sudo python setup.py install
+	sudo python setup_lib.py install
 install3:
-	sudo python3 setup.py install
+	sudo python3 setup_lib.py install
 # Publish to github
 publish:
 	git push origin master 
@@ -23,15 +23,15 @@ md2html:
 	pandoc -s -r markdown -w html README.md -o README.html
 	
 wheel:
-	sudo python setup.py bdist_wheel
+	sudo python setup_lib.py bdist_wheel
 wheel3:
-	sudo python3 setup.py bdist_wheel
+	sudo python3 setup_lib.py bdist_wheel
 sdist:
-	sudo python setup.py sdist
+	sudo python setup_lib.py sdist
 upload:
 	echo "use twine upload dist/libqutrub-0.1.tar.gz"
 	
 test:
 	pytest pyarabic/test_araby.py
 doc:
-	epydoc --config epydoc.conf
+	epydoc -v --config epydoc.conf
