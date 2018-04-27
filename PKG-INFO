@@ -1,0 +1,11 @@
+Metadata-Version: 0.1
+Name:LibQutrub
+Version: 1.2
+Summary:   Qutrub: Arabic verb conjugation software  
+Home-page: http://qutrub.sourceforge.net/
+Author: Taha Zerrouki
+Author-email: taha.zerrouki@gmail.com
+License: GPL
+Description:  Qutrub: Arabic verb conjugation software  
+Platform: Os-independent
+

@@ -24,9 +24,12 @@ Feedbacks  |[Comments](http://tahadz.com/qutrub/contact)
 Accounts  | [@Twitter](https://twitter.com/linuxscout)  [@Sourceforge](http://sourceforge.net/projectsqutrub/)
 
 
-﻿#INSTALL
+#INSTALL
+--------
 Requirements
 ----------------
+pyarabic>=0.6.2
+
 Installation on Apache
 ----------------
 enable mod_python in Apache

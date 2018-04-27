@@ -1,6 +1,5 @@
 #! /usr/bin/python
-from distutils.core import setup
-from glob import glob
+from setuptools  import setup
 
 # to install type:
 # python setup.py install --root=/
@@ -16,6 +15,9 @@ setup (name='LibQutrub', version='1.2',
       package_dir={'libqutrub': 'libqutrub',},
       packages=['libqutrub'],
       # include_package_data=True,
+      install_requires=[ 'pyarabic>=0.6.2',
+      ],         
+      include_package_data=True,
       package_data = {
         'libqutrub': ['doc/*.*','doc/html/*'],
         },
