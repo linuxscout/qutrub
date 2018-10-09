@@ -17,7 +17,7 @@ Release  | 1.5
 License  |[GPL](https://github.com/linuxscout/qutrub/master/COPYING)
 Tracker  |[linuxscout/qutrub/Issues](https://github.com/linuxscout/qutrub/issues)
 Mailinglist  |[<qutrub@googlegroups.com>](http://groups.google.com/group/qutrub/)
-Website  |[tahadz.com/qutrub](http://www.tahadz.com/qutrub/)
+Website  |[qutrub.arabeyes.org](http://qutrub.arabeyes.org)
 Source  |[Github](http://github.com/linuxscout/qutrub)
 Download  |[sourceforge](http://qutrub.sourceforge.net)
 Feedbacks  |[Comments](http://tahadz.com/qutrub/contact)
