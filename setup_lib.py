@@ -4,7 +4,7 @@ from setuptools  import setup
 # to install type:
 # python setup.py install --root=/
 
-setup (name='libqutrub', version='1.2.1',
+setup (name='libqutrub', version='1.2.2',
       description='libqutrub Arabic verb conjuagtion library',
       author='Taha Zerrouki',
       author_email='taha.zerrouki@gmail.com',
