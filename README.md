@@ -36,6 +36,11 @@ enable mod_python in Apache
 extract the qutrub package and run it from the web.
 The program don't need a database.
 
+Installation as library 
+----------------
+```shell
+pip install libqutrub
+```
 Installation as an application
 ---------------
 check that python 2.5 or higher is installed
@@ -130,3 +135,23 @@ Example
 
 ```
 This program is licensed under the GPL License
+
+# Call from python
+```python
+import libqutrub.mosaref_main
+
+verb=u"سعد"
+future_type =u"كسرة"
+all = True # all tenses
+past = True
+future=True
+passive =True
+imperative=True
+future_moode= True
+confirmed=False
+transitive =True
+display_format="html"
+table = libqutrub.mosaref_main.do_sarf(verb,future_type,all,past,future,passive,imperative,future_moode,confirmed,transitive,display_format);
+ print table
+
+```
