@@ -42,7 +42,7 @@ def create_index_triverbtable():
         vocverb = triverbtable.TriVerbTable[key]['verb']
         unvverb = araby.strip_harakat(vocverb)
         normverb = araby.normalize_hamza(unvverb)
-        if TRIVERBTABLE_INDEX.has_key(normverb):
+        if normverb in TRIVERBTABLE_INDEX:
             TRIVERBTABLE_INDEX[normverb].append(key)
         else:
             TRIVERBTABLE_INDEX[normverb] = [key, ]
@@ -89,7 +89,7 @@ vocalised_entree = False):
             else:
                 liste.append(triverbtable.TriVerbTable[verb_voc_id])
     else:
-        print "triverb has no verb"
+        print("triverb has no verb")
     return liste
 
 

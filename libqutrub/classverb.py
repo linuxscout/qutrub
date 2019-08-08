@@ -495,7 +495,7 @@ class VerbClass:
         suf_val = TATWEEL + suf_val
         #uniformate suffix
         # the case is used to avoid duplicated staddization
-        if self.cache_standard['suffix'].has_key( suf_val): 
+        if  suf_val in self.cache_standard['suffix']:
             (suf_val_l, suf_val_m) = self.cache_standard['suffix'][suf_val]
         else:
             (suf_val_l, suf_val_m) = ar_verb.uniformate_suffix(suf_val)
@@ -510,7 +510,7 @@ class VerbClass:
         # Treat sukun
         # the case is used to avoid duplicated staddization
         key_cache = u'-'.join([conj_l, conj_m])
-        if self.cache_standard['sukun'].has_key(key_cache):
+        if key_cache in self.cache_standard['sukun']:
             conj_m = self.cache_standard['sukun'][key_cache]
         else:
             #~ conj_m = ar_verb.treat_sukun2(conj_l, conj_m, self.future_type)
@@ -519,7 +519,7 @@ class VerbClass:
         # standard orthographic form
         # the case is used to avoid duplicated staddization
         key_cache = u'-'.join([conj_l, conj_m])
-        if self.cache_standard['standard'].has_key(key_cache):
+        if key_cache in self.cache_standard['standard']:
             conj = self.cache_standard['standard'][key_cache]
         else:    
             conj = ar_verb.standard2(conj_l, conj_m)
@@ -979,7 +979,7 @@ class VerbClass:
                 self.future_type  = araby.KASRA
                 #~ self.vlength      = 4
             key = self.word_letters + self.past_haraka+self.future_type
-            if vconst.IRREGULAR_VERB_CONJUG.has_key(key ):
+            if key in vconst.IRREGULAR_VERB_CONJUG:
                 return True
         return False
 
@@ -993,7 +993,7 @@ class VerbClass:
       # the key is composed from the letters and past and future marks,
       # to identify irregular verb
         key = self.word_letters+self.past_haraka+self.future_type
-        if  vconst.IRREGULAR_VERB_CONJUG.has_key(key):
+        if  key in vconst.IRREGULAR_VERB_CONJUG:
             return vconst.IRREGULAR_VERB_CONJUG[key][vconst.TenseFuture]
         else:
             return self.word_letters
@@ -1008,7 +1008,7 @@ class VerbClass:
       # the key is composed from the letters and past and future marks, 
       # to identify irregular verb
         key = self.word_letters+self.past_haraka+self.future_type
-        if vconst.IRREGULAR_VERB_CONJUG.has_key(key):
+        if key in vconst.IRREGULAR_VERB_CONJUG:
             return vconst.IRREGULAR_VERB_CONJUG[key][vconst.TensePassiveFuture]
         else:
             return self.word_letters
@@ -1023,7 +1023,7 @@ class VerbClass:
       # the key is composed from the letters and past and future marks, 
       # to identify irregular verb
         key = self.word_letters + self.past_haraka+self.future_type
-        if  vconst.IRREGULAR_VERB_CONJUG.has_key(key):
+        if  key in vconst.IRREGULAR_VERB_CONJUG:
             return vconst.IRREGULAR_VERB_CONJUG[key][vconst.TenseImperative]
         else:
             return self.word_letters

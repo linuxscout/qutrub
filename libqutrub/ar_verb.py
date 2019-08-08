@@ -1,4 +1,4 @@
-﻿#!/usr/bin/python
+﻿    #!/usr/bin/python
 # -*- coding = utf-8 -*-
 #************************************************************************
 # $Id: ar_verb.py, v 0.7 2009/06/02 01:10:00 Taha Zerrouki $
@@ -23,6 +23,12 @@
 Basic routines to treat verbs
 ar_verb
 """
+from __future__ import (
+    #~ absolute_import,
+    print_function,
+    #~ unicode_literals,
+    #~ division,
+    )
 import re
 import libqutrub.verb_const as vconst
 # import ar_ctype 
@@ -139,7 +145,7 @@ def write_harakat_in_full(harakat):
     vconst.ALEF_YEH_ALTERNATIVE:u"ئ", 
     }
     for hrk in harakat:
-        if tab_harakat.has_key(hrk):
+        if hrk in tab_harakat:
             full += u'-'+tab_harakat[hrk]
         else:
             full += u"*"
@@ -335,7 +341,7 @@ def  normalize_alef_madda(word):
         if len(word_nm) == 2:
             return word_nm.replace(ALEF_MADDA, HAMZA+ALEF)
         elif len(word_nm) == 3:
-            if vconst.ALEF_MADDA_VERB_TABLE.has_key(word_nm):
+            if word_nm in vconst.ALEF_MADDA_VERB_TABLE:
                 #print word, "exists in madd table", vconst.ALEF_MADDA_VERB_TABLE[word_nm][0]
                 #return the first one only
                 #mylist = ALEF_MADDA_VERB_TABLE[word_nm]
@@ -744,7 +750,7 @@ def standard2(word_nm, harakat):
     @rtype: unicode.
     """
     if len(word_nm) != len(harakat):
-        print word_nm.encode('utf8'),len(word_nm), u"-".join([araby.name(x) for x in harakat]), len(harakat)
+        print(word_nm.encode('utf8'),len(word_nm), u"-".join([araby.name(x) for x in harakat]), len(harakat))
         return u"*"
     else:
         word = u""
@@ -769,9 +775,9 @@ def standard2(word_nm, harakat):
         harakat_before = harakat
         word_nm, harakat = homogenize(word_nm, harakat)
         if len(word_nm) != len(harakat):
-            print "len word: ", len(word_nm), word_nm.encode('utf8') 
-            print "len harakat: ", len(harakat), repr(harakat)
-            print repr(harakat_before), word_before.encode('utf8')
+            print("len word: ", len(word_nm), word_nm.encode('utf8') )
+            print("len harakat: ", len(harakat), repr(harakat))
+            print(repr(harakat_before), word_before.encode('utf8'))
             return u""
         word_nm = tahmeez2(word_nm, harakat)
 
@@ -780,7 +786,7 @@ def standard2(word_nm, harakat):
             # للعمل :
     # هذه حالة الألف التي أصلها ياء
     # وقد استغنينا عنها بأن جعلنا الحرف الناقص من الفعل الناقص حرفا تاما
-            if vconst.WRITTEN_HARAKA.has_key(harakat[i]):
+            if harakat[i] in vconst.WRITTEN_HARAKA:
                 word += word_nm[i]+vconst.WRITTEN_HARAKA[harakat[i]]
             else:
                 word += word_nm[i]+harakat[i]
@@ -844,8 +850,8 @@ def tahmeez2(word_nm, harakat):
                         if actual == vconst.NOT_DEF_HARAKA:
                             actual = FATHA
 
-                        if  vconst.MIDDLE_TAHMEEZ_TABLE.has_key(before) and\
-                       vconst.MIDDLE_TAHMEEZ_TABLE[before].has_key(actual):
+                        if  before in vconst.MIDDLE_TAHMEEZ_TABLE and\
+                      actual in  vconst.MIDDLE_TAHMEEZ_TABLE[before]:
                             swap = vconst.MIDDLE_TAHMEEZ_TABLE[before][actual]
                             #~ # if the actual haraka is FATHA
                             if before  in (SUKUN, vconst.YEH_HARAKA, vconst.ALEF_HARAKA, vconst.WAW_HARAKA):
@@ -865,8 +871,8 @@ def tahmeez2(word_nm, harakat):
                         if actual == vconst.NOT_DEF_HARAKA: 
                             actual = FATHA
 
-                        if  vconst.FINAL_TAHMEEZ_TABLE.has_key(before) and \
-                         vconst.FINAL_TAHMEEZ_TABLE[before].has_key(actual):
+                        if  before in vconst.FINAL_TAHMEEZ_TABLE and \
+                         actual in vconst.FINAL_TAHMEEZ_TABLE[before]:
                             if word_nm[i-1]  in( araby.WAW, ) and actual in (FATHA, DAMMA):
                                 #pass
                                swap = araby.HAMZA 
@@ -915,7 +921,7 @@ def treat_sukun2(word_nm, harakat):
                     else:
                         new_harakat += FATHA
                 # if the actual haraka is in table use table conversion
-                elif vconst.CONVERSION_TABLE.has_key(harakat[i]):
+                elif harakat[i] in vconst.CONVERSION_TABLE:
                     new_harakat += vconst.CONVERSION_TABLE[harakat[i]]
                 else :
                     new_harakat += harakat[i]
@@ -937,10 +943,11 @@ def homogenize(word_nm, harakat):
     """
     # inequal length between letters and harakat
     if len(word_nm) != len(harakat):
-        print "Homogenize:inequal length", len(word_nm), len(harakat)
+        print("Homogenize:inequal length", len(word_nm), len(harakat))
         return (word_nm, harakat)
     # word without weak letters doesn't need treatment
-    elif not re.search(ur'[%s%s%s%s]'%(ALEF_MAKSURA, vconst.ALEF_MAMDUDA, \
+    #~ elif not re.search(ur'[%s%s%s%s]'%(ALEF_MAKSURA, vconst.ALEF_MAMDUDA, \
+    elif not re.search(u'[%s%s%s%s]'%(ALEF_MAKSURA, vconst.ALEF_MAMDUDA, \
      YEH, WAW), word_nm):
         return (word_nm, harakat)
     # treatment
