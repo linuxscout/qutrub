@@ -32,6 +32,8 @@ upload:
 	echo "use twine upload dist/libqutrub-0.1.tar.gz"
 	
 test:
-	pytest pyarabic/test_araby.py
+	python -m unittest discover tests
+test3:
+	python3 -m unittest discover tests
 doc:
 	epydoc -v --config epydoc.conf
