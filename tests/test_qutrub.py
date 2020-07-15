@@ -34,7 +34,7 @@ sys.path.append('../libqutrub')
 import libqutrub.conjugator
 
 class QurtubTestCase(unittest.TestCase):
-    """Tests for `araby.py`."""
+    """Tests for `libqutrub`."""
 
     def test_conjugate(self):
         """Test conjugation"""
