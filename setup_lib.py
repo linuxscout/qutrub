@@ -6,8 +6,8 @@ from setuptools  import setup
 def readme():
     with open('README.rst', encoding="utf8") as f:
         return f.read()
-setup (name='libqutrub', version='1.2.4',
-      description='libqutrub Arabic verb conjuagtion library',
+setup (name='libqutrub', version='1.2.4.1',
+      description = readme(),
       author='Taha Zerrouki',
       author_email='taha.zerrouki@gmail.com',
       url='http://libqutrub.sourceforge.net/',
