@@ -8,7 +8,7 @@ clean:
 backup: 
 	
 #create all files 
-all: install install3 wheel wheel3  doc
+all: install install3 wheel wheel3  doc sdist 
 install:
 	sudo python setup_lib.py install
 install3:
@@ -37,3 +37,5 @@ test3:
 	python3 -m unittest discover tests
 doc:
 	epydoc -v --config epydoc.conf
+
+

@@ -1,13 +1,14 @@
 #! /usr/bin/python
 from setuptools  import setup
-
+from io import open
 # to install type:
 # python setup.py install --root=/
 def readme():
     with open('README.rst', encoding="utf8") as f:
         return f.read()
 setup (name='libqutrub', version='1.2.4.1',
-      description = readme(),
+      description='libqutrub Arabic verb conjuagtion library',
+      long_description = readme(),        
       author='Taha Zerrouki',
       author_email='taha.zerrouki@gmail.com',
       url='http://libqutrub.sourceforge.net/',
