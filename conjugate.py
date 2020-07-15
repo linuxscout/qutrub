@@ -130,7 +130,7 @@ def main():
         line=fl.readline()#.decode("utf8");
     fl.close();
     for tuple_verb in verb_table:
-        word=tuple_verb[2];
+        word=tuple_verb[0];
 
 
 ##        print transi

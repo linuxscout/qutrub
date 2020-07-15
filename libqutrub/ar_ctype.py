@@ -22,32 +22,32 @@
 
 import re#, string,sys
 from arabic_const import *
-HARAKAT_pat =re.compile(ur"[%s%s%s%s%s%s%s%s]"%(FATHATAN,DAMMATAN,KASRATAN,FATHA,DAMMA,KASRA,SUKUN,SHADDA) )
-HARAKAT_NO_SHADDA_pat =re.compile(ur"[%s%s%s%s%s%s%s]"%(FATHATAN,DAMMATAN,KASRATAN,FATHA,DAMMA,KASRA,SUKUN) )
+HARAKAT_pat =re.compile(u"[%s%s%s%s%s%s%s%s]"%(FATHATAN,DAMMATAN,KASRATAN,FATHA,DAMMA,KASRA,SUKUN,SHADDA) )
+HARAKAT_NO_SHADDA_pat =re.compile(u"[%s%s%s%s%s%s%s]"%(FATHATAN,DAMMATAN,KASRATAN,FATHA,DAMMA,KASRA,SUKUN) )
 
 
 
 #strip tatweel from a word and return a result word
 #--------------------------------------
 def ar_strip_tatweel(w):
-	"strip tatweel from a word and return a result word"
-	return w.replace(TATWEEL,	'')
+    "strip tatweel from a word and return a result word"
+    return w.replace(TATWEEL,   '')
 
 #strip tatweel and vowel from a word and return a result word but keep shadda
 #--------------------------------------
 def ar_strip_marks_keepshadda(w):
-	return HARAKAT_NO_SHADDA_pat.sub('',w);
-##	return re.sub(ur'[%s%s%s%s%s%s%s%s]' % (FATHATAN, DAMMATAN, TATWEEL,
-##                                            KASRATAN, FATHA, DAMMA, KASRA, SUKUN),	'', w)
+    return HARAKAT_NO_SHADDA_pat.sub('',w);
+##  return re.sub(u'[%s%s%s%s%s%s%s%s]' % (FATHATAN, DAMMATAN, TATWEEL,
+##                                            KASRATAN, FATHA, DAMMA, KASRA, SUKUN),    '', w)
 
 
 #strip tatweel and vowel from a word and return a result word
 #--------------------------------------
 def ar_strip_marks(w):
-	"strip tatweel and vowel from a word and return a result word"
-	return HARAKAT_pat.sub('',w);
-##	return re.sub(ur'[%s%s%s%s%s%s%s%s%s]' % (FATHATAN, DAMMATAN, TATWEEL,
-##                                            KASRATAN, FATHA, DAMMA, KASRA, SUKUN,SHADDA),	'', w)
+    "strip tatweel and vowel from a word and return a result word"
+    return HARAKAT_pat.sub('',w);
+##  return re.sub(ur'[%s%s%s%s%s%s%s%s%s]' % (FATHATAN, DAMMATAN, TATWEEL,
+##                                            KASRATAN, FATHA, DAMMA, KASRA, SUKUN,SHADDA), '', w)
 
 
 
@@ -61,7 +61,7 @@ def ar_strip_punct(w):
 
 #--------------------------------------
 def replace_pos (word,rep, pos):
-	return word[0:pos]+rep+word[pos+1:];
+    return word[0:pos]+rep+word[pos+1:];
 
 def is_valid_arabic_word(word):
     if word=="": return False;

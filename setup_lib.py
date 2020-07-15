@@ -3,8 +3,10 @@ from setuptools  import setup
 
 # to install type:
 # python setup.py install --root=/
-
-setup (name='libqutrub', version='1.2.3',
+def readme():
+    with open('README.rst', encoding="utf8") as f:
+        return f.read()
+setup (name='libqutrub', version='1.2.4',
       description='libqutrub Arabic verb conjuagtion library',
       author='Taha Zerrouki',
       author_email='taha.zerrouki@gmail.com',

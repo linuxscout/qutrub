@@ -36,23 +36,23 @@ SCRIPT_VERSION  =  '0.1'
 AUTHOR_NAME = "Taha Zerrouki"
 def usage():
     """Display usage options"""
-    print "(C) CopyLeft 2009, %s" % AUTHOR_NAME
-    print "Usage: %s -f filename [OPTIONS]" % SCRIPT_NAME
+    print("(C) CopyLeft 2009, %s" % AUTHOR_NAME)
+    print("Usage: %s -f filename [OPTIONS]" % SCRIPT_NAME)
 #"Display usage options"
-    print "\t[-h | --help]\toutputs this usage message"
-    print "\t[-V | --version]\tprogram version"
-    print "\t[-f | --file=filename]\tinput file to %s" % SCRIPT_NAME
-    print "\t[-d | --display=format]\tdisplay format as html, csv, tex, xml"
-    print "\t[-a | --all ] \tConjugate in all tenses"
-    print "\t[-i | --imperative]\tConjugate in imperative"
-    print "\t[-F | --future]\tconjugate in the present and the future"
-    print "\t[-p | --past]\t conjugate in the past"
-    print "\t[-c | --confirmed]  conjugate in confirmed (future or imperative)"
-    print """\t[-m | --moode]\tconjugate in future Subjunctive(mansoub) 
-    or Jussive (majzoom)"""
-    print " \t[-v | --passive] passive form"
-    print "\r\nN.B. FILE FORMAT is descripted in README"
-    print "\r\nThis program is licensed under the GPL License\n"
+    print( "\t[-h | --help]\toutputs this usage message")
+    print("\t[-V | --version]\tprogram version")
+    print("\t[-f | --file=filename]\tinput file to %s" % SCRIPT_NAME)
+    print("\t[-d | --display=format]\tdisplay format as html, csv, tex, xml")
+    print("\t[-a | --all ] \tConjugate in all tenses")
+    print("\t[-i | --imperative]\tConjugate in imperative")
+    print("\t[-F | --future]\tconjugate in the present and the future")
+    print("\t[-p | --past]\t conjugate in the past")
+    print("\t[-c | --confirmed]  conjugate in confirmed (future or imperative)")
+    print( """\t[-m | --moode]\tconjugate in future Subjunctive(mansoub) 
+    or Jussive (majzoom)""")
+    print(" \t[-v | --passive] passive form")
+    print("\r\nN.B. FILE FORMAT is descripted in README")
+    print("\r\nThis program is licensed under the GPL License\n")
 
 
 def grabargs():
@@ -83,7 +83,7 @@ def grabargs():
             usage()
             sys.exit(0)
         if opt in ("-V", "--version"):
-            print SCRIPT_VERSION
+            print(SCRIPT_VERSION)
             sys.exit(0)
         if opt in ("-v", "--passive"):
             passive  =  True
@@ -114,11 +114,11 @@ def main():
     try:
         fle = open(filename)
     except IOError:
-        print " Error :No such file or directory: %s" % filename
+        print( " Error :No such file or directory: %s" % filename)
         sys.exit(0)
 
-    print filename, alltense, future, past, passive, imperative, \
-     confirmed, future_moode
+    print(filename, alltense, future, past, passive, imperative,
+     confirmed, future_moode)
 
     line = fle.readline().decode("utf")
     text = u""
@@ -139,8 +139,8 @@ def main():
         word = tuple_verb[0]
 
         if not verb_valid.is_valid_infinitive_verb(word):
-            print u"is invalid verb ", 
-            print word.encode("utf8")
+            print(u"is invalid verb ")
+            print(word)
         else:
             future_type = u""+tuple_verb[1]
             future_type = ar_verb.get_future_type_entree(future_type)
@@ -153,7 +153,7 @@ def main():
             text = mosaref_main.do_sarf(word, future_type, alltense, past, 
             future, passive, imperative, future_moode, confirmed, 
             transitive, display_format)
-            print text.encode("utf8")
+            print(text)
 
 if __name__  ==  "__main__":
     main()

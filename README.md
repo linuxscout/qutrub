@@ -13,7 +13,7 @@ Qutrub
 Features |   value
 ---------|---------------------------------------------------------------------------------
 Authors  | [Authors.md](https://github.com/linuxscout/qutrub/master/AUTHORS.md)
-Release  | 1.5
+Release  | 1.5 (app), 1.2.4 (library)
 License  |[GPL](https://github.com/linuxscout/qutrub/master/COPYING)
 Tracker  |[linuxscout/qutrub/Issues](https://github.com/linuxscout/qutrub/issues)
 Mailinglist  |[<qutrub@googlegroups.com>](http://groups.google.com/group/qutrub/)
@@ -24,32 +24,32 @@ Feedbacks  |[Comments](http://tahadz.com/qutrub/contact)
 Accounts  | [@Twitter](https://twitter.com/linuxscout)  [@Sourceforge](http://sourceforge.net/projectsqutrub/)
 
 
-#INSTALL
+## Install
+
 --------
-Requirements
-----------------
+### Requirements
+
 pyarabic>=0.6.2
 
-Installation on Apache
-----------------
+### Installation on Apache
+
 enable mod_python in Apache
 extract the qutrub package and run it from the web.
 The program don't need a database.
 
-Installation as library 
-----------------
+### Installation as library 
+
 ```shell
 pip install libqutrub
 ```
-Installation as an application
----------------
-check that python 2.5 or higher is installed
+### Installation as an application
+
+check that python 2.5, it support python3 or higher is installed
 extract the package
 run the conjugate.py script 
 
-```
-Usage 
---------------
+``` Usage 
+
 (C) CopyLeft 2009, Taha Zerrouki
 Usage: conjugate -f filename [OPTIONS]
 	[-h | --help]		outputs this usage message
@@ -67,8 +67,8 @@ Usage: conjugate -f filename [OPTIONS]
 	This program is licensed under the GPL License
 ```
 
-Input file format   
------------------
+#### Input file format   
+
 -File encoding must be "utf8"
 The input file  format is a text comma separeted  csv
 Fields are separated by tabulation.
@@ -119,7 +119,7 @@ The third field is :Transitive/intransitive
 				4-intransitive
 ```
 Example 
-#commented line
+#### commented line
 ```
 كَتَبَ	ضمة	متعدي
 ضَرَبَ	كسرة	متعدي
@@ -136,9 +136,41 @@ Example
 ```
 This program is licensed under the GPL License
 
-# Call from python
+### Call from python
+* Simple call
 ```python
-import libqutrub.mosaref_main
+import libqutrub.conjugator
+
+verb=u"سعد"
+future_type =u"كسرة"
+table = libqutrub.conjugator.conjugate(verb,future_type, transitive= True);
+print(table)
+
+```
+* display format
+display format can be : 
+        - 'Text':
+        - 'HTML':
+        - 'HTMLColoredDiacritics':
+        - 'DICT':
+        - 'CSV':
+        - 'GUI':
+        - 'TABLE':
+        - 'XML':
+        - 'TeX':
+        - 'ROWS':
+```python
+import libqutrub.conjugator
+
+verb=u"سعد"
+future_type =u"كسرة"
+table = libqutrub.conjugator.conjugate(verb,future_type, transitive= True, display_format="DICT");
+print(table)
+
+```
+* more options
+```python
+import libqutrub.conjugator
 
 verb=u"سعد"
 future_type =u"كسرة"
@@ -150,8 +182,8 @@ imperative=True
 future_moode= True
 confirmed=False
 transitive =True
-display_format="html"
-table = libqutrub.mosaref_main.do_sarf(verb,future_type,all,past,future,passive,imperative,future_moode,confirmed,transitive,display_format);
- print table
+display_format="HTML"
+table = libqutrub.conjugator.conjugate(verb,future_type,all,past,future,passive,imperative,future_moode,confirmed,transitive,display_format);
+print(table)
 
 ```
