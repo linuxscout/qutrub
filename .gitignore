@@ -1,6 +1,8 @@
 *.pyc
 *.*~
-tests/*
+tests/output/*
+tests/testet/models/*
+tests/samples/*
 doc/html/*
 build/*
 dist/*
