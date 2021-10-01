@@ -206,13 +206,13 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
     #test the uniformate function
         if all :
             if transitive :
-##                  print "transitive";
+##                  print("transitive")
                 listetenses= verb_const.TABLE_TENSE
                 result= vb.conjugate_all_tenses();
             else:
-##                  print "intransitive";
+##                  print("intransitive");
                 listetenses = verb_const.TableIndicativeTense;
-##                  print len(TableIndicativeTense)
+##                  print(len(TableIndicativeTense))
                 result= vb.conjugate_all_tenses(listetenses);
         else :
             listetenses=[];
@@ -248,17 +248,17 @@ def romanize(text, code = "ISO"):
     if ArabicRomanizationTable.has_key(code):
         for k in text:
             if ArabicRomanizationTable[code].has_key(k):
-                print "1"
+                print("1")
                 if explicated:
                     textcoded += "("+k+")"
-                    print "2"
+                    print("2")
                 textcoded += ArabicRomanizationTable[code][k]
-                print "3"
+                print("3")
             else:
                 textcoded += "*"
     else:
         textcoded = text
-        print "4"
+        print("4")
     return textcoded
 
 def number2letters(text):
@@ -530,7 +530,7 @@ def tashkeel_text(text, lastmark=True):
     """
     import tashkeel.tashkeel as ArabicVocalizer
     vocalizer = ArabicVocalizer.TashkeelClass()
-    print "lastMark", lastmark
+    print("lastMark", lastmark)
     if lastmark == "0":
         vocalizer.disable_last_mark()
     vocalized_text = vocalizer.tashkeel(text)
@@ -781,14 +781,14 @@ def compare_tashkeel(text):
     for txt in texts:
         list1 += vocalizer.analyzer.tokenize(txt)
     list2 = vocalized_dict
-    print u"\t".join(list1).encode('utf8')
+    print(u"\t".join(list1))
     correct = 0
     incorrect = 0
     total = len(list1)
     if len(list1)!= len(list2):
-        print "lists haven't the same length", len(list1), len(list2)
+        print("lists haven't the same length", len(list1), len(list2))
         for i in range(min(len(list1), len(list2))):
-            print (u"'%s'\t'%s'"%(list1[i], list2[i].get('chosen',''))).encode("utf8")
+            print(u"'%s'\t'%s'"%(list1[i], list2[i].get('chosen','')))
         sys.exit()
     else:
         for i in range(total):
@@ -842,7 +842,7 @@ def random_text():
     """
     get random text for tests
     """    
-    import randtext
+    from . import randtext
     
     return random.choice(randtext.textlist)
 def chunksplit(text):

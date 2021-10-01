@@ -55,7 +55,7 @@ def ajax():
     options= {}    
     if request.method == 'GET':
         args = request.args
-        print args
+        print(args)
         text   = request.args.get('text', "")
         action = request.args.get('action', '')
         options['all'] = str2bool(request.args.get('all', False))
@@ -70,8 +70,8 @@ def ajax():
         options['past'] = str2bool(request.args.get('past', False))
         options['future_type'] = request.args.get('future_type', u"فتحة")        
         options['display_format'] = request.args.get('display_format',"HTML")
-        print options
-        print request.form
+        print(options)
+        print(request.form)
         #~ resulttext = text + action
         resulttext=core.adaat.DoAction(text,action, options)
     return jsonify({'result':resulttext,})

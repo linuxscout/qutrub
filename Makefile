@@ -38,4 +38,14 @@ test3:
 doc:
 	epydoc -v --config epydoc.conf
 
-
+test4:
+	cd tests;python3 treat_reverso.py -f samples/reverso/original/تصريف-العربية-الفعل-وَدَى.html -o out.txt
+reverso:
+	cd tests;python3 scrap_reverso.py -c generate -f samples/verbsmodels.csv -o output/text.html
+eval:
+	cd tests;python3 evalconjugate-2.py  -f samples/verbsmodels.csv  > output/eval.csv
+eval2:
+	cd tests;python2 evalconjugate-2.py  -f samples/verbsmodels.csv  > output/eval.csv
+scrap_dal:
+	cd tests;python3 scrap_reverso.py -c scrap-dal -f samples/verbsmodels.csv >  output/text.dal.html
+	
