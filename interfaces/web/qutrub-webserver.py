@@ -265,34 +265,34 @@ def str2bool(strg):
 
 @app.route("/doc/")
 def doc():
-    return render_template("doc.html")
+    return render_template("doc.html",current_page='doc')
 
 
 @app.route("/contact/")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html",current_page='contact')
 
 
 @app.route("/download/")
 def download():
-    return render_template("download.html")
+    return render_template("download.html",current_page='download')
 
 
 @app.route("/projects/")
 def projects():
-    return render_template("projects.html")
+    return render_template("projects.html",current_page='projects')
 
 
 @app.route("/index/")
 def index():
-    return render_template("main.html")
+    return render_template("main.html",current_page='home')
 
 
 @app.route("/")
 def home():
-    DefaultText = "Text"  # core.adaat.random_text(),
-    ResultText = u"السلام عليكم"
-    return render_template("main.html", DefaultText=DefaultText, ResultText=ResultText)
+    # DefaultText = "Text"  # core.adaat.random_text(),
+    # ResultText = u"السلام عليكم"
+    return render_template("main.html",current_page='home')
 
 
 @app.route("/ajaxGet", methods=["POST", "GET"])
