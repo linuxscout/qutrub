@@ -7,3 +7,6 @@ doc/html/*
 build/*
 dist/*
 interfaces/web.old/*
+my_env/*
+.vscode/*
+interfaces/web/.vscode/
