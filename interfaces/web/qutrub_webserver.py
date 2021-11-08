@@ -251,6 +251,7 @@ from flask_minify import minify
 
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 minify(app=app, html=True, js=True, cssless=True)
 
 
@@ -328,7 +329,8 @@ def ajax():
         options["display_format"] = args.get("display_format", "HTML")
 
         resulttext = core.adaat.DoAction(text, action, options)
-        return jsonify({"result": resulttext})
+        suggestions = core.adaat.DoAction(text, "Suggest", options)
+        return jsonify({"result": resulttext, "suggest":suggestions})
 
 
 @app.route("/result", methods=["POST", "GET"])
