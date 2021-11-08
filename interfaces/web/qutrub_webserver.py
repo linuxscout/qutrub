@@ -5,12 +5,13 @@ import sys
 import os.path
 import re
 from glob import glob
-from logging.config import fileConfig
+import logging.config
 sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "./lib"))
 sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "../../"))
 
 import core.adaat
-LOGGING_CFG ="logging.cfg"
+from config.qutrub_config import LOGGING_CFG_FILE
+# ~ LOGGING_CFG ="logging.cfg"
 example_json = {
     "result": {
         "0": {
@@ -249,7 +250,7 @@ from flask_minify import minify
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-fileConfig(LOGGING_CFG)
+logging.config.fileConfig(LOGGING_CFG_FILE)
 minify(app=app, html=True, js=True, cssless=True)
 
 

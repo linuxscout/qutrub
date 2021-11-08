@@ -15,10 +15,12 @@ Adaat, arabic tools interface
 """
 import sys,os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../support/'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../config/'))
 import random
 import pyarabic.araby  as araby # arabic words general functions
 import re
 
+import qutrub_config
 #~import pyarabic.number
 def DoAction(text, action, options = {}):
     """
@@ -271,7 +273,7 @@ def suggest_verb_list(text, options):
     word = text.split(" ")[0]
     given_future_type = options.get("future_mark",u"فتحة")    
     valid = is_valid_infinitive_verb(word)
-    db_base_path = "/home/zerrouki/projects/qutrub-project/qutrub-1.2/"    
+    db_base_path = qutrub_config.db_base_path
     if valid:
 
         suggestions = libqutrub.verb_db.find_triliteral_verb(db_base_path, word, 

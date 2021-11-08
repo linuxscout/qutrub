@@ -26,3 +26,4 @@ interfaces/web/.vscode/
 /interfaces/web/static/Thumbs.db
 /interfaces/web/templates/carousel.html
 /interfaces/web/templates/main2.html
+/demo.log
