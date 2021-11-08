@@ -30,7 +30,8 @@ sdist:
 	sudo python setup_lib.py sdist
 upload:
 	echo "use twine upload dist/libqutrub-0.1.tar.gz"
-	
+web:
+	python3 interfaces/web/qutrub_webserver.py
 test:
 	python -m unittest discover tests
 test3:

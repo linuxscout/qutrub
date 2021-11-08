@@ -5,15 +5,12 @@ import sys
 import os.path
 import re
 from glob import glob
-
-# ~ sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../../support/'))
-# sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../../mishkal/lib/'))
-# ~ sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../../mishkal'))
+from logging.config import fileConfig
 sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "./lib"))
 sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), "../../"))
 
 import core.adaat
-
+LOGGING_CFG ="logging.cfg"
 example_json = {
     "result": {
         "0": {
@@ -252,6 +249,7 @@ from flask_minify import minify
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+fileConfig(LOGGING_CFG)
 minify(app=app, html=True, js=True, cssless=True)
 
 
@@ -293,6 +291,7 @@ def index():
 def home():
     # DefaultText = "Text"  # core.adaat.random_text(),
     # ResultText = u"السلام عليكم"
+    app.logger.info('Processing default request')
     return render_template("main.html",current_page='home')
 
 
@@ -330,6 +329,8 @@ def ajax():
 
         resulttext = core.adaat.DoAction(text, action, options)
         suggestions = core.adaat.DoAction(text, "Suggest", options)
+        app.logger.info('%s:%s'%(action, text))
+        app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
         return jsonify({"result": resulttext, "suggest":suggestions})
 
 
