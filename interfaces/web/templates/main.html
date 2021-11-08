@@ -8,7 +8,7 @@
             <div class="col-12 col-md-12 col-lg-9">
                 <div class="card">
                     <div class="container d-flex pt-1 pb-1 justify-content-end" title="أدوات">
-                        <a href="http://localhost:5000/#" class="btn btn-outline me-2 " onclick="toggel_adawat()">
+                        <button  class="btn btn-outline me-2 " onclick="toggel_adawat()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -21,8 +21,11 @@
                                 <line x1="16" y1="17" x2="14.5" y2="18.5"></line>
                             </svg>
                             <span> أدوات</span>
-                        </a>
-                        <a href="http://localhost:5000/#" class="btn btn-outline me-2 " title="فعل عشوائي" onclick="random_text()">
+
+                        </button>
+                        <button  class="btn btn-outline me-2 " title="فعل عشوائي"
+                            onclick="random_text()">
+
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -32,9 +35,11 @@
                                 <line x1="3" y1="7" x2="21" y2="7"></line>
                                 <path d="M18 20l3 -3l-3 -3"></path>
                             </svg>
-                            <span class="d-none d-sm-block" >فعل عشوائي</span>
-                        </a>
-                        <a href="http://localhost:5000/#" class="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-simple" title="مساعدة">
+                            <span class="d-none d-sm-block"> فعل عشوائي</span>
+                        </button>
+                        <button  class="btn btn-outline me-2 " data-bs-toggle="modal"
+                            data-bs-target="#modal-simple" title="مساعدة">
+
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -44,8 +49,9 @@
                                 <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"></path>
                             </svg>
                             <span class="d-none d-sm-block">مساعدة</span>
-                        </a>
-                        <a href="http://localhost:5000/#" class="btn btn-outline me-2 " title="مسح" onclick="remove_text()">
+                        </button>
+                        <button  class="btn btn-outline me-2 " title="مسح"
+                            onclick="remove_text()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -54,7 +60,7 @@
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                             <span class="d-none d-sm-block"> مسح</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="card mt-2 pt-2 pb-2">
@@ -191,7 +197,8 @@
                                     srcset="">
                             </div>
                             <div class="col-8 align-items-center d-flex">
-                                <a href="http://pypi.python.org/pypi/Tashaphyne/"> تاشفين: التجذيع الخفيف للنصوص العربية</a>
+                                <a href="http://pypi.python.org/pypi/Tashaphyne/"> تاشفين: التجذيع الخفيف للنصوص
+                                    العربية</a>
                             </div>
                         </div>
 
@@ -244,6 +251,7 @@
 
 <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
+
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">مساعدة</h5>
@@ -261,10 +269,10 @@
               </ul>        </div>
         <div class="modal-footer">
           <button type="button" class="btn me-auto" data-bs-dismiss="modal">غلق</button>
+
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 <div class="modal modal-blur fade" id="modal-tasrif-view" tabindex="-1" style="display: none;" aria-hidden="true">
