@@ -18,6 +18,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../support/'))
 import random
 import pyarabic.araby  as araby # arabic words general functions
 import re
+
 #~import pyarabic.number
 def DoAction(text, action, options = {}):
     """
@@ -25,6 +26,10 @@ def DoAction(text, action, options = {}):
     """
     if action == "DoNothing":
         return text
+    elif action == "Conjugate":
+        return conjugate(text, options)        
+    elif action == "Suggest":
+        return suggest_verb_list(text, options)        
     elif action == "TashkeelText":
         lastmark = options.get('lastmark', "0")
         return tashkeel_text(text, lastmark)
@@ -42,8 +47,7 @@ def DoAction(text, action, options = {}):
         return text
     elif action == "StripHarakat":
         return araby.strip_tashkeel(text)
-    elif action == "Conjugate":
-        return conjugate(text, options)
+
     elif action == "CsvToData":
         return csv_to_python_table(text)
     elif action == "Romanize":
@@ -174,9 +178,21 @@ def conjugate(text, options):
 
     #extract first word if many words are given
     word = text.split(" ")[0]
-
+    given_future_type = options.get("future_type",u"فتحة") 
+    # find future haraka for a given verb
+    import libqutrub.verb_db
+    db_base_path = "/home/zerrouki/projects/qutrub-project/qutrub-1.2/"
+    verb_list = libqutrub.verb_db.find_triliteral_verb(db_base_path, word, 
+        given_future_type)
+    print(verb_list)
+    # get vocalized form of the verb
+    if(verb_list):
+        word = verb_list[0].get("verb",word)
+        future_type = verb_list[0].get("haraka",word)
+    else:
+        future_type = given_future_type
     return do_sarf(word, 
-        future_type = options.get("future_type",u"فتحة"),
+        future_type = future_type,
         all         = options.get("all", False),
         past        = options.get("past", False),
         future      = options.get("future", False),
@@ -194,7 +210,7 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
     import libqutrub.classverb as verbclass
     import libqutrub.verb_const as verb_const
     import pyarabic.arabrepr as myrepr
-    from libqutrub.verb_valid import is_valid_infinitive_verb
+    from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
     valid = is_valid_infinitive_verb(word)
     listetenses=[];
     if valid:
@@ -237,8 +253,47 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
         #return result;
 
         return vb.conj_display.display("TABLE",listetenses)
-    else: return None;
+    else:
+        suggestions  =  suggest_verb(word)
+        if suggestions:
+            print("do-sarf",suggestions)
+            return {"suggest":suggestions};
+        else:
+            return {"suggest":[]}
+            
+def suggest_verb_list(text, options):
+    """
+    Suggest a list of verbs if error or multiple entries
+    """
+    from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
+    import libqutrub.verb_db
+    suggestions = []
+    word = text.split(" ")[0]
+    given_future_type = options.get("future_mark",u"فتحة")    
+    valid = is_valid_infinitive_verb(word)
+    db_base_path = "/home/zerrouki/projects/qutrub-project/qutrub-1.2/"    
+    if valid:
 
+        suggestions = libqutrub.verb_db.find_triliteral_verb(db_base_path, word, 
+            given_future_type)
+    else:
+        sug_verb_list  =  list(set(suggest_verb(word)))
+        suggestions = []
+        for sug in sug_verb_list:
+            suggestions.extend(libqutrub.verb_db.find_triliteral_verb(db_base_path, sug, 
+            given_future_type))
+        # ~ suggestions = list(set(suggestions)) 
+    # make suggestion unique
+    list_of_data_uniq = []
+    for data in suggestions:
+        if data not in list_of_data_uniq:
+            list_of_data_uniq.append(data)
+    suggestions =  list_of_data_uniq
+    if suggestions:
+        print("suggest_verb_list",suggestions)
+        return suggestions;
+    else:
+        return ["Taha"]
 
 def romanize(text, code = "ISO"):
     """

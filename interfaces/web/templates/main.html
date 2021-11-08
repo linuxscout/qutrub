@@ -21,9 +21,11 @@
                                 <line x1="16" y1="17" x2="14.5" y2="18.5"></line>
                             </svg>
                             <span> أدوات</span>
+
                         </button>
-                        <button  class="btn btn-outline me-2 " title="نص عشوائي"
+                        <button  class="btn btn-outline me-2 " title="فعل عشوائي"
                             onclick="random_text()">
+
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -33,10 +35,11 @@
                                 <line x1="3" y1="7" x2="21" y2="7"></line>
                                 <path d="M18 20l3 -3l-3 -3"></path>
                             </svg>
-                            <span class="d-none d-sm-block"> نص عشوائي</span>
+                            <span class="d-none d-sm-block"> فعل عشوائي</span>
                         </button>
                         <button  class="btn btn-outline me-2 " data-bs-toggle="modal"
                             data-bs-target="#modal-simple" title="مساعدة">
+
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -248,25 +251,25 @@
 
 <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">مساعدة</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <ul>
-                    <li>أكتب الفعل في الخانة، ثم اضغط على زر <span class="text-primary">تصريف الفعل</span>.</li>
 
-                    <li>انتظر حتى تظهر النتيجة.</li>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">مساعدة</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li>أكتب الفعل في الخانة، ثم اضغط على زر <span class="text-primary">تصريف الفعل</span>.</li>
+  
+                <li>انتظر حتى تظهر النتيجة.</li>
+  
+                <li>اضغط على <span class="text-primary">فعل عشوائي</span> للحصول على اقتراحات أخرى.</li>
+  
+                <li>اضغط على زر <span class="text-primary">أدوات</span> أخرى للحصول على خدمات أخرى.</li>
+              </ul>        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">غلق</button>
 
-                    <li>اضغط على <span class="text-primary">نص عشوائي</span> للحصول على اقتراحات أخرى.</li>
-
-                    <li>اضغط على زر <span class="text-primary">أدوات</span> أخرى للحصول على خدمات أخرى.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">غلق</button>
-            </div>
         </div>
     </div>
 </div>

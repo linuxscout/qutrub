@@ -6,5 +6,6 @@ Noureddine Doumi: ndoumi2006 at gmail.com: conjugation evaluation.
 Marwan Elbawab: marwanbawan at gmail.com Language counseling.
 Khaled Hosny: Latex output Format
 Youcef Chahibi: Web interface contribution.
+Tarek Berkane: Web interface new redesign
 
 

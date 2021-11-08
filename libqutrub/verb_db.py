@@ -112,8 +112,9 @@ def find_triliteral_verb(db_base_path, triliteralverb, givenharaka):
         import sqlite3 as sqlite
         import os
 #     db_path = os.path.join(_base_directory(req), "data/verbdict.db")
-
-        #db_path = os.path.join(db_base_path, "data/verbdict.db")
+        
+        db_path = os.path.join(db_base_path, "data/verbdict.db")
+        
         conn  =  sqlite.connect(db_path)
         cursor  =  conn.cursor()
         verb_nm = araby.strip_harakat(triliteralverb)
