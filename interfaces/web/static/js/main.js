@@ -1,5 +1,7 @@
 
 
+var json_table = null;
+
 function toggel_adawat() {
     let adawat_area = document.getElementById("adawat-area")
 
@@ -112,7 +114,8 @@ function request_data() {
     })
         .then(function (response) {
             console.log(response);
-            set_view_done(response)
+            set_view_done(response);
+            json_table = response.data.result;
         })
         .catch(function (error) {
             console.log(error);
@@ -147,6 +150,8 @@ function request_data_suggest(verb, future_type, transitive) {
         .then(function (response) {
             console.log(response);
             set_view_done(response)
+            json_table = response.data.result;
+
         })
         .catch(function (error) {
             console.log(error);
@@ -206,13 +211,13 @@ function set_view_empty_input() {
 
 function view_suggestions(data) {
     let suggest_area = document.getElementById('suggest-area');
-    
+
     // if data is empty don't show suggest area
     if (data == null || data == undefined || data.length < 1) {
-        suggest_area.innerHTML=``;
+        suggest_area.innerHTML = ``;
         return;
     }
-    
+
     let html = ``;
     for (let index in data) {
         html += `<li class="curson-pointer" >&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
@@ -285,30 +290,38 @@ function set_view_done(response) {
 }
 
 function _build_options() {
-    return `<div class="container d-flex pt-1 pb-1 " title="أدوات">
+    return `<div class="container d-flex pt-1 pb-1 " title="تكبير">
         <button href="#" class="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-tasrif-view">
             <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="7" y1="10" x2="13" y2="10" /><line x1="10" y1="7" x2="10" y2="13" /><line x1="21" y1="21" x2="15" y2="15" /></svg>      
                      <span>تكبير</span>
         </button>
-<!-- 
-        <a href="#" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#modal-full-width">
-            Full width modal
-          </a> 
-        <a href="#" class="btn btn-outline me-2  " onclick="_print_table()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
-                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path
-                    d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
-                <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
-                <rect x="7" y="13" width="10" height="8" rx="2" />
-            </svg>
-            <span class="d-none d-sm-block"> طباعة</span>
 
-        </a>
-        <a href="#" class="btn btn-outline me-2 " title="نص عشوائي">
+     
+
+        <button class="btn btn-outline  text-black dropdown " title="نسخ" >
+        <span  class="dropdown-toggle text-black"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
+                          <div class="dropdown-menu dropdown-menu-end" style="">
+                            <a class="dropdown-item" onclick="copy_as_html()" >نسخ ك HTML</a>
+                            <a class="dropdown-item" onclick="copy_as_csv()" >مسخ ك csv</a>
+                          </div>
+        </button>
+<!--       
+
+<button href="#" class="btn btn-outline me-2  " onclick="copy_as_csv()">
+<svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
+    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path
+        d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" />
+    <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
+    <rect x="7" y="13" width="10" height="8" rx="2" />
+</svg>
+<span class="d-none d-sm-block"> نسخ الجدول</span>
+
+</button>
+<a href="#" class="btn btn-outline me-2 " title="نص عشوائي">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon " width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -342,7 +355,7 @@ function _build_table(result) {
     let tabel_content = "";
 
     tabel_content += _get_header(result['0']);
-    delete result["0"];
+    // delete result["0"];
     tabel_content += _get_body(result);
 
     return `
@@ -368,6 +381,7 @@ function _get_header(data) {
 function _get_body(data) {
     let rows = "";
     for (let index in data) {
+        if (index == 0) continue;
         rows += _get_body_row(data[index]);
     }
 
@@ -395,8 +409,70 @@ function _update_modal(table) {
     modal_body.innerHTML = table;
 }
 
+// Generate data area
+
+function generate_html_table() {
+    if (json_table == undefined || json_table == null || json_table == "") {
+        return;
+    }
+
+    let raw_table = '<table>';
+
+    for (let row_index in json_table) {
+        if (json_table.hasOwnProperty(row_index)) {
+            let row = '<tr>'
+            for (let cell_index in json_table[row_index]) {
+                if (json_table[row_index].hasOwnProperty(cell_index)) {
+                    let cell = null;
+                    if (row_index == 0) {
+                        cell = `<th>${json_table[row_index][cell_index]} </th>`
+
+                    } else {
+                        cell = `<td>${json_table[row_index][cell_index]} </td>`
+                    }
+
+                    row += cell;
+                }
+            }
+            row += "</tr>"
+            raw_table += row;
+        }
+    }
+    raw_table += "</table>"
+
+    return raw_table;
+}
+
+function generate_csv_table() {
+    if (json_table == undefined || json_table == null || json_table == "") {
+        return;
+    }
+
+    let raw_table = '';
+
+    for (let row_index in json_table) {
+        if (json_table.hasOwnProperty(row_index)) {
+            let row = ''
+            for (let cell_index in json_table[row_index]) {
+                if (json_table[row_index].hasOwnProperty(cell_index)) {
+                    let cell = `${json_table[row_index][cell_index]},`
+                    row += cell;
+                }
+            }
+            row += "\n"
+            raw_table += row;
+        }
+    }
 
 
+    return raw_table;
+
+}
+
+
+
+
+// COPY Functions area
 function copy_text(text) {
     /* Copy the text inside the text field */
     navigator.clipboard.writeText(text);
@@ -404,6 +480,22 @@ function copy_text(text) {
     show_alert("تم نسخ الفعل " + text);
 }
 
+function copy_as_html() {
+    let table = generate_html_table();
+    navigator.clipboard.writeText(table);
+
+    show_alert(" تم نسخ الجدول ك html")
+}
+
+function copy_as_csv() {
+    let csv = generate_csv_table()
+    navigator.clipboard.writeText(csv);
+
+    show_alert(" تم نسخ الجدول ك csv")
+
+}
+
+// ALEART area
 
 function show_alert(text) {
     Toastify({
@@ -417,6 +509,9 @@ function show_alert(text) {
         }
     }).showToast();
 }
+
+
+
 
 
 // TODO: add pring version for later
