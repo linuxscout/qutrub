@@ -183,7 +183,7 @@ def conjugate(text, options):
     given_future_type = options.get("future_type",u"فتحة") 
     # find future haraka for a given verb
     import libqutrub.verb_db
-    db_base_path = "/home/zerrouki/projects/qutrub-project/qutrub-1.2/"
+    db_base_path = "."
     verb_list = libqutrub.verb_db.find_triliteral_verb(db_base_path, word, 
         given_future_type)
     print(verb_list)
