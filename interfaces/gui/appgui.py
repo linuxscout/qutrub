@@ -9,7 +9,7 @@
 import sys
 import os
 PWD = os.path.join(os.path.dirname(__file__))
-print PWD
+#print PWD
 sys.path.append(os.path.join(PWD, '../../support'))
 sys.path.append(os.path.join(PWD, '../../'))
 
