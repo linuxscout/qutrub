@@ -1,6 +1,36 @@
 
 
+
+// global json used to generate html and csv data
 var json_table = null;
+
+init();
+
+
+function init() {
+    document.addEventListener("DOMContentLoaded", (event) => {
+        // retrieve GET parameters 
+        let verb_arg = findGetParameter('verb');
+        if( verb_arg != null && verb_arg != undefined){
+            let input_text_field = document.getElementById('input-text-field');
+            input_text_field.value = verb_arg;
+            request_data();
+        }
+    });
+}
+
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
 
 function toggel_adawat() {
     let adawat_area = document.getElementById("adawat-area")
@@ -284,8 +314,8 @@ function set_view_done(response) {
     console.log("Suggedtions", response.data.suggest);
     view_suggestions(response.data.suggest);
     let verb_info = `<h3>${response.data.verb_info}</h3>`;
-    
-    result_area.innerHTML = verb_info+  option_view + table_view;
+
+    result_area.innerHTML = verb_info + option_view + table_view;
     _update_modal(table_view);
 
 
