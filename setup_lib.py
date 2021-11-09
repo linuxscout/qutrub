@@ -6,7 +6,7 @@ from io import open
 def readme():
     with open('README.rst', encoding="utf8") as f:
         return f.read()
-setup (name='libqutrub', version='1.2.4.1',
+setup (name='libqutrub', version='1.2.5',
       description='libqutrub Arabic verb conjuagtion library',
       long_description = readme(),        
       author='Taha Zerrouki',
