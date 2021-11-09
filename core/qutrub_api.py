@@ -29,11 +29,9 @@ import libqutrub.ar_verb as ar_verb
 import libqutrub.verb_const as verb_const
 import libqutrub.mosaref_main as mosaref
 from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
-# ~ import libqutrub.verb_db
-# ~ import libqutrub.mosaref_main as mosaref
 class QutrubApi:
     """
-    a class as conjugator 
+    a class as conjugator wraper
     """
     def __init__(self, db_path="."):
         """
@@ -51,6 +49,7 @@ class QutrubApi:
             8: 'فعل ثماني', 
             9: 'فعل تساعي'}
         self.my_verb_class = None
+        self.listetenses = verb_const.TABLE_TENSE
     
     def set_db_path(self, db_path):
         """
@@ -113,6 +112,8 @@ class QutrubApi:
         """ conjugate verb in input wwith tenses"""
         if not tenses:
             tenses = self.listetenses
+        if not self.my_verb_class:
+            return None
         result = self.my_verb_class.conjugate_all_tenses(tenses)
         
         return result;
@@ -122,9 +123,12 @@ class QutrubApi:
         translate future type by name
         """
         return ar_verb.get_future_type_by_name(future_type)
+
     def display(self):
         """
         """
+        if not self.my_verb_class:
+            return None        
         resulttext = self.my_verb_class.conj_display.display("TABLE",self.listetenses)
         return resulttext
         
@@ -208,6 +212,8 @@ class QutrubApi:
         prepare input
         """
         self.my_verb_class = verbclass.VerbClass(verb,transitive,future_type);
+        # init tenses list
+        self.listetenses = verb_const.TABLE_TENSE
         
     def conjugate(word, future_type, alltense = True, past = False, future = False, 
 passive = False, imperative = False, future_moode = False, confirmed = False,
@@ -224,6 +230,11 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         """
         Display verb info in proper way
         """
+        if type(features) != dict:
+            if type(features) != str:
+                return features
+            else:
+                return ""
         text = """"الفعل 
         {verb} - {future_form} {length} {trans} {weak} {salim}""".format(
         verb=features.get("الفعل", ""),
@@ -236,7 +247,12 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         if exist_in_database:
             text += " [في قاعدة البيانات]"
         return text
-        
+    def suggest_verb(self, word):
+        """
+        generate suggestion for incorrect verbs
+        """
+        return suggest_verb(word)
+                
     def suggest_verb_list(self, text, options):
         """
         Suggest a list of verbs if error or multiple entries

@@ -83,12 +83,6 @@ def conjugate(text, options):
     "verb_info":conjugate_result_verb_info}
 
 def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
-    import libqutrub.mosaref_main as mosaref
-    import libqutrub.ar_verb as ar_verb
-    import libqutrub.classverb as verbclass
-    import libqutrub.verb_const as verb_const
-    import pyarabic.arabrepr as myrepr
-    from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
     
     from . import qutrub_api
     db_base_path = "."
@@ -100,49 +94,19 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
         future_type= myconjugator.get_future_type_by_name(future_type);
         bab_sarf=0;
         myconjugator.input(word,transitive,future_type);
-        #vb.verb_class();
+
         myconjugator.set_display_format(display_format);
     #test the uniformate function
         listetenses= myconjugator.manage_tenses(all, past,future,passive,imperative,future_moode,confirmed,transitive)    
-        # ~ if all :
-            # ~ if transitive :
-# ~ ##                  print("transitive")
-                # ~ listetenses= verb_const.TABLE_TENSE
-                # ~ result= vb.conjugate_all_tenses();
-            # ~ else:
-# ~ ##                  print("intransitive");
-                # ~ listetenses = verb_const.TableIndicativeTense;
-# ~ ##                  print(len(TableIndicativeTense))
-                # ~ result= vb.conjugate_all_tenses(listetenses);
-        # ~ else :
-            # ~ listetenses= myconjugator.manage_tenses(past,future,passive,imperative,future_moode,confirmed,transitive)
-            # ~ if past : listetenses.append(verb_const.TensePast);
-            # ~ if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
-            # ~ if future : listetenses.append(verb_const.TenseFuture);
-            # ~ if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
-            # ~ if (future_moode) :
-                # ~ listetenses.append(verb_const.TenseSubjunctiveFuture)
-                # ~ listetenses.append(verb_const.TenseJussiveFuture)
-            # ~ if (confirmed) :
-                # ~ if (future):listetenses.append(verb_const.TenseConfirmedFuture);
-                # ~ if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
-            # ~ if (future and passive and transitive and confirmed) :
-                # ~ listetenses.append(verb_const.TensePassiveConfirmedFuture);
-            # ~ if (passive and transitive and future_moode) :
-                # ~ listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
-                # ~ listetenses.append(verb_const.TensePassiveJussiveFuture)
-            # ~ if imperative : listetenses.append(verb_const.TenseImperative)
+
         result =  myconjugator.conjugate_all_tenses(listetenses);
-            #self.result["HTML"]=vb.conj_display.display("HTML",listetenses)
-        #return result;
-        # ~ print("Display text:", vb.conj_display.text)
         conjs_table = myconjugator.display()
         verb_info= myconjugator.get_verb_info(word,future_type,  transitive )
-        # ~ return {"table":conjs_table,"suggest":[], "verb_info":repr(vb.conj_display.text)}
+
         return {"table":conjs_table,"suggest":[], "verb_info":verb_info}
         
     else:
-        suggestions  =  suggest_verb(word)
+        suggestions  =  myconjugator.suggest_verb(word)
         if suggestions:
             print("do-sarf",suggestions)
             return {"table":[], "verb_info":"","suggest":suggestions};
