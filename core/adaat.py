@@ -186,7 +186,7 @@ def conjugate(text, options):
     db_base_path = "."
     verb_list = libqutrub.verb_db.find_triliteral_verb(db_base_path, word, 
         given_future_type)
-    print(verb_list)
+    # ~ print(verb_list)
     # get vocalized form of the verb
     if(verb_list):
         word = verb_list[0].get("verb",word)
@@ -208,7 +208,8 @@ def conjugate(text, options):
         
     conjugate_result_table = conjugate_result.get("table",{})
     conjugate_result_suggest = conjugate_result.get("suggest",{})
-    conjugate_result_verb_info= conjugate_result.get("verb_info","")
+    conjugate_result_verb_info= format_verb_info(conjugate_result.get("verb_info",""), bool(verb_list))
+
     return {"table":conjugate_result_table,
     "suggest":conjugate_result_suggest,
     "verb_info":conjugate_result_verb_info}
@@ -262,7 +263,9 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
         #return result;
         # ~ print("Display text:", vb.conj_display.text)
         conjs_table = vb.conj_display.display("TABLE",listetenses)
-        return {"table":conjs_table,"suggest":[], "verb_info":repr(vb.conj_display.text)}
+        verb_info= get_verb_info(word,future_type,  transitive )
+        # ~ return {"table":conjs_table,"suggest":[], "verb_info":repr(vb.conj_display.text)}
+        return {"table":conjs_table,"suggest":[], "verb_info":verb_info}
         
     else:
         suggestions  =  suggest_verb(word)
@@ -958,3 +961,103 @@ def chunksplit(text):
             #print synnode.get_word().encode('utf8'),
         #syno_tags += " '%s[%s]'"%(synnode.get_word_type(), synnode.get_guessed_type_tag())
     return chunklist
+
+tab_type = {0: '', 1: '', 2: '', 
+3: 'فعل ثلاثي', 
+4: 'فعل رباعي', 
+5: 'فعل خماسي', 
+6: 'فعل سداسي', 
+7: 'فعل سباعي', 
+8: 'فعل ثماني', 
+9: 'فعل تساعي'}
+
+def get_verb_info(word, future_type="فتحة", transitive=True):
+    """
+    This function extract verb feaures:
+    * length: 3,4,5,6 
+    * weakness: weak, well
+    * safety: hamza, shadda
+    * kind of weakness: waw, yeh
+    * category of weakness
+    """
+    import libqutrub.mosaref_main as mosaref
+    future_form = mosaref.get_future_form(word, future_type)
+    # strip haraka and keep shadda
+    verb_nm = araby.strip_harakat(word)
+    features = {"الفعل":word, "مضارعه": future_form}
+    # length
+    vlength = len(verb_nm)
+    features["طول"]= tab_type.get(vlength, "")
+    verb_normalized = araby.normalize_hamza(verb_nm)
+    
+    #التعدي
+    if transitive :
+        features["تعدي"] = "متعدي"
+    else:
+        features["تعدي"] = "لازم"        
+    # سالم أو مهموز أو مضعف
+    if araby.SHADDA in verb_nm and araby.HAMZA in verb_normalized:
+        features["سالم"] = "مضعف مهموز"
+    elif araby.SHADDA in  verb_nm:
+        features["سالم"] = "مضعف"
+    elif araby.HAMZA in verb_normalized:
+        features["سالم"] = "مهموز"
+    else:
+        features["سالم"] = "" 
+            
+    # معتل
+    if vlength == 3:
+        if verb_nm[0] == araby.WAW:
+            # ~ if verb_nm[1] == araby.ALEF:
+                # ~ feature["علة"] = "لفيف مقرون"
+            if verb_nm[2] in(araby.ALEF, araby.ALEF_MAKSURA, araby.YEH):
+                features["علة"] = "لفيف مفروق"
+            else:
+                features["علة"] = "مثال واوي"
+        elif verb_nm[1] == araby.WAW:
+            if verb_nm[2] in(araby.ALEF_MAKSURA, araby.YEH):
+                features["علة"] = "لفيف مقرون"        
+        elif verb_nm[1] == araby.ALEF:
+            # ~ if verb_nm[2] in(araby.ALEF, araby.ALEF_MAKSURA, araby.YEH):
+                # ~ feature["علة"] = "لفيف مفروق"            
+            if future_type == "ضمة":
+                features["علة"] = "أجوف واوي"
+            elif future_type == "فتحة":
+                features["علة"] = "أجوف واوي"
+            elif future_type == "كسرة":
+                features["علة"] = "أجوف يائي"
+            else:
+                features["علة"] = "أجوف"
+        elif verb_nm[2] == araby.ALEF:
+            features["علة"] = "ناقص واوي"
+        elif verb_nm[2] == araby.ALEF_MAKSURA:
+            features["علة"] = "ناقص يائي"
+        else:
+            features["علة"] = "صحيح"
+    else:
+        if verb_nm[-2:-1] == araby.ALEF:
+            features["علة"] = "أجوف"
+        elif verb_nm[-1:] == araby.ALEF_MAKSURA:
+            features["علة"] = "ناقص"
+        else:
+            features["علة"] = "صحيح"
+    if not features["سالم"] and features["علة"] == "صحيح":
+        features["سالم"]  = "سالم"
+    return features
+
+def format_verb_info(features, exist_in_database=False):
+    """
+    Display verb info in proper way
+    """
+    text = """"الفعل 
+    {verb} - {future_form} {length} {trans} {weak} {salim}""".format(
+    verb=features.get("الفعل", ""),
+    future_form =  features.get("مضارعه", ""),
+    length=  features.get("طول", ""),
+    trans =  features.get("تعدي", ""),
+    weak =  features.get("علة", ""),
+    salim =  features.get("سالم", ""),
+    )
+    if exist_in_database:
+        text += " [في قاعدة البيانات]"
+    return text
