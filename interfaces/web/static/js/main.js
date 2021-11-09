@@ -63,7 +63,7 @@ function random_text() {
         }
     }
 
-    axios.post('/ajaxGet', {
+    axios.post('ajaxGet', {
         data: { "response_type": 'get_random_text' },
     })
         .then(function (response) {
@@ -139,7 +139,7 @@ function request_data() {
     }
 
     set_view_loading();
-    axios.post('/ajaxGet', {
+    axios.post('ajaxGet', {
         data: config_data,
     })
         .then(function (response) {
@@ -174,7 +174,7 @@ function request_data_suggest(verb, future_type, transitive) {
     }
 
     set_view_loading();
-    axios.post('/ajaxGet', {
+    axios.post('ajaxGet', {
         data: config_data,
     })
         .then(function (response) {

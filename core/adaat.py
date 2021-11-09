@@ -21,7 +21,8 @@ import random
 import pyarabic.araby  as araby # arabic words general functions
 import re
 
-import qutrub_config
+import config.qutrub_config
+import logging
 #~import pyarabic.number
 def DoAction(text, action, options = {}):
     """
@@ -45,16 +46,14 @@ def conjugate(text, options):
     
     """
     from . import qutrub_api
-    db_base_path = "."
-    myconjugator = qutrub_api.QutrubApi(db_path = db_base_path)
+    
+    myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
     #extract first word if many words are given
     word = text.split(" ")[0]
     given_future_type = options.get("future_type",u"فتحة") 
     # find future haraka for a given verb
-    import libqutrub.verb_db
-
     verb_list = myconjugator.find_tri_verb(word, given_future_type)
-    # ~ print(verb_list)
+    # ~ logging.debug("adaat.py:", repr(verb_list))
     # get vocalized form of the verb
     if(verb_list):
         word = verb_list[0].get("verb",word)
@@ -85,8 +84,8 @@ def conjugate(text, options):
 def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
     
     from . import qutrub_api
-    db_base_path = "."
-    myconjugator = qutrub_api.QutrubApi(db_path = db_base_path)
+    
+    myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
         
     valid = myconjugator.is_valid_infinitive(word)
     listetenses=[];
@@ -115,8 +114,7 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
             
 def suggest_verb_list(text, options):
     from . import qutrub_api
-    db_base_path = "."
-    myconjugator = qutrub_api.QutrubApi(db_path = db_base_path)
+    myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
     return myconjugator.suggest_verb_list(text, options)
     
 

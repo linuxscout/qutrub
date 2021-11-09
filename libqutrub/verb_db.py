@@ -30,7 +30,7 @@ db_path = os.path.join(os.path.dirname(__file__), "data/verbdict.db")
 import pyarabic.araby as araby
 import libqutrub.triverbtable as triverbtable
 TRIVERBTABLE_INDEX = {}
-
+import logging
 def create_index_triverbtable():
     """ Create index from the verb dictionary
     to accelerate the search in the dictionary for verbs
@@ -112,9 +112,9 @@ def find_triliteral_verb(db_base_path, triliteralverb, givenharaka):
         import sqlite3 as sqlite
         import os
 #     db_path = os.path.join(_base_directory(req), "data/verbdict.db")
-        
+
         db_path = os.path.join(db_base_path, "data/verbdict.db")
-        
+        logging.debug("verb_db:"+ db_path)        
         conn  =  sqlite.connect(db_path)
         cursor  =  conn.cursor()
         verb_nm = araby.strip_harakat(triliteralverb)
