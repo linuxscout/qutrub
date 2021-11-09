@@ -269,6 +269,7 @@ def suggest_verb_list(text, options):
     """
     from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
     import libqutrub.verb_db
+    import libqutrub.mosaref_main as mosaref
     suggestions = []
     word = text.split(" ")[0]
     given_future_type = options.get("future_mark",u"فتحة")    
@@ -291,11 +292,14 @@ def suggest_verb_list(text, options):
         if data not in list_of_data_uniq:
             list_of_data_uniq.append(data)
     suggestions =  list_of_data_uniq
+    # add future form
+    for sug in suggestions:
+        sug["future"] = mosaref.get_future_form(sug.get("verb", ""), sug.get("haraka", ""))
     if suggestions:
         print("suggest_verb_list",suggestions)
         return suggestions;
     else:
-        return ["Taha"]
+        return []
 
 def romanize(text, code = "ISO"):
     """

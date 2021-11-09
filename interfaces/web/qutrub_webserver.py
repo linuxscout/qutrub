@@ -292,7 +292,6 @@ def index():
 def home():
     # DefaultText = "Text"  # core.adaat.random_text(),
     # ResultText = u"السلام عليكم"
-    app.logger.info('Processing default request')
     return render_template("main.html",current_page='home')
 
 
@@ -303,36 +302,38 @@ def ajax():
     text = default
     action = ""
     options = {}
-    if request.method == "POST":
-
+    if request.method == "GET":
+        args = request.args
+    elif request.method == "POST":
         args = request.get_json(silent=True)["data"]
+    else:
+        return jsonify({"text": default})
+    # Request a random text
+    if args.get("response_type", "") == "get_random_text":
+        return jsonify({"text": default})
 
-        # Request a random text
-        if args.get("response_type", "") == "get_random_text":
-            return jsonify({"text": default})
+    text = args.get("text", "")
+    action = args.get("action", "")
+    options["all"] = args.get("all", False)
+    options["transitive"] = args.get("transitive", False)
 
-        text = args.get("text", "")
-        action = args.get("action", "")
-        options["all"] = args.get("all", False)
-        options["transitive"] = args.get("transitive", False)
+    options["past"] = args.get("past", False)
+    options["future"] = args.get("future", False)
+    options["imperative"] = args.get("imperative", False)
+    options["future_moode"] = args.get("future_moode", False)
+    options["confirmed"] = args.get("confirmed", False)
 
-        options["past"] = args.get("past", False)
-        options["future"] = args.get("future", False)
-        options["imperative"] = args.get("imperative", False)
-        options["future_moode"] = args.get("future_moode", False)
-        options["confirmed"] = args.get("confirmed", False)
+    options["passive"] = args.get("passive", False)
+    options["past"] = args.get("past", False)
+    options["future_type"] = args.get("future_type", u"فتحة")
 
-        options["passive"] = args.get("passive", False)
-        options["past"] = args.get("past", False)
-        options["future_type"] = args.get("future_type", u"فتحة")
+    options["display_format"] = args.get("display_format", "HTML")
 
-        options["display_format"] = args.get("display_format", "HTML")
-
-        resulttext = core.adaat.DoAction(text, action, options)
-        suggestions = core.adaat.DoAction(text, "Suggest", options)
-        app.logger.info('%s:%s'%(action, text))
-        app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
-        return jsonify({"result": resulttext, "suggest":suggestions})
+    resulttext = core.adaat.DoAction(text, action, options)
+    suggestions = core.adaat.DoAction(text, "Suggest", options)
+    app.logger.info('%s:%s'%(action, text))
+    app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
+    return jsonify({"result": resulttext, "suggest":suggestions})
 
 
 @app.route("/result", methods=["POST", "GET"])

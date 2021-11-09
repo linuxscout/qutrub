@@ -119,6 +119,40 @@ function request_data() {
             set_view_error();
         });
 }
+//~ function request_data_suggest(verb, transitive, future_type) {
+function request_data_suggest(verb, future_type, transitive) {
+
+    let config_data = {
+        'text': verb, 'action': 'Conjugate',
+        'all': 1, 'transitive': transitive, 'future_type': future_type
+        //~ 'all': true, 'transitive': true, 'future_type': future_type
+    };
+
+    if (config_data['text'] == '') {
+        set_view_empty_input();
+        return;
+    }
+
+    var config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
+    }
+
+    set_view_loading();
+    axios.post('/ajaxGet', {
+        data: config_data,
+    })
+        .then(function (response) {
+            console.log(response);
+            set_view_done(response)
+        })
+        .catch(function (error) {
+            console.log(error);
+            set_view_error();
+        });
+}
 
 
 function set_view_loading() {
@@ -167,6 +201,16 @@ function set_view_empty_input() {
     `;
 }
 
+function view_suggestions(data) {
+    let result_area = document.getElementById('suggest-area');
+    let html = ``;
+    for (let index in data) {
+        html += `<li>&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
+    }
+    result_area.innerHTML = `
+    <h4 class="mt-0 ">هل تقصد؟ </h4>
+    <ul>`+html+`</ul>`;
+}
 
 function set_view_done(response) {
     // let fake_data = {
@@ -221,6 +265,9 @@ function set_view_done(response) {
 
     let option_view = _build_options();
     let table_view = _build_table(response.data.result);
+    // print suggestions
+    console.log("Suggedtions", response.data.suggest);
+    view_suggestions( response.data.suggest);
     result_area.innerHTML = option_view + table_view;
     _update_modal(table_view);
 
