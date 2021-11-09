@@ -29,6 +29,7 @@ import libqutrub.ar_verb as ar_verb
 import libqutrub.verb_const as verb_const
 import libqutrub.mosaref_main as mosaref
 from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
+import logging
 class QutrubApi:
     """
     a class as conjugator wraper
@@ -211,7 +212,8 @@ class QutrubApi:
         """
         prepare input
         """
-        self.my_verb_class = verbclass.VerbClass(verb,transitive,future_type);
+        # ~ logging.debug("qutrub_api",future_type)
+        self.my_verb_class = verbclass.VerbClass(verb, transitive, future_type);
         # init tenses list
         self.listetenses = verb_const.TABLE_TENSE
         

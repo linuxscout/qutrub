@@ -53,13 +53,16 @@ def conjugate(text, options):
     given_future_type = options.get("future_type",u"فتحة") 
     # find future haraka for a given verb
     verb_list = myconjugator.find_tri_verb(word, given_future_type)
+    # ~ print("adaat.py:", verb_list)
     # ~ logging.debug("adaat.py:", repr(verb_list))
     # get vocalized form of the verb
     if(verb_list):
         word = verb_list[0].get("verb",word)
         future_type = verb_list[0].get("haraka",word)
+        # ~ logging.debug("adaat.py:", future_type, verb_list[0].get("haraka",word))
     else:
         future_type = given_future_type
+    
     conjugate_result =  do_sarf(word, 
         future_type = future_type,
         all         = options.get("all", False),
@@ -92,7 +95,7 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
     if valid:
         future_type= myconjugator.get_future_type_by_name(future_type);
         bab_sarf=0;
-        myconjugator.input(word,transitive,future_type);
+        myconjugator.input(word, future_type, transitive);
 
         myconjugator.set_display_format(display_format);
     #test the uniformate function
@@ -100,7 +103,7 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
 
         result =  myconjugator.conjugate_all_tenses(listetenses);
         conjs_table = myconjugator.display()
-        verb_info= myconjugator.get_verb_info(word,future_type,  transitive )
+        verb_info= myconjugator.get_verb_info(word, future_type,  transitive )
 
         return {"table":conjs_table,"suggest":[], "verb_info":verb_info}
         
