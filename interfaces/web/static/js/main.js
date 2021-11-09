@@ -188,6 +188,9 @@ function set_view_error() {
 }
 
 function set_view_empty_input() {
+    // by set null as argument the suggested view area will be hidden
+    view_suggestions(null);
+
     let result_area = document.getElementById('result-area');
     result_area.innerHTML = `
     <div class="loading d-flex flex-column justify-content-center align-items-center text-yellow"
