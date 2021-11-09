@@ -202,14 +202,19 @@ function set_view_empty_input() {
 }
 
 function view_suggestions(data) {
+    // if data is empty don't show suggest area
+    if (data == null || data == undefined || data.length < 1) {
+        return;
+    }
+
     let result_area = document.getElementById('suggest-area');
     let html = ``;
     for (let index in data) {
-        html += `<li>&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
+        html += `<li class="curson-pointer" >&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
     }
     result_area.innerHTML = `
     <h4 class="mt-0 ">هل تقصد؟ </h4>
-    <ul>`+html+`</ul>`;
+    <ul class="mb-0" >`+ html + `</ul>`;
 }
 
 function set_view_done(response) {
@@ -267,7 +272,7 @@ function set_view_done(response) {
     let table_view = _build_table(response.data.result);
     // print suggestions
     console.log("Suggedtions", response.data.suggest);
-    view_suggestions( response.data.suggest);
+    view_suggestions(response.data.suggest);
     result_area.innerHTML = option_view + table_view;
     _update_modal(table_view);
 
@@ -367,7 +372,7 @@ function _get_body(data) {
 function _get_body_row(items) {
     let row = "";
     for (let index in items) {
-        row += `<td>${items[index]}</td>`
+        row += `<td class="curson-pointer" onclick="copy_text('${items[index]}')" title="نسخ الفعل ${items[index]} " >${items[index]}</td>`
     }
 
     return `<tr>${row}</tr>`;
@@ -383,6 +388,29 @@ function _update_modal(table) {
 
 
     modal_body.innerHTML = table;
+}
+
+
+
+function copy_text(text) {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(text);
+    /* Alert the copied text */
+    show_alert("تم نسخ الفعل " + text);
+}
+
+
+function show_alert(text) {
+    Toastify({
+        text: text,
+        duration: 2000,
+        className: "info text-primary border border-primary border-1 rounded-2  ",
+        style: {
+            background: "white",
+            'direction': 'rtl',
+            'text-align': 'right',
+        }
+    }).showToast();
 }
 
 

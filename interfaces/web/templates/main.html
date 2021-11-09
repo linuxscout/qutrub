@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block extra_css_link %}
+<!-- Toast for notifications -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+{% endblock %}
+
 
 {% block content %}
 <div class="page-wrapper mb-2" style="min-height: 90vh;">
@@ -141,7 +146,7 @@
                 </div>
 
                 <div class="card mt-2 mb-3">
-                    <div id="suggest-area" class="suggest" style="min-height: 50px;">
+                    <div id="suggest-area" class="suggest p-2" >
                         <!-- SUGGEST AREA -->
                     </div>
                     <div id="result-area" class="result" style="min-height: 150px;">
@@ -298,5 +303,6 @@
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
