@@ -188,6 +188,9 @@ function set_view_error() {
 }
 
 function set_view_empty_input() {
+    // by set null as argument the suggested view area will be hidden
+    view_suggestions(null);
+
     let result_area = document.getElementById('result-area');
     result_area.innerHTML = `
     <div class="loading d-flex flex-column justify-content-center align-items-center text-yellow"
@@ -202,14 +205,21 @@ function set_view_empty_input() {
 }
 
 function view_suggestions(data) {
-    let result_area = document.getElementById('suggest-area');
+    let suggest_area = document.getElementById('suggest-area');
+    
+    // if data is empty don't show suggest area
+    if (data == null || data == undefined || data.length < 1) {
+        suggest_area.innerHTML=``;
+        return;
+    }
+    
     let html = ``;
     for (let index in data) {
-        html += `<li>&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
+        html += `<li class="curson-pointer" >&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
     }
-    result_area.innerHTML = `
+    suggest_area.innerHTML = `
     <h4 class="mt-0 ">هل تقصد؟ </h4>
-    <ul>`+html+`</ul>`;
+    <ul class="mb-0" >`+ html + `</ul>`;
 }
 
 function set_view_done(response) {
@@ -267,7 +277,7 @@ function set_view_done(response) {
     let table_view = _build_table(response.data.result);
     // print suggestions
     console.log("Suggedtions", response.data.suggest);
-    view_suggestions( response.data.suggest);
+    view_suggestions(response.data.suggest);
     result_area.innerHTML = option_view + table_view;
     _update_modal(table_view);
 
@@ -276,11 +286,11 @@ function set_view_done(response) {
 
 function _build_options() {
     return `<div class="container d-flex pt-1 pb-1 " title="أدوات">
-        <a href="#" class="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-tasrif-view">
+        <button href="#" class="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-tasrif-view">
             <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="7" y1="10" x2="13" y2="10" /><line x1="10" y1="7" x2="10" y2="13" /><line x1="21" y1="21" x2="15" y2="15" /></svg>      
                      <span>تكبير</span>
-        </a>
+        </button>
 <!-- 
         <a href="#" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#modal-full-width">
             Full width modal
@@ -367,7 +377,7 @@ function _get_body(data) {
 function _get_body_row(items) {
     let row = "";
     for (let index in items) {
-        row += `<td>${items[index]}</td>`
+        row += `<td class="curson-pointer" onclick="copy_text('${items[index]}')" title="نسخ الفعل ${items[index]} " >${items[index]}</td>`
     }
 
     return `<tr>${row}</tr>`;
@@ -379,10 +389,33 @@ function _update_modal(table) {
     let modal_body = modal_view.getElementsByClassName('modal-body')[0];
 
     let input_text_field = document.getElementById('input-text-field');
-    modal_title.innerHTML = ` تصريف للفعل <span class='text-primary'>${input_text_field.value}</span>`;
+    modal_title.innerHTML = `تصريف للفعل <span class='text-primary'>${input_text_field.value}</span>`;
 
 
     modal_body.innerHTML = table;
+}
+
+
+
+function copy_text(text) {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(text);
+    /* Alert the copied text */
+    show_alert("تم نسخ الفعل " + text);
+}
+
+
+function show_alert(text) {
+    Toastify({
+        text: text,
+        duration: 2000,
+        className: "info text-primary border border-primary border-1 rounded-2  ",
+        style: {
+            background: "white",
+            'direction': 'rtl',
+            'text-align': 'right',
+        }
+    }).showToast();
 }
 
 

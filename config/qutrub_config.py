@@ -5,7 +5,7 @@
 #  
 
 #Database config directory
-db_base_path = "/home/zerrouki/projects/qutrub-project/qutrub-1.2/"
+db_base_path = "."
 # Logging file
 LOGGING_CFG_FILE = "config/logging.cfg"
 def main(args):

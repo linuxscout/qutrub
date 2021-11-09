@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block extra_css_link %}
+<!-- Toast for notifications -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+{% endblock %}
+
 
 {% block content %}
 <div class="page-wrapper mb-2" style="min-height: 90vh;">
@@ -8,7 +13,7 @@
             <div class="col-12 col-md-12 col-lg-9">
                 <div class="card">
                     <div class="container d-flex pt-1 pb-1 justify-content-end" title="أدوات">
-                        <button  class="btn btn-outline me-2 " onclick="toggel_adawat()">
+                        <button class="btn btn-outline me-2 " onclick="toggel_adawat()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -23,8 +28,7 @@
                             <span> أدوات</span>
 
                         </button>
-                        <button  class="btn btn-outline me-2 " title="فعل عشوائي"
-                            onclick="random_text()">
+                        <button class="btn btn-outline me-2 " title="فعل عشوائي" onclick="random_text()">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -37,8 +41,8 @@
                             </svg>
                             <span class="d-none d-sm-block"> فعل عشوائي</span>
                         </button>
-                        <button  class="btn btn-outline me-2 " data-bs-toggle="modal"
-                            data-bs-target="#modal-simple" title="مساعدة">
+                        <button class="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-simple"
+                            title="مساعدة">
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -50,8 +54,7 @@
                             </svg>
                             <span class="d-none d-sm-block">مساعدة</span>
                         </button>
-                        <button  class="btn btn-outline me-2 " title="مسح"
-                            onclick="remove_text()">
+                        <button class="btn btn-outline me-2 " title="مسح" onclick="remove_text()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-0 me-md-2" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -141,7 +144,7 @@
                 </div>
 
                 <div class="card mt-2 mb-3">
-                    <div id="suggest-area" class="suggest" style="min-height: 50px;">
+                    <div id="suggest-area" class="suggest p-2">
                         <!-- SUGGEST AREA -->
                     </div>
                     <div id="result-area" class="result" style="min-height: 150px;">
@@ -255,28 +258,29 @@
 <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
 
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">مساعدة</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li>أكتب الفعل في الخانة، ثم اضغط على زر <span class="text-primary">تصريف الفعل</span>.</li>
-  
-                <li>انتظر حتى تظهر النتيجة.</li>
-  
-                <li>اضغط على <span class="text-primary">فعل عشوائي</span> للحصول على اقتراحات أخرى.</li>
-  
-                <li>اضغط على زر <span class="text-primary">أدوات</span> أخرى للحصول على خدمات أخرى.</li>
-              </ul>        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn me-auto" data-bs-dismiss="modal">غلق</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">مساعدة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>أكتب الفعل في الخانة، ثم اضغط على زر <span class="text-primary">تصريف الفعل</span>.</li>
 
+                    <li>انتظر حتى تظهر النتيجة.</li>
+
+                    <li>اضغط على <span class="text-primary">فعل عشوائي</span> للحصول على اقتراحات أخرى.</li>
+
+                    <li>اضغط على زر <span class="text-primary">أدوات</span> أخرى للحصول على خدمات أخرى.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">غلق</button>
+
+            </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal modal-blur fade" id="modal-tasrif-view" tabindex="-1" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-full-width modal-dialog-centered" role="document">
@@ -294,9 +298,12 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
