@@ -202,12 +202,14 @@ function set_view_empty_input() {
 }
 
 function view_suggestions(data) {
+    let result_area = document.getElementById('suggest-area');
+    
     // if data is empty don't show suggest area
     if (data == null || data == undefined || data.length < 1) {
+        result_area.innerHTML=``;
         return;
     }
-
-    let result_area = document.getElementById('suggest-area');
+    
     let html = ``;
     for (let index in data) {
         html += `<li class="curson-pointer" >&nbsp;<span class="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
