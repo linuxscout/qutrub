@@ -193,7 +193,7 @@ def conjugate(text, options):
         future_type = verb_list[0].get("haraka",word)
     else:
         future_type = given_future_type
-    return do_sarf(word, 
+    conjugate_result =  do_sarf(word, 
         future_type = future_type,
         all         = options.get("all", False),
         past        = options.get("past", False),
@@ -205,6 +205,13 @@ def conjugate(text, options):
         transitive  = options.get("transitive", False),
         #~ display_format  =options.get("imperative", "HTML"),
         );
+        
+    conjugate_result_table = conjugate_result.get("table",{})
+    conjugate_result_suggest = conjugate_result.get("suggest",{})
+    conjugate_result_verb_info= conjugate_result.get("verb_info","")
+    return {"table":conjugate_result_table,
+    "suggest":conjugate_result_suggest,
+    "verb_info":conjugate_result_verb_info}
 
 def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
     import libqutrub.mosaref_main as mosaref
@@ -253,15 +260,17 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
             result =vb.conjugate_all_tenses(listetenses);
             #self.result["HTML"]=vb.conj_display.display("HTML",listetenses)
         #return result;
-
-        return vb.conj_display.display("TABLE",listetenses)
+        # ~ print("Display text:", vb.conj_display.text)
+        conjs_table = vb.conj_display.display("TABLE",listetenses)
+        return {"table":conjs_table,"suggest":[], "verb_info":repr(vb.conj_display.text)}
+        
     else:
         suggestions  =  suggest_verb(word)
         if suggestions:
             print("do-sarf",suggestions)
-            return {"suggest":suggestions};
+            return {"table":[], "verb_info":"","suggest":suggestions};
         else:
-            return {"suggest":[]}
+            return {"table":[], "verb_info":"","suggest":[]}
             
 def suggest_verb_list(text, options):
     """

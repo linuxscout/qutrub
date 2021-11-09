@@ -283,7 +283,9 @@ function set_view_done(response) {
     // print suggestions
     console.log("Suggedtions", response.data.suggest);
     view_suggestions(response.data.suggest);
-    result_area.innerHTML = option_view + table_view;
+    let verb_info = `<h3>${response.data.verb_info}</h3>`;
+    
+    result_area.innerHTML = verb_info+  option_view + table_view;
     _update_modal(table_view);
 
 
