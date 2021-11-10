@@ -77,7 +77,10 @@ def conjugate(text, options):
         );
         
     conjugate_result_table = conjugate_result.get("table",{})
-    conjugate_result_suggest = conjugate_result.get("suggest",{})
+    if(verb_list): # as suggestion
+        conjugate_result_suggest = verb_list
+    else:
+        conjugate_result_suggest = conjugate_result.get("suggest",{})
     conjugate_result_verb_info= myconjugator.format_verb_info(conjugate_result.get("verb_info",""), bool(verb_list))
 
     return {"table":conjugate_result_table,
@@ -110,7 +113,7 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
     else:
         suggestions  =  myconjugator.suggest_verb(word)
         if suggestions:
-            print("do-sarf",suggestions)
+            # ~ print("do-sarf",suggestions)
             return {"table":[], "verb_info":"","suggest":suggestions};
         else:
             return {"table":[], "verb_info":"","suggest":[]}

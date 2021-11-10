@@ -125,7 +125,8 @@ function load_config_data() {
 function request_data() {
 
     let config_data = load_config_data();
-
+    // init clear view
+    set_view_empty_input();
     if (config_data['text'] == '') {
         set_view_empty_input();
         return;
@@ -311,7 +312,7 @@ function set_view_done(response) {
     let option_view = _build_options();
     let table_view = _build_table(response.data.result);
     // print suggestions
-    console.log("Suggedtions", response.data.suggest);
+    //~ console.log("Suggedtions", response.data.suggest);
     view_suggestions(response.data.suggest);
     let verb_info = `<h3>${response.data.verb_info}</h3>`;
 
@@ -363,7 +364,7 @@ function _build_options() {
                     d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3" />
             </svg> 
             <span class="d-sm-none d-block">JSON</span>
-            <span class="d-none d-sm-block"> إستخراج صيغة JSON</span>
+            <span class="d-none d-sm-block"> استخراج صيغة JSON</span>
         </a>
 
         <a href="#" class="btn btn-outline me-2 " title="نص عشوائي" >
@@ -377,7 +378,7 @@ function _build_options() {
                     d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3" />
             </svg> 
             <span class="d-sm-none d-block">CSV</span>
-            <span class="d-none d-sm-block"> إستخراج صيغة CSV</span>
+            <span class="d-none d-sm-block"> استخراج صيغة CSV</span>
         </a> -->
     </div>`;
 }

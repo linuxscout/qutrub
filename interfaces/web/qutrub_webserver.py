@@ -334,10 +334,11 @@ def ajax():
     options["display_format"] = args.get("display_format", "HTML")
 
     resulttext = core.adaat.DoAction(text, action, options)
-    suggestions = core.adaat.DoAction(text, "Suggest", options)
+    # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
     app.logger.info('%s:%s'%(action, text))
     app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
-    return jsonify({"result": resulttext.get("table",{}),"verb_info":resulttext.get("verb_info",""), "suggest":suggestions})
+    # ~ return jsonify({"result": resulttext.get("table",{}),"verb_info":resulttext.get("verb_info",""), "suggest":suggestions})
+    return jsonify({"result": resulttext.get("table",{}),"verb_info":resulttext.get("verb_info",""), "suggest":resulttext.get("suggest","")})
 
 
 @app.route("/result", methods=["POST", "GET"])
