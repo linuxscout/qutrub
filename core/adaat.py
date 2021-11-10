@@ -50,11 +50,10 @@ def conjugate(text, options):
     myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
     #extract first word if many words are given
     word = text.split(" ")[0]
+    
     given_future_type = options.get("future_type",u"فتحة") 
     # find future haraka for a given verb
     verb_list = myconjugator.find_tri_verb(word, given_future_type)
-    # ~ print("adaat.py:", verb_list)
-    # ~ logging.debug("adaat.py:", repr(verb_list))
     # get vocalized form of the verb
     if(verb_list):
         word = verb_list[0].get("verb",word)
@@ -63,7 +62,7 @@ def conjugate(text, options):
     else:
         future_type = given_future_type
     
-    conjugate_result =  do_sarf(word, 
+    conjugate_result =  do_sarf(myconjugator, word, 
         future_type = future_type,
         all         = options.get("all", False),
         past        = options.get("past", False),
@@ -73,25 +72,25 @@ def conjugate(text, options):
         future_moode= options.get("future_moode", False),
         confirmed   = options.get("confirmed", False),
         transitive  = options.get("transitive", False),
-        #~ display_format  =options.get("imperative", "HTML"),
         );
         
     conjugate_result_table = conjugate_result.get("table",{})
-    if(verb_list): # as suggestion
-        conjugate_result_suggest = verb_list
-    else:
+    if(not conjugate_result_table):
         conjugate_result_suggest = conjugate_result.get("suggest",{})
+    else:
+        conjugate_result_suggest = myconjugator.suggest_similar_verb_list(word, future_type)
+        
     conjugate_result_verb_info= myconjugator.format_verb_info(conjugate_result.get("verb_info",""), bool(verb_list))
 
     return {"table":conjugate_result_table,
     "suggest":conjugate_result_suggest,
     "verb_info":conjugate_result_verb_info}
 
-def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
+def do_sarf(myconjugator, word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
     
-    from . import qutrub_api
+    # ~ from . import qutrub_api
     
-    myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
+    # ~ myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
         
     valid = myconjugator.is_valid_infinitive(word)
     listetenses=[];
@@ -118,10 +117,10 @@ def do_sarf(word,future_type,all=True,past=False,future=False,passive=False,impe
         else:
             return {"table":[], "verb_info":"","suggest":[]}
             
-def suggest_verb_list(text, options):
-    from . import qutrub_api
-    myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
-    return myconjugator.suggest_verb_list(text, options)
+# ~ def suggest_similar_verb_list(text, options):
+    # ~ from . import qutrub_api
+    # ~ myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
+    # ~ return myconjugator.suggest_verb_list(text, options)
     
 
 

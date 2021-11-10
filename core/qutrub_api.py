@@ -255,14 +255,13 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         """
         return suggest_verb(word)
                 
-    def suggest_verb_list(self, text, options):
+    def suggest_similar_verb_list(self, word, given_future_type):
         """
         Suggest a list of verbs if error or multiple entries
         """
 
         suggestions = []
-        word = text.split(" ")[0]
-        given_future_type = options.get("future_mark",u"فتحة")    
+  
         valid = is_valid_infinitive_verb(word)
         db_base_path = self.db_path
         if valid:
