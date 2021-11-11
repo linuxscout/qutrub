@@ -16,6 +16,13 @@ function init() {
             input_text_field.value = verb_arg;
             request_data();
         }
+
+        // listiner to input filed , when user click Enter the js request data and update result
+        document.querySelector('#input-text-field').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                request_data();
+            }
+        });
     });
 }
 
@@ -67,8 +74,9 @@ function random_text() {
         data: { "response_type": 'get_random_text' },
     })
         .then(function (response) {
-            console.log(response)
+            // console.log(response)
             input_text_field.value = response.data.text;
+            input_text_field.focus();
         })
         .catch(function (error) {
             console.log(error);
@@ -543,6 +551,7 @@ function show_alert(text) {
     }).showToast();
 }
 
+// EventListener
 
 
 
