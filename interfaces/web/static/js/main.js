@@ -140,6 +140,10 @@ function request_data() {
         return;
     }
 
+    // update url of the page
+    //  https://qutrub.arabeyes.org/?verb=خرج
+    update_url(config_data['text']);
+
     var config = {
         headers: {
             'Content-Type': 'application/json',
@@ -551,36 +555,12 @@ function show_alert(text) {
     }).showToast();
 }
 
-// EventListener
 
-
-
-
-// TODO: add pring version for later
-/*
-function _print_table() {
-    let config_data = load_config_data();
-
-    config_data['response_type'] = 'pdf';
-
-    var config = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        }
+function update_url(verb){
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?verb=${verb}`;
+        window.history.pushState({path:newurl},'',newurl);
     }
+}
 
-    axios.post('/ajaxGet', {
-        data: config_data,
-    })
-        .then(function (response) {
-         //   console.log(response);
-            var a = window.open('', '', '');
-            a.document.write(response.data);
-            a.document.close();
-            a.print();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}*/
+
