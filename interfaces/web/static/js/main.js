@@ -344,7 +344,7 @@ function _build_options() {
         <span  class="dropdown-toggle text-black"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
                           <div class="dropdown-menu dropdown-menu-end" style="">
                             <a class="dropdown-item" onclick="copy_as_html()" >نسخ ك HTML</a>
-                            <a class="dropdown-item" onclick="copy_as_csv()" >مسخ ك csv</a>
+                            <a class="dropdown-item" onclick="copy_as_csv()" >نسخ ك csv</a>
                           </div>
         </button>
 <!--       
