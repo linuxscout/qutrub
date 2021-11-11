@@ -88,23 +88,23 @@ class QutrubApi:
                 listetenses= verb_const.TABLE_TENSE
             else:
                 listetenses = verb_const.TableIndicativeTense;
-
-        if past : listetenses.append(verb_const.TensePast);
-        if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
-        if future : listetenses.append(verb_const.TenseFuture);
-        if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
-        if (future_moode) :
-            listetenses.append(verb_const.TenseSubjunctiveFuture)
-            listetenses.append(verb_const.TenseJussiveFuture)
-        if (confirmed) :
-            if (future):listetenses.append(verb_const.TenseConfirmedFuture);
-            if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
-        if (future and passive and transitive and confirmed) :
-            listetenses.append(verb_const.TensePassiveConfirmedFuture);
-        if (passive and transitive and future_moode) :
-            listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
-            listetenses.append(verb_const.TensePassiveJussiveFuture)
-        if imperative : listetenses.append(verb_const.TenseImperative)
+        else:
+            if past : listetenses.append(verb_const.TensePast);
+            if (past and passive and transitive) : listetenses.append(verb_const.TensePassivePast)
+            if future : listetenses.append(verb_const.TenseFuture);
+            if (future and passive and transitive) : listetenses.append(verb_const.TensePassiveFuture)
+            if (future_moode) :
+                listetenses.append(verb_const.TenseSubjunctiveFuture)
+                listetenses.append(verb_const.TenseJussiveFuture)
+            if (confirmed) :
+                if (future):listetenses.append(verb_const.TenseConfirmedFuture);
+                if (imperative):listetenses.append(verb_const.TenseConfirmedImperative);
+            if (future and passive and transitive and confirmed) :
+                listetenses.append(verb_const.TensePassiveConfirmedFuture);
+            if (passive and transitive and future_moode) :
+                listetenses.append(verb_const.TensePassiveSubjunctiveFuture)
+                listetenses.append(verb_const.TensePassiveJussiveFuture)
+            if imperative : listetenses.append(verb_const.TenseImperative)
         
         self.listetenses = listetenses ;
         
