@@ -31,7 +31,11 @@
 
 
     {% block document_title %}
-    <title>قطرب: تصريف الأفعال العربية قطرب: تصريف الأفعال العربية</title>
+    {% if verb %}
+    <title>قطرب | تصريف الفعل {{verb}}</title>
+    {% else %}
+    <title>قطرب: تصريف الأفعال العربية</title>
+    {% endif %}
     {% endblock %}
 </head>
 
@@ -179,22 +183,22 @@
 
             <div class="row">
                 <div class="col">
-                    
-                        <span> <a href="{{ url_for('contact') }}"> للإتصال</a> </span>
-                        <span><a href="http://blog.tahadz.com/"> مدونتي</a></span>
-                   
+
+                    <span> <a href="{{ url_for('contact') }}"> للإتصال</a> </span>
+                    <span><a href="http://blog.tahadz.com/"> مدونتي</a></span>
+
                 </div>
                 <div class="col text-center">
-                    
-دعم من مجموعة 
-  <a href="https://arabeyes.org/" class="">
+
+                    دعم من مجموعة
+                    <a href="https://arabeyes.org/" class="">
 
 
-عربايز
+                        عربايز
                     </a>
-                    الاستضافة بدعم شركة 
+                    الاستضافة بدعم شركة
                     <a href="https://kuwaitnet.com/" class="">
-كويت-نت
+                        كويت-نت
                     </a>
                 </div>
             </div>
