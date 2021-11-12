@@ -13,7 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 import core.adaat
 from config.qutrub_config import LOGGING_CFG_FILE
 from config.qutrub_config import LOGGING_FILE
-HOMEDOMAIN = "http://qutrub.arabeyes.org"
+# ~ HOMEDOMAIN = "http://qutrub.arabeyes.org"
 example_json = {
     "result": {
         "0": {
@@ -246,14 +246,14 @@ example_json = {
 }
 
 
-from flask import Flask, render_template, make_response, request, jsonify, redirect
-from flask_sitemap import Sitemap
+from flask import Flask, render_template, make_response, send_from_directory, request, jsonify, redirect
+# ~ from flask_sitemap import Sitemap
 from flask_minify import minify
 
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-# ~ ext = Sitemap(app=app)
+
 
 # ~ logging.config.fileConfig(LOGGING_CFG_FILE,  disable_existing_loggers = False)
 logging.basicConfig(filename=LOGGING_FILE, level=logging.DEBUG)
@@ -370,65 +370,73 @@ def not_found(e):
     return render_template('404.shtml')
 
 
-@app.route('/sitemap.xml', methods=['GET'])
-def sitemap():
-    try:
-      """Generate sitemap.xml. Makes a list of urls and date modified."""
-      ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
-      verb_list = ["كتب",
-      "سأل",
-      "استعمل"]
-      pages=[]
+# ~ @app.route('/sitemap.xml', methods=['GET'])
+# ~ def sitemap():
+    # ~ try:
+      # ~ """Generate sitemap.xml. Makes a list of urls and date modified."""
+      # ~ ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
+      # ~ verb_list = ["كتب",
+      # ~ "سأل",
+      # ~ "استعمل"]
+      # ~ pages=[]
     
-      ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
-      # static pages
-      for rule in app.url_map.iter_rules():
-          if "GET" in rule.methods and len(rule.arguments)==0:
-              pages.append(
-                           {"loc":HOMEDOMAIN+str(rule.rule),
-                           "lastmod":ten_days_ago,
-                           }
-                           )
-      # dynamic pages
-      for verb in verb_list:
-          pages.append(
-                        {"loc":HOMEDOMAIN+"/verb/"+verb,
-                        "lastmod":ten_days_ago,
-                        "prio":0.5,
-                        "freq":"daily",
-                          }
-                       )
+      # ~ ten_days_ago=(datetime.now() - timedelta(days=7)).date().isoformat()
+      # ~ # static pages
+      # ~ for rule in app.url_map.iter_rules():
+          # ~ if "GET" in rule.methods and len(rule.arguments)==0:
+              # ~ pages.append(
+                           # ~ {"loc":HOMEDOMAIN+str(rule.rule),
+                           # ~ "lastmod":ten_days_ago,
+                           # ~ }
+                           # ~ )
+      # ~ # dynamic pages
+      # ~ for verb in verb_list:
+          # ~ pages.append(
+                        # ~ {"loc":HOMEDOMAIN+"/verb/"+verb,
+                        # ~ "lastmod":ten_days_ago,
+                        # ~ "prio":0.5,
+                        # ~ "freq":"daily",
+                          # ~ }
+                       # ~ )
 
-      sitemap_xml = render_template('sitemap_template.xml', pages=pages)
-      response= make_response(sitemap_xml)
-      response.headers["Content-Type"] = "application/xml"    
+      # ~ sitemap_xml = render_template('sitemap_template.xml', pages=pages)
+      # ~ response= make_response(sitemap_xml)
+      # ~ response.headers["Content-Type"] = "application/xml"    
     
-      return response
-    except Exception as e:
-        return(str(e))  
+      # ~ return response
+    # ~ except Exception as e:
+        # ~ return(str(e))  
 @app.route('/sitemap.txt', methods=['GET'])
 def sitemap_txt():
-    try:
-      """Generate sitemap.xml. Makes a list of urls and date modified."""
-      verb_list = ["كتب",
-      "سأل",
-      "استعمل"]
-      pages=[]
-      # static pages
-      for rule in app.url_map.iter_rules():
-          if "GET" in rule.methods and len(rule.arguments)==0:
-              pages.append(HOMEDOMAIN+str(rule.rule))
-      # dynamic pages
-      for verb in verb_list:
-          pages.append(HOMEDOMAIN+"/verb/"+verb)
+      return send_from_directory(app.static_folder, request.path[1:])
 
-      sitemap_text = render_template('sitemap_template.txt', pages=pages)
-      response= make_response(sitemap_text)
-      response.headers["Content-Type"] = "text/text"    
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap_xml():
+      return send_from_directory(app.static_folder, request.path[1:])
+
+# ~ @app.route('/sitemap.txt', methods=['GET'])
+# ~ def sitemap_txt():
+    # ~ try:
+      # ~ """Generate sitemap.xml. Makes a list of urls and date modified."""
+      # ~ verb_list = ["كتب",
+      # ~ "سأل",
+      # ~ "استعمل"]
+      # ~ pages=[]
+      # ~ # static pages
+      # ~ for rule in app.url_map.iter_rules():
+          # ~ if "GET" in rule.methods and len(rule.arguments)==0:
+              # ~ pages.append(HOMEDOMAIN+str(rule.rule))
+      # ~ # dynamic pages
+      # ~ for verb in verb_list:
+          # ~ pages.append(HOMEDOMAIN+"/verb/"+verb)
+
+      # ~ sitemap_text = render_template('sitemap_template.txt', pages=pages)
+      # ~ response= make_response(sitemap_text)
+      # ~ response.headers["Content-Type"] = "text/text"    
     
-      return response
-    except Exception as e:
-        return(str(e))  
+      # ~ return response
+    # ~ except Exception as e:
+        # ~ return(str(e))  
         
 if __name__ == "__main__":
     app.run(debug=True)

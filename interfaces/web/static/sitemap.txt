@@ -1,0 +1,14 @@
+
+http://qutrub.arabeyes.org/sitemap.xml
+http://qutrub.arabeyes.org/sitemap.txt
+http://qutrub.arabeyes.org/download/
+http://qutrub.arabeyes.org/projects/
+http://qutrub.arabeyes.org/contact/
+http://qutrub.arabeyes.org/ajaxGet
+http://qutrub.arabeyes.org/result
+http://qutrub.arabeyes.org/index/
+http://qutrub.arabeyes.org/doc/
+http://qutrub.arabeyes.org/
+http://qutrub.arabeyes.org/verb/كتب
+http://qutrub.arabeyes.org/verb/سأل
+http://qutrub.arabeyes.org/verb/استعمل
