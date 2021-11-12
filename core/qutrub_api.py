@@ -21,13 +21,22 @@
 #  MA 02110-1301, USA.
 #  
 #
+import re
+import sqlite3 as sqlite
+import os
+        
 import pyarabic.araby as araby
+
+VERB_STAMP_PAT = re.compile(u"[%s%s%s%s%s%s]"%(araby.ALEF, araby.YEH, araby.WAW,
+        araby.ALEF_MAKSURA, araby.HAMZA, araby.SHADDA), re.UNICODE)
+
 import libqutrub.conjugator
 import libqutrub.classverb as verbclass
 import libqutrub.verb_db
 import libqutrub.ar_verb as ar_verb
 import libqutrub.verb_const as verb_const
 import libqutrub.mosaref_main as mosaref
+
 from libqutrub.verb_valid import is_valid_infinitive_verb, suggest_verb
 import logging
 class QutrubApi:
@@ -51,6 +60,7 @@ class QutrubApi:
             9: 'فعل تساعي'}
         self.my_verb_class = None
         self.listetenses = verb_const.TABLE_TENSE
+        self.verb_stamp_pat = VERB_STAMP_PAT
     
     def set_db_path(self, db_path):
         """
@@ -70,6 +80,13 @@ class QutrubApi:
         """
         verb_list = libqutrub.verb_db.find_triliteral_verb(self.db_path, 
                 word,    given_future_type)        
+        return verb_list
+        
+    def find_nontri_verb(self, word):
+        """
+        lookup for non tri verb from database
+        """
+        verb_list = self.lookup_nontri_verb(word)
         return verb_list
         
     def is_valid_infinitive(self, verb):
@@ -143,8 +160,11 @@ class QutrubApi:
         * kind of weakness: waw, yeh
         * category of weakness
         """
-
-        future_form = mosaref.get_future_form(word, future_type)
+        try:
+            future_form = mosaref.get_future_form(word, future_type)
+        except:
+            print("qutrub_api: Error on future form ", word)
+            future_form = word
         # strip haraka and keep shadda
         verb_nm = araby.strip_harakat(word)
         features = {"الفعل":word, "مضارعه": future_form}
@@ -169,6 +189,7 @@ class QutrubApi:
             features["سالم"] = "" 
                 
         # معتل
+        features["علة"] = ""
         if vlength == 3:
             if verb_nm[0] == araby.WAW:
                 # ~ if verb_nm[1] == araby.ALEF:
@@ -263,16 +284,16 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         suggestions = []
   
         valid = is_valid_infinitive_verb(word)
-        db_base_path = self.db_path
         if valid:
-
             suggestions = self.find_tri_verb(word, given_future_type)
+            suggestions.extend(self.find_nontri_verb(word))            
         else:
             sug_verb_list  =  list(set(suggest_verb(word)))
             suggestions = []
+            logging.info(repr(sug_verb_list))
             for sug in sug_verb_list:
                 suggestions.extend(self.find_tri_verb(sug, given_future_type))
-            # ~ suggestions = list(set(suggestions)) 
+                suggestions.extend(self.find_nontri_verb(sug))
         # make suggestion unique
         list_of_data_uniq = []
         for data in suggestions:
@@ -286,9 +307,91 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
             print("suggest_verb_list",suggestions)
             return suggestions;
         else:
-            return []        
-def main(args):
-    return 0
+            return []   
+    def verb_stamp(self, word):
+        """
+        generate a stamp for a verb,
+        the verb stamp is different of word stamp, by hamza noralization
+        remove all letters which can change form in the word :
+            - ALEF,
+            - YEH,
+            - WAW,
+            - ALEF_MAKSURA
+            - SHADDA
+        @return: stamped word
+        """
+        word = araby.strip_tashkeel(word)
+        #The vowels are striped in stamp function
+        word = araby.normalize_hamza(word)
+        if word.startswith(araby.HAMZA):
+            #strip The first hamza
+            word = word[1:]
+        # strip the last letter if is doubled
+        if word[-1:] == word[-2:-1]:
+            word = word[:-1]
+        return self.verb_stamp_pat.sub('', word)
+        
+    def lookup_nontri_verb(self, verb):
+        """
+        Find the triliteral verb in the dictionary, 
+        return a list of possible verb forms
+        @param db_base_path: the database path
+        @type db_base_path: path string.
+        @param triliteralverb: given verb.
+        @type triliteralverb: unicode.
+        @param givenharaka: given haraka of tuture type of the verb.
+        @type givenharaka: unicode.
+        @return: list of triliteral verbs.
+        @rtype: list of unicode.
+        """
+        # ~ liste = [{"verb":"استعجل", 
+                    # ~ "haraka":"فتحة", "transitive":True}]
+        # ~ return liste
+        liste = []
+        db_path = os.path.join(self.db_path, "data/verbdict.db")
+        logging.info("QAPI;", db_path)
+        try:
+            logging.debug("verb_db2:"+ db_path)        
+            conn  =  sqlite.connect(db_path)
+            cursor  =  conn.cursor()
+            verb_nm = araby.strip_harakat(verb)
+            verb_stamp = self.verb_stamp(verb)
+            # ~ tup = (verb_nm, )
+            # ~ cursor.execute("""select verb, transitive 
+                        # ~ from verbmore
+                        # ~ where unvocalized = ?""", tup)
+            tup = (verb_stamp, )
+            cursor.execute("""select verb, transitive 
+                        from verbmore
+                        where stamp = ?""", tup)
+            for row in cursor:
+                verb_vocalised = row[0]
+                haraka = "فتحة"
+                transitive = row[1]
+                # Return the transitivity option
+                #MEEM is transitive
+                # KAF is commun ( transitive and intransitive)
+                # LAM is intransitive
+                if transitive in (araby.KAF, araby.MEEM):
+                    transitive = True
+                else:
+                    transitive = False
+    # if the given verb is the list, 
+    #it will be inserted in the top of the list, 
+    #to be treated in prior
+                if verb == verb_vocalised:
+                    liste.insert(0, {"verb":verb_vocalised, 
+                    "haraka":haraka, "transitive":transitive})
+    # else the verb is appended in the liste
+                else:
+                    liste.append({"verb":verb_vocalised, 
+                    "haraka":haraka, "transitive":transitive})
+            cursor.close()
+            return liste
+        except IOError:
+            return None                     
+    def main(args):
+        return 0
 
 if __name__ == '__main__':
     import sys
