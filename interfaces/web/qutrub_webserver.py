@@ -246,7 +246,7 @@ example_json = {
 }
 
 
-from flask import Flask, render_template, make_response, request, jsonify 
+from flask import Flask, render_template, make_response, request, jsonify, redirect
 from flask_sitemap import Sitemap
 from flask_minify import minify
 
@@ -297,14 +297,21 @@ def index():
 
 @app.route("/")
 def home():
-    # DefaultText = "Text"  # core.adaat.random_text(),
-    # ResultText = u"السلام عليكم"
     context = {}
     args = request.args
     if args.get('verb'):
         context['verb']= args.get('verb')
 
     return render_template("main.html",current_page='home',**context)
+
+# ~ @app.route("/verb/<value>", methods=["POST", "GET"])
+
+@app.route("/verb/<verb_value>")
+def verb(verb_value):
+    context = {}
+    context['verb']= verb_value
+    return redirect('/?verb=%s'%verb_value)
+    # ~ return render_template("main.html",current_page='verb',**context)
 
 
 @app.route("/ajaxGet", methods=["POST", "GET"])
@@ -385,7 +392,7 @@ def sitemap():
       # dynamic pages
       for verb in verb_list:
           pages.append(
-                        {"loc":HOMEDOMAIN+"?verb="+verb,
+                        {"loc":HOMEDOMAIN+"/verb/"+verb,
                         "lastmod":ten_days_ago,
                         "prio":0.5,
                         "freq":"daily",
