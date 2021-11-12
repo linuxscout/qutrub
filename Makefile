@@ -50,3 +50,12 @@ eval2:
 scrap_dal:
 	cd tests;python3 scrap_reverso.py -c scrap-dal -f samples/verbsmodels.csv >  output/text.dal.html
 	
+prepare_data:
+	cd tools; python3 prepare_database.py 
+	echo " result saved on tools/temp.csv"
+sitemap:
+	cd tools; python3 prepare_database.py
+	less tools/static_urls.txt > tools/sitemap.txt
+	cut -f12 tools/temp.csv >> tools/sitemap.txt
+	cp tools/sitemap.txt interfaces/web/static/
+

@@ -63,6 +63,7 @@ class converter():
         
         self.df["salim"] = self.df["verb"].apply(lambda x: self.get_info(x).get("سالم"))
         self.df["weak"] = self.df["verb"].apply(lambda x: self.get_info(x).get("علة"))
+        self.df["url"] = self.df["unmarked"].apply(lambda x: "http://qutrub.arabeyes.org/verb/%s"%x)
         
         
     def get_info(self, verb):
