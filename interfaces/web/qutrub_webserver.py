@@ -406,6 +406,29 @@ def sitemap():
       return response
     except Exception as e:
         return(str(e))  
+@app.route('/sitemap.txt', methods=['GET'])
+def sitemap_txt():
+    try:
+      """Generate sitemap.xml. Makes a list of urls and date modified."""
+      verb_list = ["كتب",
+      "سأل",
+      "استعمل"]
+      pages=[]
+      # static pages
+      for rule in app.url_map.iter_rules():
+          if "GET" in rule.methods and len(rule.arguments)==0:
+              pages.append(HOMEDOMAIN+str(rule.rule))
+      # dynamic pages
+      for verb in verb_list:
+          pages.append(HOMEDOMAIN+"/verb/"+verb)
+
+      sitemap_text = render_template('sitemap_template.txt', pages=pages)
+      response= make_response(sitemap_text)
+      response.headers["Content-Type"] = "text/text"    
+    
+      return response
+    except Exception as e:
+        return(str(e))  
         
 if __name__ == "__main__":
     app.run(debug=True)
