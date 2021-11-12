@@ -296,7 +296,12 @@ def index():
 def home():
     # DefaultText = "Text"  # core.adaat.random_text(),
     # ResultText = u"السلام عليكم"
-    return render_template("main.html",current_page='home')
+    context = {}
+    args = request.args
+    if args.get('verb'):
+        context['verb']= args.get('verb')
+
+    return render_template("main.html",current_page='home',**context)
 
 
 @app.route("/ajaxGet", methods=["POST", "GET"])

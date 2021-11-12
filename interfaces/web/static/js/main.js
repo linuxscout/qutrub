@@ -140,6 +140,10 @@ function request_data() {
         return;
     }
 
+    // update url of the page
+    //  https://qutrub.arabeyes.org/?verb=خرج
+    update_url(config_data['text']);
+
     var config = {
         headers: {
             'Content-Type': 'application/json',
@@ -340,13 +344,19 @@ function _build_options() {
 
      
 
-        <button class="btn btn-outline  text-black dropdown " title="نسخ" >
+        <button class="btn btn-outline  text-black dropdown me-2 " title="نسخ" >
         <span  class="dropdown-toggle text-black"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
                           <div class="dropdown-menu dropdown-menu-end" style="">
                             <a class="dropdown-item" onclick="copy_as_html()" >نسخ ك HTML</a>
                             <a class="dropdown-item" onclick="copy_as_csv()" >نسخ ك csv</a>
                           </div>
         </button>
+
+        <button href="#" class="btn btn-outline me-2 " onclick="share_page_link()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="6" cy="12" r="3" /><circle cx="18" cy="6" r="3" /><circle cx="18" cy="18" r="3" /><line x1="8.7" y1="10.7" x2="15.3" y2="7.3" /><line x1="8.7" y1="13.3" x2="15.3" y2="16.7" /></svg>     
+                 <span>مشاركة</span>
+        </button>
+        
 <!--       
 
 <button href="#" class="btn btn-outline me-2  " onclick="copy_as_csv()">
@@ -536,6 +546,13 @@ function copy_as_csv() {
 
 }
 
+function share_page_link(){
+    let link = location.href;
+    navigator.clipboard.writeText(link);
+
+    show_alert("تم نسخ رابط الموقع")
+}
+
 // ALEART area
 
 function show_alert(text) {
@@ -551,36 +568,12 @@ function show_alert(text) {
     }).showToast();
 }
 
-// EventListener
 
-
-
-
-// TODO: add pring version for later
-/*
-function _print_table() {
-    let config_data = load_config_data();
-
-    config_data['response_type'] = 'pdf';
-
-    var config = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        }
+function update_url(verb){
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?verb=${verb}`;
+        window.history.pushState({path:newurl},'',newurl);
     }
+}
 
-    axios.post('/ajaxGet', {
-        data: config_data,
-    })
-        .then(function (response) {
-         //   console.log(response);
-            var a = window.open('', '', '');
-            a.document.write(response.data);
-            a.document.close();
-            a.print();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}*/
+
