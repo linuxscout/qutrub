@@ -15,6 +15,7 @@ sys.path.append(os.path.join(PWD, '../../'))
 
 import PyQt5.QtCore as QtCore
 import PyQt5.QtGui as QtGui
+import PyQt5.QtPrintSupport as QtPrintSupport
 import PyQt5.QtWidgets as  QtWidgets
 from libqutrub.verb_valid import is_valid_infinitive_verb
 from .qutrub_rc import *
@@ -121,7 +122,7 @@ class Ui_MainWindow(object):
         self.Tverb.setEnabled(True)
         self.Tverb.setMaximumSize(QtCore.QSize(200, 40))
         self.Tverb.setFont(self.font_result)
-        print("Font", self.font_result.family())
+
         self.Tverb.setObjectName("Tverb")
         self.gridLayout_5.addWidget(self.Tverb, 0, 0, 1, 1)
         self.gridLayout_5.setColumnStretch(0,3)
@@ -665,9 +666,9 @@ class Ui_MainWindow(object):
     def print_preview(self):
         if "HTML" in self.result:
 
-            printer = QtWidgets.QPrinter()
+            printer = QtPrintSupport.QPrinter()
 
-            self.printpreview = QtWidgets.QPrintPreviewDialog(printer, self.centralwidget)
+            self.printpreview = QtPrintSupport.QPrintPreviewDialog(printer, self.centralwidget)
             # ~ QtCore.QObject.self.printpreview, QtCore.SIGNAL("paintRequested(QPrinter *)"), self.generate_preview)
             self.printpreview.paintRequested.connect(self.generate_preview)
             QtCore.QMetaObject.connectSlotsByName(self.centralwidget)
@@ -682,7 +683,7 @@ class Ui_MainWindow(object):
         #print "working";
 
         asd=u"""<b>عربي</b>((self.ui.\ntextEdit.toPlainText())"""#.split('\n')
-        document = QtWidgets.QTextDocument("")
+        document = QtGui.QTextDocument("")
         document.setHtml(self.result["TEXT"]);
         asd=document.toPlainText().split("\n");
         self.printpreview.autoFillBackground()
@@ -702,10 +703,10 @@ class Ui_MainWindow(object):
         return True;
 
 
-        document = QtWidgets.QTextDocument("")
+        document = QtGui.QTextDocument("")
         self.result["HTML"]="u<html dir=rtl><body>"+self.result["HTML"]+"</body></html>"
         document.setHtml(self.result["HTML"]);
-        printer = QtWidgets.QPrinter()
+        printer = QtPrintSupport.QPrinter()
 
         self.printpreview.autoFillBackground()
         painter = QtWidgets.QPainter()
@@ -726,17 +727,17 @@ class Ui_MainWindow(object):
                 mySTYLE_SHEET=u"""
 body {
     direction: rtl;
-    font-family: Traditional Arabic, "Times New Roman";
+    font-family: Arial, "Times New Roman";
     font-size: 16pt;
 }
 """
-            document = QtWidgets.QTextDocument("")
+            document = QtGui.QTextDocument("")
             document.setDefaultStyleSheet(mySTYLE_SHEET)
             self.result["HTML"]=u"<html dir=rtl><body dir='rtl'>"+self.result["HTML"]+"</body></html>"
             document.setHtml(self.result["HTML"]);
-            printer = QtWidgets.QPrinter()
+            printer = QtPrintSupport.QPrinter()
 
-            dlg = QtWidgets.QPrintDialog(printer, self.centralwidget)
+            dlg = QtPrintSupport.QPrintDialog(printer, self.centralwidget)
             if dlg.exec_() != QtWidgets.QDialog.Accepted:
                 return
 
@@ -894,17 +895,21 @@ body {
 ##          QtWidgets.QMessageBox.about(self.centralwidget,U"عن البرنامج",
 ##                                u"اسم ملف غير مناسب %s"%filename);
     def save_result(self):
-        filename = QtWidgets.QFileDialog.getSaveFileName(self.centralwidget,
+        filename_tuple = QtWidgets.QFileDialog.getSaveFileName(self.centralwidget,
         QtWidgets.QApplication.translate("MainWindow", "حفظ ملف", None, ),"untitled","HTML document (*.html *.htm);;Text file (*.txt);;Text Unicode comma separeted format file (*.csv);;XML file (*.xml);;TeX file (*.tex)");
+        filename = filename_tuple[0]
         if filename:
-            filename=unicode(filename)
-            tuple=filename.split(".");
-            if len(tuple)>=2:
-                extention=tuple.pop();
+            # ~ filename= str(filename)
+
+            fields = filename.split(".");
+
+            if len(fields)>=2:
+                extention = fields.pop();
             else:
                 extention="html";
                 filename+="."+extention
             text=""
+
             if extention.lower() in ('html','tex','txt','xml','csv'):
                 display_format=extention.upper();
             #Add text generation
@@ -915,20 +920,20 @@ body {
                 text+=self.result[extention.upper()];
             else:
                 QtWidgets.QMessageBox.warning(self.centralwidget,QtWidgets.QApplication.translate("MainWindow", "خطأ", None, ),
-                               QtWidgets.QApplication.translate("MainWindow", "اسم ملف غير مناسب %1", None, ).arg(filename))
+                               QtWidgets.QApplication.translate("MainWindow", "اسم ملف غير مناسب %s"%filename, None, ))
             try:
                 file_saved=open(filename,'w+');
                 if file_saved:
-                    file_saved.write(text.encode("utf8"));
+                    file_saved.write(text);
                     file_saved.flush();
                     file_saved.close();
 
                 else:
                     QtWidgets.QMessageBox.warning(self.centralwidget,QtWidgets.QApplication.translate("MainWindow", "خطأ", None, ),
-                                QtWidgets.QApplication.translate("MainWindow", "لا يمكن فتح الملف %1", None, ).arg(filename))
+                                QtWidgets.QApplication.translate("MainWindow", "لا يمكن فتح الملف %s"%filename, None, ))
             except:
                 QtWidgets.QMessageBox.warning(self.centralwidget,QtWidgets.QApplication.translate("MainWindow", "خطأ", None, ),
-                                QtWidgets.QApplication.translate("MainWindow", "لا يمكن حفظ الملف %1", None, ).arg(filename))
+                                QtWidgets.QApplication.translate("MainWindow", "لا يمكن فتح الملف %s"%filename, None, ))
     def getLanguageCode(self,):
         languages={ 0:  "ar",  
  1:  "en",  
@@ -981,7 +986,6 @@ body {
     def display_result(self):
 
         word = self.Tverb.text();
-        print("display_result", word)
         if word:
 
             # ~ word=unicode(word);
@@ -995,7 +999,7 @@ body {
 
             else:
                 #=u"فتحة"
-                print("CBHARAKA", self.CBHaraka.currentIndex());
+                
                 haraka= self.CBHaraka.currentText();
                 display_format =  'CSV';
                 all = (self.BAll.checkState()!=0)
@@ -1067,7 +1071,6 @@ body {
 
 
     def display_result_in_grid(self):
-        print("display_result_in_grid")
         rslt_tab = self.result["TABLE"];
         # display in grid
         self.TabActiveResult.clear();

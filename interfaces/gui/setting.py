@@ -182,7 +182,7 @@ class Ui_Dialog(object):
  5:  "fa",  
  6:  "jp", 
  7:  "ms",}
-        if languages.has_key(index):
+        if index in languages:
             CurrentLanguage=languages[index];
             print(CurrentLanguage);
 
