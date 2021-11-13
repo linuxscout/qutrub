@@ -246,6 +246,162 @@ example_json = {
 }
 
 
+libraries = [
+        {
+        'lang':'py',
+        'title':'مشكال',
+        'description':'  لتشكيل النصوص العربية',
+        'link':'https://pypi.org/project/mishkal/',
+        'website':'http://www.tahadz.com/mishkal/'
+    },
+    {
+        'lang':'py',
+        'title':'قطرب',
+        'description':'تصريف الأفعال العربية',
+        'link':'https://pypi.org/project/libqutrub/',
+        'website':'https://qutrub.arabeyes.org/'
+    },
+    {
+        'lang':'py',
+        'title':'PyArabic',
+        'description':'مكتبة برمجية للغة العربية بلغة بيثون، توفر دوالا للتحكم في الحروف والنصوص',
+        'link':'https://pypi.org/project/PyArabic/'
+    },
+    {
+        'lang':'py',
+        'title':'غلطاوي',
+        'description':'التصحيح التلقائي العربي',
+        'link':'https://pypi.org/project/ghalatawi/',
+        'website':'http://ghalatawi.sourceforge.net/'
+    },
+         {
+        'lang':'py',
+        'title':'مسكوك',
+        'description':'مكتبة وبيانات المتلازمات العربية',
+        'link':'https://pypi.org/project/maskouk-pysqlite/',
+        'website':"http://maskouk.sourceforge.net/"
+    },
+
+       {
+        'lang':'py',
+        'title':'الراموز',
+        'description':'القاموس العربي للتحليل الصرفي',
+        'link':'https://pypi.org/project/arramooz-pysqlite/',
+        'website':'http://arramooz.sourceforge.net/'
+    },
+       {
+        'lang':'py',
+        'title':'نفطويه',
+        'description':'مكتبة لتصنيف الكلمات إلى أنواعها (اسم، فعل، حرف)',
+        'link':'https://pypi.org/project/Naftawayh/',
+        'website':'http://naftawayh.sourceforge.net/'
+    },
+      {
+        'lang':'py',
+        'title':'الكلمات المستبعدة',
+        'description':'مكتبة للكلمات المستبعدة',
+        'link':'https://pypi.org/project/arabic-stopwords/',
+        'website':'http://arabicstopwords.sourceforge.net/'
+    },
+     {
+        'lang':'py',
+        'title':'أدوات',
+        'description':'مجموعة أدوات اللغة العربية',
+        'link':'https://pypi.org/project/adawat/'
+    },
+    {
+        'lang':'py',
+        'title':'قلصادي',
+        'description':' محلل الصرفي العربي لبايثون',
+        'link':'https://pypi.org/project/qalsadi/'
+    },
+   
+     {
+        'lang':'py',
+        'title':'ميسم',
+        'description':'إدارة الوسوم العربية',
+        'link':'https://pypi.org/project/mysam-tagmanager/'
+    },
+    {
+        'lang':'py',
+        'title':'اليحمور',
+        'description':'مولد التشكل العربي الانثناء',
+        'link':'https://pypi.org/project/alyahmor/'
+    },
+       {
+        'lang':'py',
+        'title':'سيلجون',
+        'description':'مكتبة سيلجون للتحليل النحوي',
+        'link':'https://pypi.org/project/sylajone/'
+    },
+       {
+        'lang':'py',
+        'title':'مشطار',
+        'description':' استخلاص المسميات والعبارات الزمنية',
+        'link':'https://pypi.org/project/mishtar/'
+    },
+      {
+        'lang':'py',
+        'title':'Arrand',
+        'description':' مكتبة توليد النص العربي عشوائيا',
+        'link':'https://pypi.org/project/arrand/'
+    },
+   
+     {
+        'lang':'py',
+        'title':'الأصمعي',
+        'description':'مكتبة التحليل الدلالي العربية لبايثون',
+        'link':'https://pypi.org/project/asmai/'
+    },
+ 
+      {
+        'lang':'py',
+        'title':'تاشفين',
+        'description':' التجذيع الخفيف للنصوص العربية',
+        'link':'https://pypi.org/project/Tashaphyne/'
+    },
+  
+ 
+]
+
+websites = [
+    {
+        'title':'دليل المصطلحات للسنة الأولى في المدرسة الوطنية العليا للحاسوب بالجزائر',
+        'link':'http://esidzstudentdic.sourceforge.net'
+    },
+    {
+        'title':'مدونة النصوص العربية المشكولة',
+        'link':'http://tashkeela.sf.net/'
+    },
+    {
+        'title':'لعبة الكلمات المنزلقة',
+        'link':'http://arabicwordslide.sf.net/'
+    },
+    {
+        'title':"دليل المدونات اللغوية العربية (مكانز) المتاحة",
+        'link':'http://aracorpus.e3rab.com/'
+    },
+    {
+        'title':'مدونة "مبادرة اللغات البرمجية العربية',
+        'link':'http://arabproglang.wordpress.com/'
+    },
+    {
+        'title':'الرديف معجم المترادفات والأضداد، والقوافي وجموع التكسير',
+        'link':'http://radif.sf.net/',
+    },
+    {
+        'title':'معجم المترادفات على sinonimi',
+        'link':'http://ayaspell.sf.net/syno'
+    },
+    {
+        'title':'المحلل الصرفي العربي',
+        'link':'http://arabicmorphoanalayzer.appspot.com/'
+    },
+    
+]
+
+
+
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify, redirect
 # ~ from flask_sitemap import Sitemap
 from flask_minify import minify
@@ -287,7 +443,11 @@ def download():
 
 @app.route("/projects/")
 def projects():
-    return render_template("projects.html",current_page='projects')
+    context = {
+        'libraries':libraries,
+        'websites':websites
+    }
+    return render_template("projects.html",current_page='projects',**context)
 
 
 @app.route("/index/")

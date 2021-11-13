@@ -1,86 +1,200 @@
 {% extends 'base.html' %}
 
+{% block extra_css %}
+<style>
+  .hide-extra-card .extra-card {
+    display: none;
+  }
+
+  .link {
+    color: rgb(61, 61, 61) !important;
+  }
+
+  .link:hover {
+    color: #408eee !important;
+  }
+</style>
+
+{% endblock %}
+
 {% block content %}
 <div class="page-wrapper">
-    <div class="container-xl mt-2 " style="min-height: 90vh;">
-        <div class="card p-4">
-            <h2 class="text-primary">مشاريع</h2>
-            <ul>
-              <li>
-                <a href="http://tashkeela.sf.net/">مدونة النصوص العربية المشكولة</a>
-              </li>
-          
-              <li>
-                <a href="http://maskouk.sf.net/">المتلازمات اللفظية العربية</a>
-              </li>
-          
-              <li>
-                <a href="http://naftawayh.sf.net/">مكتبة نفطويه لتصنيف الكلمات العربية</a>
-              </li>
-          
-              <li>
-                <a href="http://arramooz.sf.net/">الراموز الوسيط: المعجم العربي الحر للتحليل الصرفي</a>
-              </li>
-          
-              <li>
-                <a href="http://arabicwordslide.sf.net/">لعبة الكلمات المنزلقة</a>
-              </li>
-          
-              <li>
-                <a href="http://ghalatawi.sf.net/">غلطاوي: التصحيح التلقائي العربي</a>
-              </li>
-          
-              <li>
-                <a href="http://aracorpus.e3rab.com/">دليل المدونات اللغوية العربية (مكانز) المتاحة</a>
-              </li>
-          
-              <li>
-                <a href="http://arabproglang.wordpress.com">مدونة "مبادرة اللغات البرمجية العربية"</a>
-              </li>
-          
-              <li>
-                <a href="http://radif.sf.net/">الرديف معجم المترادفات والأضداد، والقوافي وجموع التكسير</a>
-              </li>
-          
-              <li>
-                <a href="http://ayaspell.sf.net/syno">معجم المترادفات على sinonimi</a>
-              </li>
-          
-              <li>
-                <a href="http://qutrub.arabeyes.org">قطرب لتصريف الأفعال</a>
-              </li>
-          
-              <li>
-                <a href="http://adawaty.appspot.com">أدوات معالجة النص العربي</a>
-              </li>
-          
-              <li>
-                <a href="http://arabicmorphoanalayzer.appspot.com">المحلل الصرفي العربي</a>
-              </li>
-          
-              <li>
-                <a href="http://ayaspell.sf.net">المدقق الإملائي العربي الحر</a>
-              </li>
-          
-              <li>
-                <a href="http://arabicstopwords.sf.net">الكلمات المستبعدة arabic stop words</a>
-              </li>
-          
-              <li>
-                <a href="http://esidzstudentdic.sourceforge.net">دليل المصطلحات للسنة الأولى في المدرسة
-                الوطنية العليا للحاسوب بالجزائر</a>
-              </li>
-          
-              <li>
-                <a href="http://pypi.python.org/pypi/PyArabic/">مكتبة بايثون للعربية Python and Arabic</a>
-              </li>
-          
-              <li>
-                <a href="http://pypi.python.org/pypi/Tashaphyne/">مكتبة تاشفين للتحليل</a>
-              </li>
-            </ul>
+  <div class="container-xl mt-2 " style="min-height: 90vh;">
+    <!-- <div class="card p-4">
+      <h2 class="text-primary">مشاريع</h2>
+      <ul>
+        <li>
+          <a href="http://tashkeela.sf.net/">مدونة النصوص العربية المشكولة</a>
+        </li>
+
+        <li>
+          <a href="http://maskouk.sf.net/">المتلازمات اللفظية العربية</a>
+        </li>
+
+        <li>
+          <a href="http://naftawayh.sf.net/">مكتبة نفطويه لتصنيف الكلمات العربية</a>
+        </li>
+
+        <li>
+          <a href="http://arramooz.sf.net/">الراموز الوسيط: المعجم العربي الحر للتحليل الصرفي</a>
+        </li>
+
+        <li>
+          <a href="http://arabicwordslide.sf.net/">لعبة الكلمات المنزلقة</a>
+        </li>
+
+        <li>
+          <a href="http://ghalatawi.sf.net/">غلطاوي: التصحيح التلقائي العربي</a>
+        </li>
+
+        <li>
+          <a href="http://aracorpus.e3rab.com/">دليل المدونات اللغوية العربية (مكانز) المتاحة</a>
+        </li>
+
+        <li>
+          <a href="http://arabproglang.wordpress.com">مدونة "مبادرة اللغات البرمجية العربية"</a>
+        </li>
+
+        <li>
+          <a href="http://radif.sf.net/">الرديف معجم المترادفات والأضداد، والقوافي وجموع التكسير</a>
+        </li>
+
+        <li>
+          <a href="http://ayaspell.sf.net/syno">معجم المترادفات على sinonimi</a>
+        </li>
+
+        <li>
+          <a href="http://qutrub.arabeyes.org">قطرب لتصريف الأفعال</a>
+        </li>
+
+        <li>
+          <a href="http://adawaty.appspot.com">أدوات معالجة النص العربي</a>
+        </li>
+
+        <li>
+          <a href="http://arabicmorphoanalayzer.appspot.com">المحلل الصرفي العربي</a>
+        </li>
+
+        <li>
+          <a href="http://ayaspell.sf.net">المدقق الإملائي العربي الحر</a>
+        </li>
+
+        <li>
+          <a href="http://arabicstopwords.sf.net">الكلمات المستبعدة arabic stop words</a>
+        </li>
+
+        <li>
+          <a href="http://esidzstudentdic.sourceforge.net">دليل المصطلحات للسنة الأولى في المدرسة
+            الوطنية العليا للحاسوب بالجزائر</a>
+        </li>
+
+        <li>
+          <a href="http://pypi.python.org/pypi/PyArabic/">مكتبة بايثون للعربية Python and Arabic</a>
+        </li>
+
+        <li>
+          <a href="http://pypi.python.org/pypi/Tashaphyne/">مكتبة تاشفين للتحليل</a>
+        </li>
+      </ul>
+    </div> -->
+  
+    <div class="cntainer-libraries py-2 hide-extra-card" id="libraries-project-area">
+      <h2 class="text-primary">المكتبات البرمجية</h2>
+      <div class="row">
+        {% for library in libraries %}
+        <div class="col-lg-3 col-md-4 col-sm-6 my-2 {% if loop.index>8 %}extra-card {% endif %} m-auto">
+          <div class="card ">
+            <div class="card-body text-center">
+
+              <div class="text-area" style="height: 90px;">
+                <a href="{{library.link}}" class="link" target="blank" style="text-decoration: none;">
+                  <h2>{{library.title}}</h2>
+                </a>
+                {{library.description}}
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <div class="link-area">
+                <a href="{{library.link}}" class="mx-1" title="github" target="blank">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-python -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 9h-7a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h3" />
+                    <path d="M12 15h7a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-3" />
+                    <path
+                      d="M8 9v-4a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v5a2 2 0 0 1 -2 2h-4a2 2 0 0 0 -2 2v5a2 2 0 0 0 2 2h4a2 2 0 0 0 2 -2v-4" />
+                    <line x1="11" y1="6" x2="11" y2="6.01" />
+                    <line x1="13" y1="18" x2="13" y2="18.01" />
+                  </svg>
+                </a>
+                {% if library.website %}
+                <a href="{{library.website}}" class="mx-1" title="موقع" target="blank">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/view-360 -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="12" r="9" />
+                    <ellipse cx="12" cy="12" rx="4" ry="9" />
+                    <ellipse cx="12" cy="12" rx="4" ry="9" transform="rotate(90 12 12)" />
+                  </svg>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
         </div>
+        {% endfor %}
+      </div>
+      <div class="container text-center">
+        {% if libraries|length > 8 %}
+        <a class="text-primary curson-pointer " style="text-decoration: none;"
+          onclick="show_more('libraries-project-area',this)">
+          <h3>إظهار المزيد</h3>
+        </a>
+        {% endif %}
+      </div>
     </div>
+    <div class="cntainer-libraries py-2 hide-extra-card" id="websites-project-area">
+      <h2 class="text-primary">مشاريع أخرى </h2>
+      <div class="row">
+        {% for website in websites %}
+        <div class="col-lg-3 col-md-4 col-sm-6 my-2 {% if loop.index>8 %}extra-card {% endif %} m-auto">
+          <div class="card ">
+            <div class="card-body text-center">
+              <div class="text-area d-flex justify-content-center align-items-center" style="height: 60px;">
+                <a href="{{website.link}}" class="link" target="blank" style="text-decoration: none;">
+                  <h4 class="mb-0 ">{{website.title}}</h4>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="container text-center">
+        {% if websites|length > 8 %}
+        <a class="text-primary curson-pointer " style="text-decoration: none;"
+          onclick="show_more('websites-project-area',this)">
+          <h3>إظهار المزيد</h3>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+  function show_more(container_id, link_element) {
+    let project_container = document.getElementById(container_id);
+    project_container.classList.remove('hide-extra-card')
+    link_element.remove();
+  }
+</script>
 
 {% endblock %}
