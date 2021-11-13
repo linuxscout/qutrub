@@ -6,7 +6,7 @@ Qutrub
 [![downloads]( https://img.shields.io/sourceforge/dt/qutrub.svg)](http://sourceforge.org/projects/qutrub)
 [![downloads]( https://img.shields.io/sourceforge/dm/qutrub.svg)](http://sourceforge.org/projects/qutrub)
 
-  Developpers: 	Taha Zerrouki: http://tahadz.com
+  Developers: 	Taha Zerrouki: http://tahadz.com
 	taha dot zerrouki at gmail dot com
 
 
@@ -35,7 +35,7 @@ pyarabic>=0.6.2
 
 enable mod_python in Apache
 extract the qutrub package and run it from the web.
-The program don't need a database.
+The program doesn't need a database.
 
 ### Installation as library 
 
@@ -44,7 +44,7 @@ pip install libqutrub
 ```
 ### Installation as an application
 
-check that python 2.5, it support python3 or higher is installed
+check that python is of version 2.5, it support python3 or higher is installed
 extract the package
 run the conjugate.py script 
 
