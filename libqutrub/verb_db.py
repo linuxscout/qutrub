@@ -78,7 +78,7 @@ vocalised_entree = False):
         verb_nm = triverb
 
     normalized = araby.normalize_hamza(verb_nm)
-    if TRIVERBTABLE_INDEX.has_key(normalized):
+    if normalized in TRIVERBTABLE_INDEX:
         for verb_voc_id in TRIVERBTABLE_INDEX[normalized]:
             if triverb == triverbtable.TriVerbTable[verb_voc_id]['verb'] and \
              givenharaka == triverbtable.TriVerbTable[verb_voc_id]['haraka']:

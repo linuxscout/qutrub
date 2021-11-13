@@ -7,7 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 
 qt_resource_data = "\
 \x00\x00\x0c\x06\
@@ -8347,6 +8347,9 @@ qt_resource_struct = "\
 \x00\x00\x00\x52\x00\x00\x00\xba\x00\x08\x00\x00\x0c\x0a\
 \x00\x00\x00\x72\x00\x00\x00\xba\x00\x08\x00\x00\x15\x64\
 "
+qt_resource_struct = bytes(qt_resource_struct , "utf8")
+qt_resource_name = bytes(qt_resource_name , "utf8")
+qt_resource_data = bytes(qt_resource_data , "utf8")
 
 def qInitResources():
     QtCore.qRegisterResourceData(0x01, qt_resource_struct, qt_resource_name, qt_resource_data)

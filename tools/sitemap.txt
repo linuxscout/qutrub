@@ -4,7 +4,6 @@ http://qutrub.arabeyes.org/projects/
 http://qutrub.arabeyes.org/contact/
 http://qutrub.arabeyes.org/index/
 http://qutrub.arabeyes.org/doc/
-url
 http://qutrub.arabeyes.org/verb/أبأ
 http://qutrub.arabeyes.org/verb/أبّ
 http://qutrub.arabeyes.org/verb/تأبّب

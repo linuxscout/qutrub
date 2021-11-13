@@ -32,6 +32,8 @@ upload:
 	echo "use twine upload dist/libqutrub-0.1.tar.gz"
 web:
 	python3 interfaces/web/qutrub_webserver.py
+gui:
+	python3 interfaces/gui/appgui.py
 test:
 	python -m unittest discover tests
 test3:
@@ -56,6 +58,6 @@ prepare_data:
 sitemap:
 	cd tools; python3 prepare_database.py
 	less tools/static_urls.txt > tools/sitemap.txt
-	cut -f12 tools/temp.csv >> tools/sitemap.txt
+	tail -n +2 tools/temp.csv | cut -f12  >> tools/sitemap.txt
 	cp tools/sitemap.txt interfaces/web/static/
 
