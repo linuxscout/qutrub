@@ -325,7 +325,7 @@ libraries = [
     {
         'lang':'py',
         'title':'اليحمور',
-        'description':'مولد التشكل العربي الانثناء',
+        'description':'مولد صرفي للغلة العربية',
         'link':'https://pypi.org/project/alyahmor/'
     },
        {
