@@ -509,13 +509,80 @@ def ajax():
     options["display_format"] = args.get("display_format", "HTML")
 
     resulttext = core.adaat.DoAction(text, action, options)
-        
-    suggestions = resulttext.get("suggest","")
+    
+    
+    if type(resulttext) == dict:
+        suggestions = resulttext.get("suggest",[])
+        results = {"result": resulttext.get("table",{}),
+                "verb_info":resulttext.get("verb_info",""),
+                 "suggest":suggestions}        
+    else:
+        app.logger.info('No suggestion ', resulttext)
+        suggestions = []
+        results = {"result": {},
+                "verb_info":"",
+                 "suggest": []}  
     # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
     app.logger.info('%s:%s'%(action, text))
     app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
-    return jsonify({"result": resulttext.get("table",{}),"verb_info":resulttext.get("verb_info",""), "suggest":suggestions})
-    # ~ return jsonify({"result": resulttext.get("table",{}),"verb_info":resulttext.get("verb_info",""), "suggest":resulttext.get("suggest","")})
+    return jsonify(results)
+    
+    
+@app.route("/api/<verb>/<haraka>", methods=["GET"])
+@app.route("/api/<verb>", methods=["GET"])
+@app.route("/api", methods=["GET"])
+def api(text="", haraka=""):
+    default = "ضرب"
+    # ~ text = verb
+    action = "Conjugate"
+    options = {}
+    if request.method == "GET":
+        args = request.args
+    else:
+        return jsonify({"text": default})
+    # Request a random text
+    if args.get("response_type", "") == "get_random_text":
+        return jsonify({"text": default})
+
+    if not text : 
+        text = args.get("verb", "")
+        if not text:
+            text = default
+    if not haraka:
+        haraka = args.get("haraka", u"فتحة")
+        if haraka.lower() == "a":
+            haraka = "فتحة"
+        elif haraka.lower() == "u":
+            haraka = "ضمة"
+        elif haraka.lower() == "i":
+            haraka = "كسرة"
+        options["future_type"] = haraka
+    
+    trans = args.get("trans", True)
+    if trans == "0":
+        options["transitive"] = False
+    else:
+        options["transitive"] = True
+    options["all"] = True    
+
+    resulttext = core.adaat.DoAction(text, action, options)
+
+    if type(resulttext) == dict:
+        suggestions = resulttext.get("suggest",[])
+        results = {"result": resulttext.get("table",{}),
+                "verb_info":resulttext.get("verb_info",""),
+                 "suggest":suggestions}        
+    else:
+        app.logger.info('No suggestion ', resulttext)
+        suggestions = []
+        results = {"result": {},
+                "verb_info":"",
+                 "suggest": []}  
+    # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
+    app.logger.info('%s:%s'%(action, text))
+    app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
+    return jsonify(results)
+    
 
 
 @app.route("/result", methods=["POST", "GET"])
