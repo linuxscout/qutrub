@@ -74,6 +74,19 @@ class QutrubApi:
         self.display_format = display_format
 
 
+    def find_verb(self, word, given_future_type):
+        """
+        lookup for tri verb from database
+        """
+        # remove harakat keep shadda
+        verb_nm = araby.strip_harakat(word)
+        if len(verb_nm) == 3:
+            verb_list = self.find_tri_verb(word,  given_future_type)
+        else:
+            verb_list = self.find_nontri_verb(word)            
+            
+        return verb_list
+        
     def find_tri_verb(self, word, given_future_type):
         """
         lookup for tri verb from database

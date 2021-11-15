@@ -62,15 +62,18 @@ def conjugate(text, options):
             
         
         given_future_type = options.get("future_type",u"فتحة") 
+        given_transitive = options.get("transitive", False)
         # find future haraka for a given verb
-        verb_list = myconjugator.find_tri_verb(word, given_future_type)
+        verb_list = myconjugator.find_verb(word, given_future_type)
         # get vocalized form of the verb
         if(verb_list):
             word = verb_list[0].get("verb",word)
             future_type = verb_list[0].get("haraka",word)
+            transitive = verb_list[0].get("transitive",word)
             # ~ logging.debug("adaat.py:", future_type, verb_list[0].get("haraka",word))
         else:
             future_type = given_future_type
+            transitive = given_transitive
         
         conjugate_result =  do_sarf(myconjugator, word, 
             future_type = future_type,
@@ -81,7 +84,7 @@ def conjugate(text, options):
             imperative  = options.get("imperative", False),
             future_moode= options.get("future_moode", False),
             confirmed   = options.get("confirmed", False),
-            transitive  = options.get("transitive", False),
+            transitive  = transitive,
             );
             
         conjugate_result_table = conjugate_result.get("table",{})

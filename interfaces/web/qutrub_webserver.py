@@ -459,18 +459,23 @@ def index():
 def home():
     context = {}
     args = request.args
-    if args.get('verb'):
-        context['verb']= args.get('verb')
+    context['verb']= args.get('verb', "")
+    context['future_type']= args.get('haraka', "فتحة")
+    context['transitive']= args.get('trans', False)
 
     return render_template("main.html",current_page='home',**context)
 
 # ~ @app.route("/verb/<value>", methods=["POST", "GET"])
 
+@app.route("/verb/<verb_value>/<haraka>/<trans>")
+@app.route("/verb/<verb_value>/<haraka>")
 @app.route("/verb/<verb_value>")
-def verb(verb_value):
+def verb(verb_value, haraka="فتحة", trans=False):
     context = {}
     context['verb']= verb_value
-    return redirect('/?verb=%s'%verb_value)
+    context['future_type']= haraka
+    context['transitive']= trans
+    return redirect('/?verb=%s&haraka=%s&trans=%s'%(verb_value, haraka, trans))
     # ~ return render_template("main.html",current_page='verb',**context)
 
 
