@@ -203,7 +203,9 @@ def api(text="", haraka=""):
     # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
     app.logger.info('%s:%s'%(action, text))
     app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
-    return jsonify(results)
+    response = jsonify(results)
+    response.headers["Content-Type"] = "application/json; charset=utf-8"
+    return response
     
 
 
