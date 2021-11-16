@@ -7,6 +7,8 @@ import re
 from glob import glob
 import logging.config
 from datetime import datetime, timedelta
+
+from werkzeug.utils import import_string
 sys.path.append(os.path.join(os.path.dirname(__file__), "./lib"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
 
@@ -20,9 +22,9 @@ import qws_const
 
 
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify, redirect
+from flask_cors import cross_origin
 # ~ from flask_sitemap import Sitemap
 from flask_minify import minify
-
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -153,6 +155,7 @@ def ajax():
 @app.route("/api/<verb>/<haraka>", methods=["GET"])
 @app.route("/api/<verb>", methods=["GET"])
 @app.route("/api", methods=["GET"])
+@cross_origin()
 def api(text="", haraka=""):
     default = "ضرب"
     # ~ text = verb
