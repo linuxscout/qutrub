@@ -5,33 +5,39 @@ import sys
 import os.path
 import re
 from glob import glob
+import logging
 import logging.config
 from datetime import datetime, timedelta
-sys.path.append(os.path.join(os.path.dirname(__file__), "./lib"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-
-import core.adaat
-from config.qutrub_config import LOGGING_CFG_FILE
-from config.qutrub_config import LOGGING_FILE
-# ~ HOMEDOMAIN = "http://qutrub.arabeyes.org"
-import qws_const
-
-
-
-
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify, redirect
 # ~ from flask_sitemap import Sitemap
 from flask_minify import minify
 
+# local libraries
+sys.path.append(os.path.join(os.path.dirname(__file__), "./lib"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
+from config.qutrub_config import LOGGING_CFG_FILE
+from config.qutrub_config import LOGGING_FILE
+from config.qutrub_config import MODE_DEBUG
+# ~ HOMEDOMAIN = "http://qutrub.arabeyes.org"
+import qws_const
+import core.adaat
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+# set output logging in utf
+import locale; 
+if locale.getpreferredencoding().upper() != 'UTF-8': 
+    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8') 
 
 # ~ logging.config.fileConfig(LOGGING_CFG_FILE,  disable_existing_loggers = False)
-logging.basicConfig(filename=LOGGING_FILE, level=logging.DEBUG)
+if MODE_DEBUG:
+    logging.basicConfig(filename=LOGGING_FILE, level=logging.DEBUG)
+else:
+    logging.basicConfig(filename=LOGGING_FILE, level=logging.INFO) 
 
 minify(app=app, html=True, js=True, cssless=True)
+
 
 
 def str2bool(strg):
@@ -41,8 +47,32 @@ def str2bool(strg):
         return True
     else:
         return strg
-
-
+def prepare_result(resulttext, text, action, options, url="ajax"):
+    """
+    extract results from conjugator
+    """
+    
+    if type(resulttext) == dict:
+        suggestions = resulttext.get("suggest",[])
+        results = {"result": resulttext.get("table",{}),
+                "verb_info":resulttext.get("verb_info",""),
+                 "suggest":suggestions}        
+    else:
+        app.logger.debug('No suggestion ', resulttext)
+        suggestions = []
+        results = {"result": {},
+                "verb_info":"",
+                 "suggest": []}  
+    if not results.get("result",[]):
+        invalid_verb = "invalid"
+    else:
+        invalid_verb = ""        
+    # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
+    app.logger.info('%s:%s:%s:%s', url, action, text, invalid_verb)
+    logging.info('%s:%s:%s:%s',url, action, text, invalid_verb)
+                     
+    app.logger.debug('%s:%s'%("Suggest", repr(suggestions)))
+    return results
 @app.route("/doc/")
 def doc():
     return render_template("doc.html",current_page='doc')
@@ -131,22 +161,26 @@ def ajax():
     options["display_format"] = args.get("display_format", "HTML")
 
     resulttext = core.adaat.DoAction(text, action, options)
+    results = prepare_result(resulttext, text, action, options,"ajax")
     
-    
-    if type(resulttext) == dict:
-        suggestions = resulttext.get("suggest",[])
-        results = {"result": resulttext.get("table",{}),
-                "verb_info":resulttext.get("verb_info",""),
-                 "suggest":suggestions}        
-    else:
-        app.logger.info('No suggestion ', resulttext)
-        suggestions = []
-        results = {"result": {},
-                "verb_info":"",
-                 "suggest": []}  
-    # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
-    app.logger.info('%s:%s'%(action, text))
-    app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
+    # ~ invalid_verb = ""
+    # ~ if type(resulttext) == dict:
+        # ~ suggestions = resulttext.get("suggest",[])
+        # ~ results = {"result": resulttext.get("table",{}),
+                # ~ "verb_info":resulttext.get("verb_info",""),
+                 # ~ "suggest":suggestions}        
+    # ~ else:
+        # ~ app.logger.debug('No suggestion ', resulttext)
+        # ~ suggestions = []
+        # ~ results = {"result": {},
+                # ~ "verb_info":"",
+                 # ~ "suggest": []}  
+    # ~ if not results.get("result",[]):
+        # ~ invalid_verb = "invalid"
+    #suggestions = core.adaat.DoAction(text, "Suggest", options)
+    # ~ app.logger.info('%s:%s:%s', action, text, invalid_verb)
+    # ~ logging.info('%s:%s:%s', action, text, invalid_verb)
+    # ~ app.logger.debug('%s:%s',"Suggest", repr(suggestions))
     return jsonify(results)
     
     
@@ -188,23 +222,30 @@ def api(text="", haraka=""):
     options["all"] = True    
 
     resulttext = core.adaat.DoAction(text, action, options)
-
-    if type(resulttext) == dict:
-        suggestions = resulttext.get("suggest",[])
-        results = {"result": resulttext.get("table",{}),
-                "verb_info":resulttext.get("verb_info",""),
-                 "suggest":suggestions}        
-    else:
-        app.logger.info('No suggestion ', resulttext)
-        suggestions = []
-        results = {"result": {},
-                "verb_info":"",
-                 "suggest": []}  
-    # ~ suggestions = core.adaat.DoAction(text, "Suggest", options)
-    app.logger.info('%s:%s'%(action, text))
-    app.logger.info('%s:%s'%("Suggest", repr(suggestions)))
+    results = prepare_result(resulttext, text, action, options, url="api")
+    # ~ if type(resulttext) == dict:
+        # ~ suggestions = resulttext.get("suggest",[])
+        # ~ results = {"result": resulttext.get("table",{}),
+                # ~ "verb_info":resulttext.get("verb_info",""),
+                 # ~ "suggest":suggestions}        
+    # ~ else:
+        # ~ app.logger.debug('No suggestion ', resulttext)
+        # ~ suggestions = []
+        # ~ results = {"result": {},
+                # ~ "verb_info":"",
+                 # ~ "suggest": []}  
+    # ~ if not results.get("result",[]):
+        # ~ invalid_verb = "invalid"
+    # ~ else:
+        # ~ invalid_verb = ""        
+    ##suggestions = core.adaat.DoAction(text, "Suggest", options)
+    # ~ app.logger.info('%s:%s:%s', action, text, invalid_verb)
+    # ~ logging.info('%s:%s:%s', action, text, invalid_verb)
+                     
+    # ~ app.logger.debug('%s:%s'%("Suggest", repr(suggestions)))
     response = jsonify(results)
     response.headers["Content-Type"] = "application/json; charset=utf-8"
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
     
 

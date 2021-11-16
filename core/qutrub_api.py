@@ -67,6 +67,8 @@ class QutrubApi:
         set the db path
         """
         self.db_path = db_path
+        
+
     def set_display_format(self, display_format):
         """
         set the display_format
@@ -303,7 +305,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         else:
             sug_verb_list  =  list(set(suggest_verb(word)))
             suggestions = []
-            logging.info(repr(sug_verb_list))
+            logging.debug(repr(sug_verb_list))
             for sug in sug_verb_list:
                 suggestions.extend(self.find_tri_verb(sug, given_future_type))
                 suggestions.extend(self.find_nontri_verb(sug))
@@ -317,7 +319,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         for sug in suggestions:
             sug["future"] = mosaref.get_future_form(sug.get("verb", ""), sug.get("haraka", ""))
         if suggestions:
-            print("suggest_verb_list",suggestions)
+            # ~ print("suggest_verb_list",suggestions)
             return suggestions;
         else:
             return []   
@@ -362,7 +364,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         # ~ return liste
         liste = []
         db_path = os.path.join(self.db_path, "data/verbdict.db")
-        logging.info("QAPI;", db_path)
+        logging.debug("QAPI;%s", db_path)
         try:
             logging.debug("verb_db2:"+ db_path)        
             conn  =  sqlite.connect(db_path)

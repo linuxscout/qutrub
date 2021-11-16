@@ -18,12 +18,15 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../support/'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../config/'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import random
-import pyarabic.araby  as araby # arabic words general functions
+import logging
 import re
 
+import pyarabic.araby  as araby # arabic words general functions
+
+
 import config.qutrub_config
-import logging
-#~import pyarabic.number
+from . import qutrub_api
+
 def DoAction(text, action, options = {}):
     """
     do action by name
@@ -32,8 +35,6 @@ def DoAction(text, action, options = {}):
         return text
     elif action == "Conjugate":
         return conjugate(text, options)        
-    elif action == "Suggest":
-        return suggest_verb_list(text, options)        
     if action == "Contibute":
         return text
     else:
@@ -45,9 +46,10 @@ def conjugate(text, options):
     Conjugate verb using qutrub
     
     """
-    from . import qutrub_api
-    
+   
     myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
+    
+   
     #extract first word if many words are given
     word = text.split(" ")[0]
     # if the verb is not valid:
