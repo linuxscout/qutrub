@@ -23,17 +23,27 @@ import qws_const
 
 from flask import Flask, render_template, make_response, send_from_directory, request, jsonify, redirect
 from flask_cors import cross_origin
+
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 # ~ from flask_sitemap import Sitemap
 from flask_minify import minify
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
+minify(app=app, html=True, js=True, cssless=True)
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+)
+
 
 # ~ logging.config.fileConfig(LOGGING_CFG_FILE,  disable_existing_loggers = False)
 logging.basicConfig(filename=LOGGING_FILE, level=logging.DEBUG)
 
-minify(app=app, html=True, js=True, cssless=True)
 
 
 def str2bool(strg):
@@ -156,6 +166,7 @@ def ajax():
 @app.route("/api/<verb>", methods=["GET"])
 @app.route("/api", methods=["GET"])
 @cross_origin()
+@limiter.limit('60 per minute')
 def api(text="", haraka=""):
     default = "ضرب"
     # ~ text = verb
