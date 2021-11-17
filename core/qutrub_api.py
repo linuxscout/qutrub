@@ -369,6 +369,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
             logging.debug("verb_db2:"+ db_path)        
             conn  =  sqlite.connect(db_path)
             cursor  =  conn.cursor()
+            # strip harakat and keep shadda
             verb_nm = araby.strip_harakat(verb)
             verb_stamp = self.verb_stamp(verb)
             # ~ tup = (verb_nm, )
@@ -376,13 +377,15 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
                         # ~ from verbmore
                         # ~ where unvocalized = ?""", tup)
             tup = (verb_stamp, )
-            cursor.execute("""select verb, transitive 
+            cursor.execute("""select verb, unmarked, transitive 
                         from verbmore
                         where stamp = ?""", tup)
             for row in cursor:
                 verb_vocalised = row[0]
+                # strip harakat and keep shadda
+                verb_unmarked = row[1] 
                 haraka = "فتحة"
-                transitive = row[1]
+                transitive = row[2]
                 # Return the transitivity option
                 #MEEM is transitive
                 # KAF is commun ( transitive and intransitive)
@@ -394,7 +397,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
     # if the given verb is the list, 
     #it will be inserted in the top of the list, 
     #to be treated in prior
-                if verb == verb_vocalised:
+                if verb_nm == verb_unmarked:
                     liste.insert(0, {"verb":verb_vocalised, 
                     "haraka":haraka, "transitive":transitive})
     # else the verb is appended in the liste

@@ -188,7 +188,7 @@ def ajax():
 @app.route("/api/<verb>", methods=["GET"])
 @app.route("/api", methods=["GET"])
 def api(text="", haraka=""):
-    default = "ضرب"
+    default = "استعمل"
     # ~ text = verb
     action = "Conjugate"
     options = {}
