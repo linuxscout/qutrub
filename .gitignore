@@ -21,10 +21,11 @@ interfaces/web/.vscode/
 /libqutrub.egg-info/dependency_links.txt
 /libqutrub.egg-info/requires.txt
 /libqutrub.egg-info/top_level.txt
-/interfaces/gui/resources/ar.zip
-/interfaces/gui/resources/images/Thumbs.db
-/interfaces/web/static/Thumbs.db
-/interfaces/web/templates/carousel.html
-/interfaces/web/templates/main2.html
+/app/web/static/Thumbs.db
+/app/web/templates/carousel.html
+/app/web/templates/main2.html
 /demo.log
 /tools/temp.csv
+
+/app/web/src/node_modules
+/app/web/src/dist
