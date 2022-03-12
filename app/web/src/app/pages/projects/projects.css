@@ -1,0 +1,11 @@
+.hide-extra-card .extra-card {
+   display: none;
+ }
+
+ .link {
+   color: rgb(61, 61, 61) !important;
+ }
+
+ .link:hover {
+   color: #408eee !important;
+ }

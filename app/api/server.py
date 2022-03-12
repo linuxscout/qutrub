@@ -5,12 +5,8 @@ import logging
 import logging.config
 from flask import Flask,request, jsonify, redirect
 from flask_cors import CORS
-
-# local libraries
-sys.path.append(os.path.join(os.path.dirname(__file__), "./lib"))
-sys.path.append(os.path.join(os.path.dirname(__file__), "../../"))
-
 import core.adaat
+import qws_const
 
 app = Flask(__name__)
 CORS(app, resources={"*": {"origins": "*"}})
@@ -138,6 +134,13 @@ def api(text="", haraka=""):
     response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 
+@app.route("/projects/", methods=["GET"])
+def projects():
+    data = {
+        'libraries': qws_const.libraries,
+        'websites': qws_const.websites
+    }
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

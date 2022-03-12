@@ -17,7 +17,7 @@ const Home = () => {
     const [modal_body, set_modal_body] = useState(undefined)
     const [modal_title, set_modal_title] = useState(undefined)
 
-    const toggel_adawat = ()=> {
+    const toggel_adawat = () => {
         let adawat_area = document.getElementById("adawat-area")
 
         if (adawat_area.classList.contains('d-none')) {
