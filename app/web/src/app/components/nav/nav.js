@@ -30,8 +30,8 @@ const Nav = ({routes}) => {
           <div className="collapse navbar-collapse " id="navbar-menu">
               <div className="d-flex flex-column flex-md-row flex-fill align-items-stretch  align-items-md-center ">
                 <ul className="navbar-nav ms-md-auto">
-                    {routes && routes.map((route) => {
-                        return (<li onClick={handLinkClick(route)} className={`nav-item ${route.is_active ? 'active' :''}`}>
+                    {routes && routes.map((route, index) => {
+                        return (<li key={index} onClick={handLinkClick(route)} className={`nav-item ${route.is_active ? 'active' :''}`}>
                             <Link className="nav-link" to={route.path}>
                                 <span className="nav-link-icon d-md-none d-lg-inline-block">
                                     {route.icon}

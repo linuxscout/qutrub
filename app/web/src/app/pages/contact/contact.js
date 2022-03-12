@@ -40,13 +40,13 @@ const Contact = () => {
 
         <div className="card d-none d-md-block mb-2 p-4">
             <h1>للاتصال بنا</h1>
-            <iframe className="m-auto text-center" height="500" frameborder="0" marginheight="0" marginwidth="0" src=
+            <iframe className="m-auto text-center" height="500" frameBorder="0" marginHeight="0" marginWidth="0" src=
             "https://docs.google.com/spreadsheet/embeddedform?formkey=dG9vWVQ2NG9JaUNCOGRYYkdkZ2pKOGc6MA"
             width="760">Loading...</iframe>
         </div>
 
         <div className="card d-md-none mb-2 p-4">
-            <h1>للاتصال بنا</h1><iframe className="m-auto" height="500" width="300" frameborder="0"  marginheight="0" marginwidth="0" src=
+            <h1>للاتصال بنا</h1><iframe className="m-auto" height="500" width="300" frameBorder="0"  marginHeight="0" marginWidth="0" src=
             "https://docs.google.com/spreadsheet/embeddedform?formkey=dG9vWVQ2NG9JaUNCOGRYYkdkZ2pKOGc6MA"
             width="760">Loading...</iframe>
         </div>

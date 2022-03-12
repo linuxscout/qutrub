@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="./css/style.css">
 
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
-   <title>قطرب: تصريف الأفعال العربية</title>
+  <link rel="manifest" href="/manifest.json">
+  <title>قطرب: تصريف الأفعال العربية</title>
 </head>
 
 <body>
@@ -18,6 +19,21 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('worker.js').then(function(registration) {
+          console.log('Worker registration successful', registration.scope);
+        }, function(err) {
+          console.log('Worker registration failed', err);
+        }).catch(function(err) {
+          console.log(err);
+        });
+      });
+    } else {
+      console.log('Service Worker is not supported by browser.');
+    }
+  </script>
   <script src="https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js"></script>
   <script src="../dist/bundle.js"></script>
 </body>

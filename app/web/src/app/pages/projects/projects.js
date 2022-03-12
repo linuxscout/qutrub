@@ -29,7 +29,7 @@ const Projects = () => {
        <h2 className="text-primary">المكتبات البرمجية</h2>
        <div className="row">
          {libraries.map((library, index) => (
-         <div className={`col-lg-3 col-md-4 col-sm-6 my-2 ${index > 8 && 'extra-card'} m-auto`}>
+         <div className={`col-lg-3 col-md-4 col-sm-6 my-2 ${index > 8 && 'extra-card'} m-auto`} key={index}>
            <div className="card ">
              <div className="card-body text-center">
 
@@ -44,7 +44,7 @@ const Projects = () => {
                <div className="link-area">
                  <a href={library.link} className="mx-1" title="github" target="blank">
                    <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24"
-                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                      <path d="M12 9h-7a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h3" />
                      <path d="M12 15h7a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-3" />
@@ -57,7 +57,7 @@ const Projects = () => {
                  {(library.website) &&
                   <a href={library.website} className="mx-1" title="موقع" target="blank">
                    <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24"
-                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                     strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                      <circle cx="12" cy="12" r="9" />
                      <ellipse cx="12" cy="12" rx="4" ry="9" />
@@ -84,7 +84,7 @@ const Projects = () => {
        <h2 className="text-primary">مشاريع أخرى </h2>
        <div className="row">
        {websites.map((website, index) => (
-         <div className={`col-lg-3 col-md-4 col-sm-6 my-2 ${index > 8 && 'extra-card'} m-auto`}>
+         <div className={`col-lg-3 col-md-4 col-sm-6 my-2 ${index > 8 && 'extra-card'} m-auto`} key={index}>
            <div className="card ">
              <div className="card-body text-center">
                <div className="text-area d-flex justify-content-center align-items-center" style={{height: '60px'}}>

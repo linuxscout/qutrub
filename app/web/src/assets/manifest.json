@@ -1,0 +1,20 @@
+{
+   "short_name": "qutrub",
+   "name": "qutrub",
+   "icons": [
+     {
+       "src": "image/favicon.ico",
+       "sizes": "194x182",
+       "type": "image/x-icon"
+     },
+     {
+       "src": "image/logo.jpg",
+       "type": "image/jpg",
+       "sizes": "any"
+     }
+   ],
+   "start_url": ".",
+   "display": "standalone",
+   "theme_color": "#000000",
+   "background_color": "#ffffff"
+ }

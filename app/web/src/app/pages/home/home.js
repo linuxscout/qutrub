@@ -49,8 +49,8 @@ const Home = () => {
             style={{minHeight: '150px'}}>
             <div className="avatar bg-white avatar-md mb-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24"
-                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
+                    viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                    strokeLinecap="round"strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path stroke="red" d="M12 9v2m0 4v.01" />
                     <path stroke="red"
@@ -189,18 +189,18 @@ const Home = () => {
     const _build_options = () => {
         return (<div className="container d-flex pt-1 pb-1ss" title="تكبير">
             <button href="#" className="btn btn-outline me-2" data-bs-toggle="modal" data-bs-target="#modal-tasrif-view">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="7" y1="10" x2="13" y2="10" /><line x1="10" y1="7" x2="10" y2="13" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="7" y1="10" x2="13" y2="10" /><line x1="10" y1="7" x2="10" y2="13" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
                          <span>تكبير</span>
             </button>
             <button className="btn btn-outline  text-black dropdown me-2 " title="نسخ" >
-            <span  className="dropdown-toggle text-black"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
+            <span  className="dropdown-toggle text-black"   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
                               <div className="dropdown-menu dropdown-menu-end">
                                 <a className="dropdown-item" onClick={copy_as_html} >نسخ ك HTML</a>
                                 <a className="dropdown-item" onClick={copy_as_csv} >نسخ ك csv</a>
                               </div>
             </button>
             <button href="#" className="btn btn-outline me-2 " onClick={share_page_link}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="6" cy="12" r="3" /><circle cx="18" cy="6" r="3" /><circle cx="18" cy="18" r="3" /><line x1="8.7" y1="10.7" x2="15.3" y2="7.3" /><line x1="8.7" y1="13.3" x2="15.3" y2="16.7" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="6" cy="12" r="3" /><circle cx="18" cy="6" r="3" /><circle cx="18" cy="18" r="3" /><line x1="8.7" y1="10.7" x2="15.3" y2="7.3" /><line x1="8.7" y1="13.3" x2="15.3" y2="16.7" /></svg>
                      <span>مشاركة</span>
             </button>
         </div>);
@@ -323,7 +323,7 @@ const Home = () => {
             <div className="loading d-flex flex-column justify-content-center align-items-center text-yellow"
             style={{minHeight: "150px"}}>
             <div className="avatar bg-white avatar-md mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" /><line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" /><line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg>
             </div>
             <h4 className="mt-0 ">أدخل النص أولا</h4>
             </div>
@@ -389,8 +389,8 @@ const Home = () => {
                             <div className="container d-flex pt-1 pb-1 justify-content-end" title="أدوات">
                                 <button className="btn btn-outline me-2 " onClick={toggel_adawat}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                        viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                                        strokeLinecap="round"strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4"></path>
                                         <line x1="14.5" y1="5.5" x2="18.5" y2="9.5"></line>
@@ -404,8 +404,8 @@ const Home = () => {
                                 <button className="btn btn-outline me-2 " title="فعل عشوائي" onClick={random_text}>
 
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon me-0 me-md-2" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                        viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                                        strokeLinecap="round"strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <line x1="21" y1="17" x2="3" y2="17"></line>
                                         <path d="M6 10l-3 -3l3 -3"></path>
@@ -414,12 +414,12 @@ const Home = () => {
                                     </svg>
                                     <span className="d-none d-sm-block"> فعل عشوائي</span>
                                 </button>
-                                <button className="btn btn-outline me-2 " data-bs-toggle="modal" data-bs-target="#modal-simple"
+                                <button className="btn btn-outline me-2 "  data-bs-toggle="modal" data-bs-target="#modal-simple"
                                     title="مساعدة">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon me-0 me-md-2" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                        viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                                        strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <circle cx="12" cy="12" r="9"></circle>
                                         <line x1="12" y1="17" x2="12" y2="17.01"></line>
@@ -429,8 +429,8 @@ const Home = () => {
                                 </button>
                                 <button className="btn btn-outline me-2 " title="مسح" onClick={remove_text}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon me-0 me-md-2" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                        viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                                        strokeLinecap="round"strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -444,7 +444,7 @@ const Home = () => {
                                 <form onSubmit={(event) => {event.preventDefault()}}>
                                     <label className="form-label mb-0 text-primary ">أدخل الفعل</label>
                                     <input id="input-text-field" type="text" className="form-control " name="example-text-input"
-                                        placeholder="أدخل الفعل ..." autofocus="" />
+                                        placeholder="أدخل الفعل ..." autoFocus="" />
                                     <div className="container-fluid d-flex mt-2 ">
                                         <a type="button" className="btn btn-primary me-2  d-none d-md-block"
                                             style={{maxHeight: '40px'}} onClick={request_data}>تصريف الفعل</a>
@@ -454,44 +454,44 @@ const Home = () => {
                                                 <div>
                                                     <label className="form-check form-check-inline">
                                                         <input id="transitive-checkbox-input" className="form-check-input"
-                                                            type="checkbox" checked />
+                                                            type="checkbox" defaultChecked />
                                                         <span className="form-check-label">متعدي </span>
                                                     </label>
                                                     <label className="form-check form-check-inline">
                                                         <input id="all-checkbox-input" className="form-check-input" type="checkbox"
-                                                            onClick={toggel_adawat_times} checked={all_times} />
+                                                            onChange={toggel_adawat_times} checked={all_times} />
                                                         <span className="form-check-label">كل الأزمنة</span>
                                                     </label>
                                                     <div id="adawat-times-area"
                                                         className="border pt-2 p-1 mb-2 rounded-1 pb-0 d-none">
                                                         <label className="form-check form-check-inline">
                                                             <input id="past-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label">الماضي </span>
                                                         </label>
                                                         <label className="form-check form-check-inline">
                                                             <input id="future-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label">المضارع </span>
                                                         </label>
                                                         <label className="form-check form-check-inline">
                                                             <input id="imperative-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label">الأمر </span>
                                                         </label>
                                                         <label className="form-check form-check-inline">
                                                             <input id="passive-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label"> المبني للمجهول </span>
                                                         </label>
                                                         <label className="form-check form-check-inline">
                                                             <input id="future_moode-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label"> المضارع المنصوب و المجزوم </span>
                                                         </label>
                                                         <label className="form-check form-check-inline">
                                                             <input id="confirmed-checkbox-input" className="form-check-input"
-                                                                type="checkbox" checked />
+                                                                type="checkbox" defaultChecked />
                                                             <span className="form-check-label">المؤكد </span>
                                                         </label>
                                                     </div>
@@ -499,9 +499,15 @@ const Home = () => {
                                                 <label className="form-check form-check-inline ps-0">
                                                     <span className="form-check-label">حركة عين المضارع
                                                         <select id="future_type-select-input" className="form-select-inline">
-                                                            <option defaultValue="فتحة" selected>الفتحة</option>
-                                                            <option defaultValue="ضمة"> "الضمة</option>
-                                                            <option defaultValue="كسرة"> "الكسرة</option>
+                                                            <option defaultValue="فتحة">
+                                                            "الفتحة"
+                                                            </option>
+                                                            <option defaultValue="ضمة">
+                                                             "الضمة"
+                                                             </option>
+                                                            <option defaultValue="كسرة">
+                                                             "الكسرة"
+                                                             </option>
                                                         </select>
                                                         للفعل الثلاثي فقط
                                                     </span>
@@ -546,8 +552,8 @@ const Home = () => {
                                 <div className="container mb-3 d-flex align-items-center justify-content-center">
                                     <a href="{{ url_for('download') }}" className="btn btn-outline-info ">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
+                                            viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
+                                            strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
                                             <polyline points="7 11 12 16 17 11"></polyline>
@@ -566,8 +572,8 @@ const Home = () => {
                                 <div className="row">
                                     <div className="col-4">
                                         <img className="me-2"
-                                            src={tashaphyne} alt=""
-                                            srcset="" />
+                                            src={tashaphyne}
+                                             />
                                     </div>
                                     <div className="col-8 align-items-center d-flex">
                                         <a href="http://pypi.python.org/pypi/Tashaphyne/"> تاشفين: التجذيع الخفيف للنصوص
@@ -578,7 +584,7 @@ const Home = () => {
                                 <div className="row">
                                     <div className="col-4">
                                         <img className="me-2" src={ayaspell}
-                                            alt="" srcset="" />
+                                              />
                                     </div>
                                     <div className="col-8 align-items-center d-flex">
                                         <a href="http://ayaspell.sf.net/">آية سبل، القاموس العربي الحر للتدقيق الإملائي</a>
@@ -587,8 +593,8 @@ const Home = () => {
 
                                 <div className="row">
                                     <div className="col-4">
-                                        <img src={adawat} alt=""
-                                            srcset="" />
+                                        <img src={adawat}
+                                             />
                                     </div>
                                     <div className="col-8 align-items-center d-flex">
                                         <a href="http://adawat.sf.net/">أدوات النص العربي</a>
@@ -597,8 +603,8 @@ const Home = () => {
 
                                 <div className="row">
                                     <div className="col-4">
-                                        <img src={pyarabic} alt=""
-                                            srcset="" />
+                                        <img src={pyarabic}
+                                             />
                                     </div>
                                     <div className="col-8 align-items-center d-flex">
                                         <a href="http://pypi.python.org/pypi/PyArabic/">مكتبة برمجية للغة العربية بلغة بيثون</a>
@@ -607,8 +613,8 @@ const Home = () => {
 
                                 <div className="row">
                                     <div className="col-4">
-                                        <img src={radif} alt=""
-                                            srcset="" />
+                                        <img src={radif}
+                                             />
                                     </div>
                                     <div className="col-8 align-items-center d-flex">
                                         <a href="http://radif.sf.net/">معجم المترادفات والأضداد والقوافي والجموع</a>
