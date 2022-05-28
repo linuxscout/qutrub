@@ -5,8 +5,9 @@ import logging
 import logging.config
 from flask import Flask,request, jsonify, redirect
 from flask_cors import CORS
-import core.adaat
 import qws_const
+sys.path.append("../../")
+import core.adaat
 
 app = Flask(__name__)
 CORS(app, resources={"*": {"origins": "*"}})
