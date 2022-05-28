@@ -16,6 +16,7 @@ const Home = () => {
     const [result_area, set_result_area] = useState(undefined)
     const [modal_body, set_modal_body] = useState(undefined)
     const [modal_title, set_modal_title] = useState(undefined)
+    const [suggestions, set_suggestions] = useState(undefined)
 
     const toggel_adawat = () => {
         let adawat_area = document.getElementById("adawat-area")
@@ -38,7 +39,6 @@ const Home = () => {
                 input_text_field.focus();
             })
             .catch(function (error) {
-                console.log(error);
                 set_view_error();
             });
     }
@@ -87,12 +87,10 @@ const Home = () => {
             data: config_data,
         })
             .then(function (response) {
-                console.log(response);
                 set_view_done(response);
                 set_json_table(response.data.result);
             })
             .catch(function (error) {
-                console.log(error);
                 set_view_error();
             });
     }
@@ -126,7 +124,7 @@ const Home = () => {
         let option_view = _build_options();
         let table_view = _build_table(response.data.result);
 
-        view_suggestions(response.data.suggest);
+        set_suggestions(response.data.suggest);
         let verb_info = <h3>{response.data.verb_info}</h3>;
 
         let result_area = []
@@ -162,10 +160,32 @@ const Home = () => {
         return <thead><tr>{headers}</tr></thead>;
     }
 
+    const request_data_suggest = (verb, future_type, transitive) => {
+        let config_data = {
+            'text': verb, 'action': 'Conjugate',
+            'all': 1, 'transitive': transitive, 'future_type': future_type
+        };
+
+        if (config_data['text'] == '') {
+            set_view_empty_input();
+            return;
+        }
+
+        set_view_loading();
+        axios.post('ajaxGet', {
+            data: config_data,
+        }).then(function (response) {
+            set_view_done(response)
+            set_json_table(response.data.result);
+        }).catch(function (error) {
+            set_view_error();
+        });
+    }
+
     const _get_body_row = (items) => {
         let row = [];
         for (let index in items) {
-            row.push(<td className="curson-pointer" onClick={copy_text(items[index])} title={`نسخ الفعل ${items[index]}`} >{items[index]}</td>);
+            row.push(<td className="curson-pointer" onClick={() => copy_text(items[index])} title={`نسخ الفعل ${items[index]}`} >{items[index]}</td>);
         }
 
         return <tr>{row}</tr>;
@@ -195,11 +215,11 @@ const Home = () => {
             <button className="btn btn-outline  text-black dropdown me-2 " title="نسخ" >
             <span  className="dropdown-toggle text-black"   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> نسخ الجدول</span>
                               <div className="dropdown-menu dropdown-menu-end">
-                                <a className="dropdown-item" onClick={copy_as_html} >نسخ ك HTML</a>
-                                <a className="dropdown-item" onClick={copy_as_csv} >نسخ ك csv</a>
+                                <a className="dropdown-item" onClick={() => copy_as_html()} >نسخ ك HTML</a>
+                                <a className="dropdown-item" onClick={() => copy_as_csv()} >نسخ ك csv</a>
                               </div>
             </button>
-            <button href="#" className="btn btn-outline me-2 " onClick={share_page_link}>
+            <button href="#" className="btn btn-outline me-2 " onClick={() => share_page_link}>
             <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round"strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="6" cy="12" r="3" /><circle cx="18" cy="6" r="3" /><circle cx="18" cy="18" r="3" /><line x1="8.7" y1="10.7" x2="15.3" y2="7.3" /><line x1="8.7" y1="13.3" x2="15.3" y2="16.7" /></svg>
                      <span>مشاركة</span>
             </button>
@@ -221,13 +241,11 @@ const Home = () => {
     }
 
     const generate_html_table = () => {
-        alert(json_table)
         if (json_table == undefined || json_table == null || json_table == "") {
             return;
         }
 
         let raw_table = '<table>';
-
         for (let row_index in json_table) {
             if (json_table.hasOwnProperty(row_index)) {
                 let row = '<tr>'
@@ -297,27 +315,9 @@ const Home = () => {
         }).showToast();
     }
 
-    const view_suggestions = (data) => {
-        let suggest_area = document.getElementById('suggest-area');
-
-        // if data is empty don't show suggest area
-        if (data == null || data == undefined || data.length < 1) {
-            suggest_area.innerHTML = ``;
-            return;
-        }
-
-        let html = ``;
-        for (let index in data) {
-            html += `<li className="curson-pointer" >&nbsp;<span className="text-primary" onclick="request_data_suggest('${data[index].verb}', '${data[index].haraka}', ${data[index].transitive})">${data[index].verb} &nbsp; ${data[index].future}</span></li>`;
-        }
-        suggest_area.innerHTML = `
-        <h4 className="mt-0 ">هل تقصد؟ </h4>
-        <ul className="mb-0" >`+ html + `</ul>`;
-    }
-
     const set_view_empty_input = () => {
         // by set null as argument the suggested view area will be hidden
-        view_suggestions(null);
+        set_suggestions(undefined);
 
         let result_area = (
             <div className="loading d-flex flex-column justify-content-center align-items-center text-yellow"
@@ -387,7 +387,7 @@ const Home = () => {
                     <div className="col-12 col-md-12 col-lg-9">
                         <div className="card">
                             <div className="container d-flex pt-1 pb-1 justify-content-end" title="أدوات">
-                                <button className="btn btn-outline me-2 " onClick={toggel_adawat}>
+                                <button className="btn btn-outline me-2 " onClick={() => toggel_adawat()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon" width="24" height="24"
                                         viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
                                         strokeLinecap="round"strokeLinejoin="round">
@@ -401,7 +401,7 @@ const Home = () => {
                                 </svg>
                                     <span> أدوات</span>
                                 </button>
-                                <button className="btn btn-outline me-2 " title="فعل عشوائي" onClick={random_text}>
+                                <button className="btn btn-outline me-2 " title="فعل عشوائي" onClick={ () => random_text()}>
 
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon me-0 me-md-2" width="24" height="24"
                                         viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
@@ -427,7 +427,7 @@ const Home = () => {
                                     </svg>
                                     <span className="d-none d-sm-block">مساعدة</span>
                                 </button>
-                                <button className="btn btn-outline me-2 " title="مسح" onClick={remove_text}>
+                                <button className="btn btn-outline me-2 " title="مسح" onClick={() => remove_text()}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon me-0 me-md-2" width="24" height="24"
                                         viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none"
                                         strokeLinecap="round"strokeLinejoin="round">
@@ -447,7 +447,7 @@ const Home = () => {
                                         placeholder="أدخل الفعل ..." autoFocus="" />
                                     <div className="container-fluid d-flex mt-2 ">
                                         <a type="button" className="btn btn-primary me-2  d-none d-md-block"
-                                            style={{maxHeight: '40px'}} onClick={request_data}>تصريف الفعل</a>
+                                            style={{maxHeight: '40px'}} onClick={() => request_data()}>تصريف الفعل</a>
                                         <div id="adawat-area" className="container-fluid  mb-0 mb-md-2 pt-2 d-none">
                                             <div className="mb-md-3 mb-0">
                                                 <div className="form-label text-primary">أدوات</div>
@@ -516,15 +516,27 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <a type="button" className="btn btn-primary me-2 d-md-none d-block"
-                                        onClick={request_data}>تصريف الفعل</a>
+                                        onClick={() => request_data()}>تصريف الفعل</a>
 
                                 </form>
                             </div>
                         </div>
 
                         <div className="card mt-2 mb-3">
-                            <div id="suggest-area" className="suggest p-2">
-                            </div>
+                            {suggestions && <div id="suggest-area" className="suggest p-2">
+                                <h4 className="mt-0 ">هل تقصد؟</h4>
+                                <ul className="mb-0" >
+                                    {suggestions.map((element, index)=> (
+                                        <li key={index} className="curson-pointer" >&nbsp;
+                                            <span className="text-primary" onClick={()=>{
+                                                request_data_suggest(element.verb, element.haraka, element.transitive)
+                                            }}>
+                                                {element.verb} &nbsp; {element.future}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>}
                             <div id="result-area" className="result" style={{minHeight: '150px'}}>
                                 {result_area}
                             </div>
