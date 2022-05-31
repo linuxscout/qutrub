@@ -2,7 +2,7 @@
 # -*- coding=UTF-8 -*-
 #------------------------------------------------------------------------
 # Name:        adaat
-# Purpose:    interface between library and the web interface for Adawat 
+# Purpose:    interface between library and the web interface for Adawat
 #
 # Author:      Taha Zerrouki (taha.zerrouki[at]gmail.com)
 #
@@ -34,7 +34,7 @@ def DoAction(text, action, options = {}):
     if action == "DoNothing":
         return text
     elif action == "Conjugate":
-        return conjugate(text, options)        
+        return conjugate(text, options)
     if action == "Contibute":
         return text
     else:
@@ -44,26 +44,26 @@ def DoAction(text, action, options = {}):
 def conjugate(text, options):
     """
     Conjugate verb using qutrub
-    
+
     """
-   
+
     myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
-    
-   
+
+
     #extract first word if many words are given
     word = text.split(" ")[0]
     # if the verb is not valid:
     valid = myconjugator.is_valid_infinitive(word)
-    if not valid:    
+    if not valid:
         suggestions  =  myconjugator.suggest_similar_verb_list(word, u"فتحة")
         if suggestions:
             return {"table":[], "verb_info":"","suggest":suggestions};
         else:
             return {"table":[], "verb_info":"","suggest":[]}
     else:  # if verb is valid
-            
-        
-        given_future_type = options.get("future_type",u"فتحة") 
+
+
+        given_future_type = options.get("future_type",u"فتحة")
         given_transitive = options.get("transitive", False)
         # find future haraka for a given verb
         verb_list = myconjugator.find_verb(word, given_future_type)
@@ -76,8 +76,8 @@ def conjugate(text, options):
         else:
             future_type = given_future_type
             transitive = given_transitive
-        
-        conjugate_result =  do_sarf(myconjugator, word, 
+
+        conjugate_result =  do_sarf(myconjugator, word,
             future_type = future_type,
             all         = options.get("all", False),
             past        = options.get("past", False),
@@ -88,11 +88,11 @@ def conjugate(text, options):
             confirmed   = options.get("confirmed", False),
             transitive  = transitive,
             );
-            
+
         conjugate_result_table = conjugate_result.get("table",{})
         # more suggestion
         conjugate_result_suggest = myconjugator.suggest_similar_verb_list(word, future_type)
-            
+
         conjugate_result_verb_info= myconjugator.format_verb_info(conjugate_result.get("verb_info",""), bool(verb_list))
 
         return {"table":conjugate_result_table,
@@ -100,31 +100,31 @@ def conjugate(text, options):
         "verb_info":conjugate_result_verb_info}
 
 def do_sarf(myconjugator, word,future_type,all=True,past=False,future=False,passive=False,imperative=False,future_moode=False,confirmed=False,transitive=False,display_format="HTML"):
-    
+
 
     future_type= myconjugator.get_future_type_by_name(future_type);
     bab_sarf=0;
     myconjugator.input(word, future_type, transitive);
 
     myconjugator.set_display_format(display_format);
-    
-    listetenses= myconjugator.manage_tenses(all, past,future,passive,imperative,future_moode,confirmed,transitive)    
+
+    listetenses= myconjugator.manage_tenses(all, past,future,passive,imperative,future_moode,confirmed,transitive)
 
     result =  myconjugator.conjugate_all_tenses(listetenses);
     conjs_table = myconjugator.display()
     verb_info= myconjugator.get_verb_info(word, future_type,  transitive )
 
     return {"table":conjs_table, "verb_info":verb_info}
-        
-            
 
-    
+
+
+
 
 
 def random_text():
     """
     get random text for tests
-    """    
+    """
     from . import randtext
-    
+
     return random.choice(randtext.textlist)
