@@ -86,13 +86,13 @@ const Home = () => {
         axios.post('ajaxGet', {
             data: config_data,
         })
-            .then(function (response) {
-                set_view_done(response);
-                set_json_table(response.data.result);
-            })
-            .catch(function (error) {
-                set_view_error();
-            });
+        .then(function (response) {
+            set_view_done(response);
+            set_json_table(response.data.result);
+        })
+        .catch(function (error) {
+            set_view_error();
+        });
     }
 
     const set_view_loading = () => {

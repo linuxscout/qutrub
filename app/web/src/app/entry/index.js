@@ -12,8 +12,6 @@ import Contact from "../pages/contact/contact";
 import Logo from "../../assets/image/logo.jpg"
 import "./entry.css";
 
-import * as serviceWorker from './serviceWorker';
-
 
 
 const App = () => {
@@ -115,5 +113,3 @@ const Index = () => {
 }
 
 ReactDOM.render(<Index />, document.getElementById("root"));
-
-serviceWorker.register();

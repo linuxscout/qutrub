@@ -29,3 +29,4 @@ interfaces/web/.vscode/
 
 /app/web/src/node_modules
 /app/web/src/dist
+/app/web/src/.env
