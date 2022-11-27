@@ -124,6 +124,26 @@ http://qutrub.arabeyes.org/api/
 - صيغة الفعل في المضارع
 - متعدي true، لازم false
 
+** مثال **
+```json
+{"suggest": [
+        {
+            "transitive": true,
+            "haraka": "ضمة",
+            "verb": "كَتَبَ",
+            "future": "يَكْتُبُ"
+        },
+        {
+            "transitive": true,
+            "haraka": "كسرة",
+            "verb": "كَتَبَ",
+            "future": "يَكْتِبُ"
+        },
+ 
+    ]
+}
+```
+
 -  verb_info -  تعريف الفعل ومعلوماته
 
 مثال
