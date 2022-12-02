@@ -187,3 +187,5 @@ table = libqutrub.conjugator.conjugate(verb,future_type,all,past,future,passive,
 print(table)
 
 ```
+### Web API
+view [API doc](doc/api.md)
