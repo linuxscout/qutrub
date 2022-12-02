@@ -5,23 +5,11 @@
 http://qutrub.arabeyes.org/api/
 
 ## طرائق الاستعلام
-يمكن الاستعلام باستعمال طريقة GET
-### طريقة المعلمات في المسار 
-يمكن استدعاء التصريف بالأشكال الآتية
-```
-/api/<verb>/<haraka>
-/api/<verb>/
-```
-مثال
-```
-/api/كتب/u/
-/api/استعمل
-
-### استعمال طريقة GET
 يمكن استدعاء التصريف بالطريقة GET
 على سبيل المثال:
 ```
 http://qutrub.arabeyes.org/api?verb=كتب&haraka=u&trans=1
+
 http://qutrub.arabeyes.org/api?verb=استعمل
 ```
 المعلمات:
