@@ -18,12 +18,15 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../support/'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../config/'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 import random
-import pyarabic.araby  as araby # arabic words general functions
+import logging
 import re
 
+import pyarabic.araby  as araby # arabic words general functions
+
+
 import config.qutrub_config
-import logging
-#~import pyarabic.number
+from . import qutrub_api
+
 def DoAction(text, action, options = {}):
     """
     do action by name
@@ -32,8 +35,6 @@ def DoAction(text, action, options = {}):
         return text
     elif action == "Conjugate":
         return conjugate(text, options)        
-    elif action == "Suggest":
-        return suggest_verb_list(text, options)        
     if action == "Contibute":
         return text
     else:
@@ -45,9 +46,10 @@ def conjugate(text, options):
     Conjugate verb using qutrub
     
     """
-    from . import qutrub_api
-    
+   
     myconjugator = qutrub_api.QutrubApi(db_path = config.qutrub_config.DB_BASE_PATH)
+    
+   
     #extract first word if many words are given
     word = text.split(" ")[0]
     # if the verb is not valid:
@@ -62,15 +64,18 @@ def conjugate(text, options):
             
         
         given_future_type = options.get("future_type",u"فتحة") 
+        given_transitive = options.get("transitive", False)
         # find future haraka for a given verb
-        verb_list = myconjugator.find_tri_verb(word, given_future_type)
+        verb_list = myconjugator.find_verb(word, given_future_type)
         # get vocalized form of the verb
         if(verb_list):
             word = verb_list[0].get("verb",word)
             future_type = verb_list[0].get("haraka",word)
+            transitive = verb_list[0].get("transitive",word)
             # ~ logging.debug("adaat.py:", future_type, verb_list[0].get("haraka",word))
         else:
             future_type = given_future_type
+            transitive = given_transitive
         
         conjugate_result =  do_sarf(myconjugator, word, 
             future_type = future_type,
@@ -81,7 +86,7 @@ def conjugate(text, options):
             imperative  = options.get("imperative", False),
             future_moode= options.get("future_moode", False),
             confirmed   = options.get("confirmed", False),
-            transitive  = options.get("transitive", False),
+            transitive  = transitive,
             );
             
         conjugate_result_table = conjugate_result.get("table",{})
