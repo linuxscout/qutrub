@@ -163,7 +163,7 @@ class QutrubApi:
         try:
             future_form = mosaref.get_future_form(word, future_type)
         except:
-            print("qutrub_api: Error on future form ", word)
+            #print("qutrub_api: Error on future form ", word)
             future_form = word
         # strip haraka and keep shadda
         verb_nm = araby.strip_harakat(word)
@@ -212,9 +212,9 @@ class QutrubApi:
                     features["علة"] = "أجوف يائي"
                 else:
                     features["علة"] = "أجوف"
-            elif verb_nm[2] == araby.ALEF:
+            elif verb_nm[2] == araby.ALEF or verb_nm[2] == araby.WAW:
                 features["علة"] = "ناقص واوي"
-            elif verb_nm[2] == araby.ALEF_MAKSURA:
+            elif verb_nm[2] == araby.ALEF_MAKSURA or verb_nm[2] == araby.YEH:
                 features["علة"] = "ناقص يائي"
             else:
                 features["علة"] = "صحيح"
@@ -389,7 +389,17 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
             cursor.close()
             return liste
         except IOError:
-            return None                     
+            return None
+    def verb_exists_in_database(self, verb, given_future_type="فتحة"):
+        """
+        Test if a given verb exists on database
+        """
+        if self.find_tri_verb(verb, given_future_type):
+            return True
+        elif self.find_nontri_verb(verb):
+            return True
+        else:
+            return False
     def main(args):
         return 0
 

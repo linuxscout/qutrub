@@ -31,6 +31,7 @@ sdist:
 upload:
 	echo "use twine upload dist/libqutrub-0.1.tar.gz"
 web:
+	#run web on 127.0.0.1:5000
 	python3 interfaces/web/qutrub_webserver.py
 gui:
 	python3 interfaces/gui/appgui.py
