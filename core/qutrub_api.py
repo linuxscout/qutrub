@@ -410,14 +410,22 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
             return None
     def verb_exists_in_database(self, verb, given_future_type="فتحة"):
         """
-        Test if a given verb exists on database
+        Test if a given verb exists on database,
         """
-        if self.find_tri_verb(verb, given_future_type):
-            return True
-        elif self.find_nontri_verb(verb):
-            return True
-        else:
+        # The  function find_verb return a list of similar verbs
+        verb_list = self.find_verb(verb, given_future_type)
+        if not verb_list:
             return False
+        else:
+            # test if the exact verb is in database
+            verb_nm = araby.strip_harakat(verb)
+            verb_nm_list = [araby.strip_harakat(v.get("verb","")) for v in verb_list]
+            # ~ verb_nm_list = [v.get("verb","") for v in verb_list]
+            return (verb_nm in verb_nm_list)
+        return False
+                
+        
+
     def main(args):
         return 0
 
