@@ -326,7 +326,7 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
     def verb_stamp(self, word):
         """
         generate a stamp for a verb,
-        the verb stamp is different of word stamp, by hamza noralization
+        the verb stamp is different of word stamp, by hamza normalization
         remove all letters which can change form in the word :
             - ALEF,
             - YEH,

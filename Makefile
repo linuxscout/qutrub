@@ -62,3 +62,20 @@ sitemap:
 	tail -n +2 tools/temp.csv | cut -f12  >> tools/sitemap.txt
 	cp tools/sitemap.txt interfaces/web/static/
 
+
+verblist:
+	# build a list of verbs to be generate all conjugations
+	awk '{ print $2"\t"$9"\t"$3}' data/Classified_verbs.csv > tests/output/verblist.csv
+	
+performance:LIMIT= 100
+performance:PROFILER= -m pyinstrument -o  tests/output/profile.txt
+performance:INPUT=data/verblist.csv 
+performance:OUTPUT=tests/output/allconjugs.csv
+performance:
+	python3 $(PROFILER) conjugate.py -d ROWS -f $(INPUT)> $(OUTPUT)
+	wc -w $(INPUT)
+	cp  tests/output/profile.txt  tests/output/profile-$(date).txt
+	# use pyinstrument to analyze profile
+	tail -n 3 $(OUTPUT) | sed "s/\[options\]/-r html --show-all/g" | sed "s/pyinstrument/python3 -m pyinstrument/g"
+
+
