@@ -65,10 +65,17 @@ def conjugate(text, options):
         
         given_future_type = options.get("future_type",u"فتحة") 
         given_transitive = options.get("transitive", False)
+        force_future_type = options.get("force_future_type", False)
+        exists_in_database = myconjugator.verb_exists_in_database(
+            word, given_future_type)
         # find future haraka for a given verb
         verb_list = myconjugator.find_verb(word, given_future_type)
         # get vocalized form of the verb
-        if(verb_list):
+        # A suggestion click represents an explicit choice of conjugation
+        # class. Do not replace it with a different class from the dictionary;
+        # the conjugator can generate the selected class even when it is not
+        # recorded there.
+        if verb_list and not force_future_type:
             word = verb_list[0].get("verb",word)
             future_type = verb_list[0].get("haraka",word)
             transitive = verb_list[0].get("transitive",word)
@@ -93,7 +100,8 @@ def conjugate(text, options):
         # more suggestion
         conjugate_result_suggest = myconjugator.suggest_similar_verb_list(word, future_type)
             
-        conjugate_result_verb_info= myconjugator.format_verb_info(conjugate_result.get("verb_info",""), bool(verb_list))
+        conjugate_result_verb_info= myconjugator.format_verb_info(
+            conjugate_result.get("verb_info", ""), exists_in_database)
 
         return {"table":conjugate_result_table,
         "suggest":conjugate_result_suggest,

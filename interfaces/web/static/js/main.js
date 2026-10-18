@@ -170,7 +170,8 @@ function request_data_suggest(verb, future_type, transitive) {
 
     let config_data = {
         'text': verb, 'action': 'Conjugate',
-        'all': 1, 'transitive': transitive, 'future_type': future_type
+        'all': 1, 'transitive': transitive, 'future_type': future_type,
+        'force_future_type': true
         //~ 'all': true, 'transitive': true, 'future_type': future_type
     };
 
@@ -575,5 +576,4 @@ function update_url(verb){
         window.history.pushState({path:newurl},'',newurl);
     }
 }
-
 

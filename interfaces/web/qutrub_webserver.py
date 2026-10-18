@@ -159,6 +159,7 @@ def ajax():
     options["future_type"] = args.get("future_type", u"فتحة")
 
     options["display_format"] = args.get("display_format", "HTML")
+    options["force_future_type"] = args.get("force_future_type", False)
 
     resulttext = core.adaat.DoAction(text, action, options)
     results = prepare_result(resulttext, text, action, options,"ajax")

@@ -283,7 +283,9 @@ passive = False, imperative = False, future_moode = False, confirmed = False,
         salim =  features.get("سالم", ""),
         )
         if exist_in_database:
-            text += " [في قاعدة البيانات]"
+            text += " [موجود في قاعدة البيانات]"
+        else:
+            text += " [غير موجود في قاعدة البيانات]"
         return text
     def suggest_verb(self, word):
         """
